@@ -63,3 +63,6 @@ class BBGestureRecognizer {
         println("registeredActions: \(registeredActions)")
     }
 }
+
+// http://oleb.net/blog/2014/07/swift-instance-methods-curried-functions/
+// https://github.com/BigZaphod/Chameleon/blob/master/UIKit/Classes/UIGestureRecognizer.m
