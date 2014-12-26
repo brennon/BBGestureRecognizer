@@ -7,16 +7,27 @@
 //
 
 import UIKit
+import SpriteKit
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
-        let bbgr = BBGestureRecognizer(target: self, action: ViewController.doSomething)
+        let skView = self.view as SKView
+        skView.showsDrawCount = true
+        skView.showsNodeCount = true
+        skView.showsFPS = true
     }
     
-    func doSomething(gestureRecognizer: BBGestureRecognizer?) {
+    override func viewWillAppear(animated: Bool) {
+        let testScene = TestScene(size: CGSizeMake(768, 1024))
+        let skView = self.view as SKView
+        skView.presentScene(testScene)
+    }
+    
+    func doSomething(gestureRecognizer: BBUIGestureRecognizer?) {
         println("doing something")
     }
 
