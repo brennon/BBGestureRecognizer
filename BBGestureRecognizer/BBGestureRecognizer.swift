@@ -7,18 +7,19 @@
 //
 
 import UIKit
+import SpriteKit
 
-protocol TargetAction {
-    func performAction()
+protocol BBGestureRecognizerTargetAction {
+    func performAction(gestureRecognizer: BBGestureRecognizer?)
 }
 
-struct TargetActionWrapper<T: AnyObject> : TargetAction {
+struct BBGestureRecognizerTargetActionWrapper<T: AnyObject> : BBGestureRecognizerTargetAction {
     weak var target: T?
-    let action: (T) -> () -> ()
+    let action: (T) -> (BBGestureRecognizer?) -> ()
     
-    func performAction() -> () {
+    func performAction(gestureRecognizer: BBGestureRecognizer?) -> () {
         if let t = target {
-            action(t)()
+            action(t)(gestureRecognizer)
         }
     }
 }
@@ -33,8 +34,6 @@ enum BBGestureRecognizerState: Int {
     case BBGestureRecognizerStateRecognized
 }
 
-typealias BBGestureRecognizerAction = (BBGestureRecognizer?) -> ()
-
 class BBGestureRecognizer {
     private var state: BBGestureRecognizerState = .BBGestureRecognizerStatePossible
     private var cancelsTouchesInView = true
@@ -42,25 +41,37 @@ class BBGestureRecognizer {
     private var delaysTouchesEnded = true
     private var enabled = true
     
-    private var registeredActions = [(AnyObject, BBGestureRecognizerAction)]()
+    private var _node: SKNode? = nil
+    private(set) var node: SKNode? {
+        get {
+            return _node
+        }
+        set(newNode) {
+            if newNode != _node {
+                reset()
+                _node = newNode
+            }
+        }
+    }
+    
+    private var registeredAction: BBGestureRecognizerTargetAction?
     private var trackingTouches = [UITouch]()
     
-    init(target: AnyObject, action: (BBGestureRecognizer?) -> ()) {
-        
+    init<T: AnyObject>(target: T, action: (T) -> (BBGestureRecognizer?) -> ()) {
+        addTarget(target, action: action)
     }
     
-    func addTarget(target: AnyObject, action: BBGestureRecognizerAction) {
-        let actionPair = (target, action)
-        registeredActions.append(actionPair)
-        println("registeredActions: \(registeredActions)")
+    func addTarget<T: AnyObject>(target: T, action: (T) -> (BBGestureRecognizer?) -> ()) {
+        let targetAction = BBGestureRecognizerTargetActionWrapper(target: target, action: action)
+        registeredAction = targetAction
     }
     
-    func removeTarget(target: AnyObject, action: BBGestureRecognizerAction) {
-        let actionPair = (target, action)
-        if let index = find(registeredActions, actionPair) {
-            registeredActions.removeAtIndex(index)
-        }
-        println("registeredActions: \(registeredActions)")
+    func removeTarget() {
+        registeredAction = nil
+    }
+    
+    func reset() {
+        state = .BBGestureRecognizerStatePossible
     }
 }
 

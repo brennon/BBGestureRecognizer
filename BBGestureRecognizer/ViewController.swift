@@ -13,6 +13,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        let bbgr = BBGestureRecognizer(target: self, action: ViewController.doSomething)
+    }
+    
+    func doSomething(gestureRecognizer: BBGestureRecognizer?) {
+        println("doing something")
     }
 
     override func didReceiveMemoryWarning() {
