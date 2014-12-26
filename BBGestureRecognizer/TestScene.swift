@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class TestScene: BBSKScene {
+class TestScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         
@@ -19,8 +19,10 @@ class TestScene: BBSKScene {
         let nodeA = SKSpriteNode(color: UIColor.redColor(), size: CGSizeMake(100, 100))
         nodeA.position = CGPointMake(midX, midY + 200)
         
-        let nodeB = SKSpriteNode(color: UIColor.redColor(), size: CGSizeMake(100, 100))
+        let nodeB = BBSKSpriteNode(color: UIColor.redColor(), size: CGSizeMake(100, 100))
         nodeB.position = CGPointMake(midX, midY)
+        let recognizer = BBUIGestureRecognizer(target: self, action: TestScene.doSomething)
+        nodeB.addGestureRecognizer(recognizer)
         
         let nodeC = SKSpriteNode(color: UIColor.redColor(), size: CGSizeMake(100, 100))
         nodeC.position = CGPointMake(midX, midY - 200)
@@ -50,5 +52,9 @@ class TestScene: BBSKScene {
         
         println("\(descendants)")
         println("number of descendants: \(descendants.count)")
+    }
+    
+    func doSomething(gestureRecognizer: BBUIGestureRecognizer?) {
+        println("doing something")
     }
 }

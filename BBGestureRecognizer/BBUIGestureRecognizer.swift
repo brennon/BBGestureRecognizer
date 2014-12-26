@@ -34,7 +34,7 @@ enum BBUIGestureRecognizerState: Int {
     case BBUIGestureRecognizerStateRecognized
 }
 
-class BBUIGestureRecognizer {
+class BBUIGestureRecognizer: Equatable {
     private var state: BBUIGestureRecognizerState = .BBUIGestureRecognizerStatePossible
     private var cancelsTouchesInView = true
     private var delaysTouchesBegan = false
@@ -42,7 +42,7 @@ class BBUIGestureRecognizer {
     private var enabled = true
     
     private var _node: SKNode? = nil
-    private(set) var node: SKNode? {
+    internal(set) var node: SKNode? {
         get {
             return _node
         }
@@ -79,8 +79,12 @@ class BBUIGestureRecognizer {
     }
     
     func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        println("touchesBegan")
+        println("touchesBegan on node: \(_node!)")
     }
+}
+
+func ==(lhs: BBUIGestureRecognizer, rhs: BBUIGestureRecognizer) -> Bool {
+    return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
 }
 
 // http://oleb.net/blog/2014/07/swift-instance-methods-curried-functions/

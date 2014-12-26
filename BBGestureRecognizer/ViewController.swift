@@ -26,10 +26,6 @@ class ViewController: UIViewController {
         let skView = self.view as SKView
         skView.presentScene(testScene)
     }
-    
-    func doSomething(gestureRecognizer: BBUIGestureRecognizer?) {
-        println("doing something")
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

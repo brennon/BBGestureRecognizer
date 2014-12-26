@@ -14,10 +14,10 @@
 		3ABA68F51A49E57400E1934C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ABA68F31A49E57400E1934C /* LaunchScreen.xib */; };
 		3ABA69011A49E57500E1934C /* BBGestureRecognizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA69001A49E57500E1934C /* BBGestureRecognizerTests.swift */; };
 		3ABA690B1A49E5B200E1934C /* BBUIGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA690A1A49E5B200E1934C /* BBUIGestureRecognizer.swift */; };
-		3AC6BB4F1A4DB86D00884F76 /* BBSKScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC6BB4E1A4DB86D00884F76 /* BBSKScene.swift */; };
-		3AC6BB511A4DBDA900884F76 /* SKNode+BBGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC6BB501A4DBDA900884F76 /* SKNode+BBGestureRecognizer.swift */; };
+		3AC6BB511A4DBDA900884F76 /* BBSKNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC6BB501A4DBDA900884F76 /* BBSKNode.swift */; };
 		3AC6BB531A4DC41E00884F76 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC6BB521A4DC41E00884F76 /* SpriteKit.framework */; };
 		3AC6BB551A4DC49B00884F76 /* TestScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC6BB541A4DC49B00884F76 /* TestScene.swift */; };
+		3AC6BB591A4DE61B00884F76 /* BBSKSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC6BB581A4DE61B00884F76 /* BBSKSpriteNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,10 +42,10 @@
 		3ABA68FF1A49E57500E1934C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3ABA69001A49E57500E1934C /* BBGestureRecognizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBGestureRecognizerTests.swift; sourceTree = "<group>"; };
 		3ABA690A1A49E5B200E1934C /* BBUIGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBUIGestureRecognizer.swift; sourceTree = "<group>"; };
-		3AC6BB4E1A4DB86D00884F76 /* BBSKScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBSKScene.swift; sourceTree = "<group>"; };
-		3AC6BB501A4DBDA900884F76 /* SKNode+BBGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKNode+BBGestureRecognizer.swift"; sourceTree = "<group>"; };
+		3AC6BB501A4DBDA900884F76 /* BBSKNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBSKNode.swift; sourceTree = "<group>"; };
 		3AC6BB521A4DC41E00884F76 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		3AC6BB541A4DC49B00884F76 /* TestScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestScene.swift; sourceTree = "<group>"; };
+		3AC6BB581A4DE61B00884F76 /* BBSKSpriteNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBSKSpriteNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,9 +95,9 @@
 				3ABA68F31A49E57400E1934C /* LaunchScreen.xib */,
 				3ABA68E81A49E57400E1934C /* Supporting Files */,
 				3ABA690A1A49E5B200E1934C /* BBUIGestureRecognizer.swift */,
-				3AC6BB4E1A4DB86D00884F76 /* BBSKScene.swift */,
-				3AC6BB501A4DBDA900884F76 /* SKNode+BBGestureRecognizer.swift */,
+				3AC6BB501A4DBDA900884F76 /* BBSKNode.swift */,
 				3AC6BB541A4DC49B00884F76 /* TestScene.swift */,
+				3AC6BB581A4DE61B00884F76 /* BBSKSpriteNode.swift */,
 			);
 			path = BBGestureRecognizer;
 			sourceTree = "<group>";
@@ -230,8 +230,8 @@
 			files = (
 				3ABA68ED1A49E57400E1934C /* ViewController.swift in Sources */,
 				3ABA68EB1A49E57400E1934C /* AppDelegate.swift in Sources */,
-				3AC6BB4F1A4DB86D00884F76 /* BBSKScene.swift in Sources */,
-				3AC6BB511A4DBDA900884F76 /* SKNode+BBGestureRecognizer.swift in Sources */,
+				3AC6BB591A4DE61B00884F76 /* BBSKSpriteNode.swift in Sources */,
+				3AC6BB511A4DBDA900884F76 /* BBSKNode.swift in Sources */,
 				3AC6BB551A4DC49B00884F76 /* TestScene.swift in Sources */,
 				3ABA690B1A49E5B200E1934C /* BBUIGestureRecognizer.swift in Sources */,
 			);
