@@ -79,7 +79,7 @@ class BBUIGestureRecognizer: Equatable {
     }
     
     func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        println("touchesBegan on node: \(_node!)")
+        println("touchesBegan in recognizer on node: \(_node!)")
     }
 }
 

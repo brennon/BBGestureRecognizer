@@ -6,7 +6,10 @@
 //  Copyright (c) 2014 Brennon Bortz. All rights reserved.
 //
 
+import ObjectiveC
 import SpriteKit
+
+private let gestureRecognizersAssociationKey = malloc(4)
 
 extension SKNode {
     var descendants: [SKNode] {
@@ -34,46 +37,44 @@ extension SKNode {
         // Return built list of descendants
         return descendantsList
     }
-}
-
-extension SKNode {
     
-    private var _gestureRecognizers = [BBUIGestureRecognizer]()
     var gestureRecognizers: [BBUIGestureRecognizer] {
         get {
-            return _gestureRecognizers
+            var associatedObject: AnyObject? = objc_getAssociatedObject(self, gestureRecognizersAssociationKey)
+            if associatedObject == nil {
+                var recognizers = [BBUIGestureRecognizer]()
+                objc_setAssociatedObject(self, gestureRecognizersAssociationKey, recognizers, UInt(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+                associatedObject = objc_getAssociatedObject(self, gestureRecognizersAssociationKey)
+            }
+            return associatedObject as [BBUIGestureRecognizer]
         }
-        set(recognizers) {
-            for recognizer in _gestureRecognizers {
-                removeGestureRecognizer(recognizer)
-            }
-            
-            for recognizer in recognizers {
-                addGestureRecognizer(recognizer)
-            }
+        set {
+            objc_setAssociatedObject(self, gestureRecognizersAssociationKey, newValue, UInt(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
         }
     }
-//
-//    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-//        super.touchesBegan(touches, withEvent: event)
-//        
-//        for recognizer in gestureRecognizers {
-//            recognizer.touchesBegan(touches, withEvent: event)
-//        }
-//    }
-//    
-//    func addGestureRecognizer(gestureRecognizer: BBUIGestureRecognizer) {
-//        if find(gestureRecognizers, gestureRecognizer) == nil {
-//            gestureRecognizer.node?.removeGestureRecognizer(gestureRecognizer)
-//            gestureRecognizers.append(gestureRecognizer)
-//            gestureRecognizer.node = self
-//        }
-//    }
-//    
-//    func removeGestureRecognizer(gestureRecognizer: BBUIGestureRecognizer) {
-//        if let index = find(gestureRecognizers, gestureRecognizer) {
-//            gestureRecognizer.node = nil
-//            gestureRecognizers.removeAtIndex(index)
-//        }
-//    }
+
+    override public func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        println("touchesBegan on node \(self)")
+        println("recognizers on node \(name): \(gestureRecognizers)")
+        super.touchesBegan(touches, withEvent: event)
+        
+        for recognizer in gestureRecognizers {
+            recognizer.touchesBegan(touches, withEvent: event)
+        }
+    }
+    
+    func addGestureRecognizer(gestureRecognizer: BBUIGestureRecognizer) {
+        if find(gestureRecognizers, gestureRecognizer) == nil {
+            gestureRecognizer.node?.removeGestureRecognizer(gestureRecognizer)
+            gestureRecognizers.append(gestureRecognizer)
+            gestureRecognizer.node = self
+        }
+    }
+    
+    func removeGestureRecognizer(gestureRecognizer: BBUIGestureRecognizer) {
+        if let index = find(gestureRecognizers, gestureRecognizer) {
+            gestureRecognizer.node = nil
+            gestureRecognizers.removeAtIndex(index)
+        }
+    }
 }
