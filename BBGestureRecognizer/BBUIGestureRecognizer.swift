@@ -35,11 +35,11 @@ enum BBUIGestureRecognizerState: Int {
 }
 
 class BBUIGestureRecognizer: Equatable {
-    private var state: BBUIGestureRecognizerState = .BBUIGestureRecognizerStatePossible
-    private var cancelsTouchesInView = true
-    private var delaysTouchesBegan = false
-    private var delaysTouchesEnded = true
-    private var enabled = true
+    private(set) var state: BBUIGestureRecognizerState = .BBUIGestureRecognizerStatePossible
+    var cancelsTouchesInView = true
+    var delaysTouchesBegan = false
+    var delaysTouchesEnded = true
+    var enabled = true
     
     private var _node: SKNode? = nil
     internal(set) var node: SKNode? {
@@ -80,6 +80,29 @@ class BBUIGestureRecognizer: Equatable {
     
     func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         println("touchesBegan in recognizer on node: \(_node!)")
+        println("trackingTouches: \(trackingTouches)")
+    }
+    
+    func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+//        println("touchesMoved in recognizer on node: \(_node!)")
+    }
+    
+    func touchesCancelled(touches: NSSet, withEvent event: UIEvent) {
+//        println("touchesCancelled in recognizer on node: \(_node!)")
+    }
+    
+    func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+//        println("touchesEnded in recognizer on node: \(_node!)")
+    }
+    
+//    func locationInNode(node: SKNode?) -> CGPoint {
+//        return
+//    }
+    
+    private func beginTrackingTouch(touch: UITouch) {
+        if enabled {
+            trackingTouches.append(touch)
+        }
     }
 }
 

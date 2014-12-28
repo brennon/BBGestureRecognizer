@@ -53,15 +53,37 @@ extension SKNode {
         }
     }
 
-    override public func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        println("touchesBegan on node \(self)")
-        println("recognizers on node \(name): \(gestureRecognizers)")
-        super.touchesBegan(touches, withEvent: event)
-        
-        for recognizer in gestureRecognizers {
-            recognizer.touchesBegan(touches, withEvent: event)
-        }
-    }
+//    override public func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+//        super.touchesBegan(touches, withEvent: event)
+//        
+//        for recognizer in gestureRecognizers {
+//            recognizer.touchesBegan(touches, withEvent: event)
+//        }
+//    }
+//    
+//    public override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+//        super.touchesBegan(touches, withEvent: event)
+//        
+//        for recognizer in gestureRecognizers {
+//            recognizer.touchesMoved(touches, withEvent: event)
+//        }
+//    }
+//    
+//    public override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
+//        super.touchesBegan(touches, withEvent: event)
+//        
+//        for recognizer in gestureRecognizers {
+//            recognizer.touchesCancelled(touches, withEvent: event)
+//        }
+//    }
+//    
+//    public override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+//        super.touchesBegan(touches, withEvent: event)
+//        
+//        for recognizer in gestureRecognizers {
+//            recognizer.touchesEnded(touches, withEvent: event)
+//        }
+//    }
     
     func addGestureRecognizer(gestureRecognizer: BBUIGestureRecognizer) {
         if find(gestureRecognizers, gestureRecognizer) == nil {
