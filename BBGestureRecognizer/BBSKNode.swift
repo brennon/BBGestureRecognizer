@@ -43,47 +43,47 @@ extension SKNode {
             var associatedObject: AnyObject? = objc_getAssociatedObject(self, gestureRecognizersAssociationKey)
             if associatedObject == nil {
                 var recognizers = [BBUIGestureRecognizer]()
-                objc_setAssociatedObject(self, gestureRecognizersAssociationKey, recognizers, UInt(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+                objc_setAssociatedObject(self, gestureRecognizersAssociationKey, recognizers, UInt(OBJC_ASSOCIATION_COPY_NONATOMIC))
                 associatedObject = objc_getAssociatedObject(self, gestureRecognizersAssociationKey)
             }
             return associatedObject as [BBUIGestureRecognizer]
         }
         set {
-            objc_setAssociatedObject(self, gestureRecognizersAssociationKey, newValue, UInt(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+            objc_setAssociatedObject(self, gestureRecognizersAssociationKey, newValue, UInt(OBJC_ASSOCIATION_COPY_NONATOMIC))
         }
     }
 
-//    override public func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-//        super.touchesBegan(touches, withEvent: event)
-//        
-//        for recognizer in gestureRecognizers {
-//            recognizer.touchesBegan(touches, withEvent: event)
-//        }
-//    }
-//    
-//    public override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
-//        super.touchesBegan(touches, withEvent: event)
-//        
-//        for recognizer in gestureRecognizers {
-//            recognizer.touchesMoved(touches, withEvent: event)
-//        }
-//    }
-//    
-//    public override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
-//        super.touchesBegan(touches, withEvent: event)
-//        
-//        for recognizer in gestureRecognizers {
-//            recognizer.touchesCancelled(touches, withEvent: event)
-//        }
-//    }
-//    
-//    public override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
-//        super.touchesBegan(touches, withEvent: event)
-//        
-//        for recognizer in gestureRecognizers {
-//            recognizer.touchesEnded(touches, withEvent: event)
-//        }
-//    }
+    public override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        super.touchesBegan(touches, withEvent: event)
+        
+        for recognizer in gestureRecognizers {
+            recognizer.touchesBegan(touches, withEvent: event)
+        }
+    }
+    
+    public override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+        super.touchesBegan(touches, withEvent: event)
+        
+        for recognizer in gestureRecognizers {
+            recognizer.touchesMoved(touches, withEvent: event)
+        }
+    }
+    
+    public override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
+        super.touchesBegan(touches, withEvent: event)
+        
+        for recognizer in gestureRecognizers {
+            recognizer.touchesCancelled(touches, withEvent: event)
+        }
+    }
+    
+    public override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+        super.touchesBegan(touches, withEvent: event)
+        
+        for recognizer in gestureRecognizers {
+            recognizer.touchesEnded(touches, withEvent: event)
+        }
+    }
     
     func addGestureRecognizer(gestureRecognizer: BBUIGestureRecognizer) {
         if find(gestureRecognizers, gestureRecognizer) == nil {
