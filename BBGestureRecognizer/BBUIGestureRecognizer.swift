@@ -34,12 +34,29 @@ enum BBUIGestureRecognizerState: Int {
     case BBUIGestureRecognizerStateRecognized
 }
 
-class BBUIGestureRecognizer: Equatable {
+protocol BBUIGestureRecognizerDelegate {
+    
+    // called when a gesture recognizer attempts to transition out of UIGestureRecognizerStatePossible. returning NO causes it to transition to UIGestureRecognizerStateFailed
+    func gestureRecognizerShouldBegin(gestureRecognizer: BBUIGestureRecognizer) -> Bool
+    
+    // called when the recognition of one of gestureRecognizer or otherGestureRecognizer would be blocked by the other
+    // return YES to allow both to recognize simultaneously. the default implementation returns NO (by default no two gestures can be recognized simultaneously)
+    //
+    // note: returning YES is guaranteed to allow simultaneous recognition. returning NO is not guaranteed to prevent simultaneous recognition, as the other gesture's delegate may return YES
+    func gestureRecognizer(gestureRecognizer: BBUIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool
+    
+    // called before touchesBegan:withEvent: is called on the gesture recognizer for a new touch. return NO to prevent the gesture recognizer from seeing this touch
+    func gestureRecognizer(gestureRecognizer: BBUIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool
+}
+
+class BBUIGestureRecognizer: Equatable, Printable {
     private(set) var state: BBUIGestureRecognizerState = .BBUIGestureRecognizerStatePossible
 //    var cancelsTouchesInView = true
 //    var delaysTouchesBegan = false
 //    var delaysTouchesEnded = true
     var enabled = true
+    
+    var delegate: BBUIGestureRecognizerDelegate? = nil
     
     private var _node: SKNode? = nil
     internal(set) var node: SKNode? {
@@ -79,24 +96,19 @@ class BBUIGestureRecognizer: Equatable {
     }
     
     func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        
-        // Begin tracking touches
-        beginTrackingTouches(touches.allObjects as [UITouch])
+        println("touches began in recognizer")
     }
     
     func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+        println("touches moved in recognizer")
     }
     
     func touchesCancelled(touches: NSSet, withEvent event: UIEvent) {
-        
-        // End tracking touches
-        endTrackingTouches(touches.allObjects as [UITouch])
+        println("touches cancelled in recognizer")
     }
     
     func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
-        
-        // End tracking touches
-        endTrackingTouches(touches.allObjects as [UITouch])
+        println("touches ended in recognizer")
     }
     
     func locationInNode(node: SKNode!) -> CGPoint? {
@@ -123,14 +135,93 @@ class BBUIGestureRecognizer: Equatable {
     }
     
     private func beginTrackingTouch(touch: UITouch) {
+        
+        // If this recognizer is enabled
         if enabled {
-            trackingTouches.append(touch)
+            
+            // If there is no delgate or the delegate says this recognizer 
+            // should receive this touch, add this touch to trackingTouches
+            var shouldReceiveTouch = true
+            if let actualDelegate = delegate {
+                shouldReceiveTouch = actualDelegate.gestureRecognizer(
+                    self,
+                    shouldReceiveTouch: touch
+                )
+            }
+            
+            if shouldReceiveTouch {
+                trackingTouches.append(touch)
+            }
         }
     }
     
-    private func beginTrackingTouches(touches: [UITouch]) {
+    internal func beginTrackingTouches(touches: [UITouch]) {
         for touch in touches {
             beginTrackingTouch(touch)
+        }
+    }
+    
+    internal func continueTrackingTouchesWithEvent(event: UIEvent) {
+        var began = NSMutableSet()
+        var moved = NSMutableSet()
+        var ended = NSMutableSet()
+        var cancelled = NSMutableSet()
+        
+        var multitouchSequenceIsEnded = true
+        
+        for touch in trackingTouches {
+            switch touch.phase {
+            case .Began:
+                multitouchSequenceIsEnded = false
+                began.addObject(touch)
+            case .Moved:
+                multitouchSequenceIsEnded = false
+                moved.addObject(touch)
+            case .Stationary:
+                multitouchSequenceIsEnded = false
+            case .Ended:
+                ended.addObject(touch)
+            case .Cancelled:
+                cancelled.addObject(touch)
+            }
+        }
+        
+        switch state {
+        case .BBUIGestureRecognizerStatePossible,
+             .BBUIGestureRecognizerStateBegan,
+             .BBUIGestureRecognizerStateChanged:
+            
+            if began.count > 0 {
+                touchesBegan(began, withEvent: event)
+            }
+            
+            if moved.count > 0 {
+                touchesMoved(moved, withEvent: event)
+            }
+            
+            if ended.count > 0 {
+                touchesEnded(ended, withEvent: event)
+            }
+            
+            if cancelled.count > 0 {
+                touchesCancelled(cancelled, withEvent: event)
+            }
+        default:
+            break
+        }
+        
+
+        // if all the touches are ended or cancelled, then the multitouch sequence must be over - so we can reset
+        // our state back to normal and clear all the tracked touches, etc. to get ready for a new touch sequence
+        // in the future.
+        // this also applies to the special discrete gesture events because those events are only sent once!
+        if multitouchSequenceIsEnded {
+            
+            // see note above in -setState: about the delay here!
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                self.reset()
+            }
         }
     }
     
@@ -142,10 +233,34 @@ class BBUIGestureRecognizer: Equatable {
         }
     }
     
-    private func endTrackingTouches(touches: [UITouch]) {
+    internal func endTrackingTouches(touches: [UITouch]) {
         for touch in touches {
             endTrackingTouch(touch)
         }
+    }
+    
+    var description: String {
+        var stateString: String
+        
+        switch (state) {
+        case .BBUIGestureRecognizerStatePossible:
+            stateString = "Possible"
+        case .BBUIGestureRecognizerStateBegan:
+            stateString = "Began"
+        case .BBUIGestureRecognizerStateChanged:
+            stateString = "Changed"
+        case .BBUIGestureRecognizerStateEnded:
+            stateString = "Ended"
+        case .BBUIGestureRecognizerStateCancelled:
+            stateString = "Cancelled"
+        case .BBUIGestureRecognizerStateFailed:
+            stateString = "Failed"
+        case .BBUIGestureRecognizerStateRecognized:
+            stateString = "Recognized"
+        }
+        
+        let thisType = ObjectIdentifier(self)
+        return "<BBUIGestureRecognizer; state = \(stateString); node = \(node)>"
     }
 }
 

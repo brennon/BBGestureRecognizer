@@ -53,36 +53,54 @@ extension SKNode {
         }
     }
 
+    // The standard UIResponder methods on this node should pass touches on to 
+    // the node's gesture recognizers based on the kind of touch
     public override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         super.touchesBegan(touches, withEvent: event)
         
         for recognizer in gestureRecognizers {
-            recognizer.touchesBegan(touches, withEvent: event)
+            recognizer.beginTrackingTouches(touches.allObjects as [UITouch])
+            recognizer.continueTrackingTouchesWithEvent(event)
         }
+        
+        processGestureRecognizers()
     }
     
     public override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
         super.touchesBegan(touches, withEvent: event)
         
         for recognizer in gestureRecognizers {
-            recognizer.touchesMoved(touches, withEvent: event)
+            recognizer.continueTrackingTouchesWithEvent(event)
         }
+        
+        processGestureRecognizers()
     }
     
     public override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
         super.touchesBegan(touches, withEvent: event)
         
         for recognizer in gestureRecognizers {
-            recognizer.touchesCancelled(touches, withEvent: event)
+            recognizer.continueTrackingTouchesWithEvent(event)
+            recognizer.endTrackingTouches(touches.allObjects as [UITouch])
         }
+        
+        processGestureRecognizers()
     }
     
     public override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
         super.touchesBegan(touches, withEvent: event)
         
         for recognizer in gestureRecognizers {
-            recognizer.touchesEnded(touches, withEvent: event)
+            recognizer.continueTrackingTouchesWithEvent(event)
+            recognizer.endTrackingTouches(touches.allObjects as [UITouch])
         }
+        
+        processGestureRecognizers()
+    }
+    
+    // Go through gesture recognizers and allow them to process touches
+    func processGestureRecognizers() {
+        
     }
     
     func addGestureRecognizer(gestureRecognizer: BBUIGestureRecognizer) {
