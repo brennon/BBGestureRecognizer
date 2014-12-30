@@ -24,26 +24,14 @@ struct BBUIGestureRecognizerTargetActionWrapper<T: AnyObject> : BBUIGestureRecog
     }
 }
 
-enum BBUIGestureRecognizerState: Int {
-    case BBUIGestureRecognizerStatePossible
-    case BBUIGestureRecognizerStateBegan
-    case BBUIGestureRecognizerStateChanged
-    case BBUIGestureRecognizerStateEnded
-    case BBUIGestureRecognizerStateCancelled
-    case BBUIGestureRecognizerStateFailed
-    case BBUIGestureRecognizerStateRecognized
-}
-
-protocol BBUIGestureRecognizerDelegate {
-    
-    // called when a gesture recognizer attempts to transition out of UIGestureRecognizerStatePossible. returning NO causes it to transition to UIGestureRecognizerStateFailed
-    func gestureRecognizerShouldBegin(gestureRecognizer: BBUIGestureRecognizer) -> Bool
-    
-    // called when the recognition of one of gestureRecognizer or otherGestureRecognizer would be blocked by the other
-    // return YES to allow both to recognize simultaneously. the default implementation returns NO (by default no two gestures can be recognized simultaneously)
-    //
-    // note: returning YES is guaranteed to allow simultaneous recognition. returning NO is not guaranteed to prevent simultaneous recognition, as the other gesture's delegate may return YES
-    func gestureRecognizer(gestureRecognizer: BBUIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool
+enum BBUIGestureRecognizerState: Int, Printable {
+    case Possible
+    case Began
+    case Changed
+    case Ended
+    case Cancelled
+    case Failed
+    case Recognized
     
     // called before touchesBegan:withEvent: is called on the gesture recognizer for a new touch. return NO to prevent the gesture recognizer from seeing this touch
     func gestureRecognizer(gestureRecognizer: BBUIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool
