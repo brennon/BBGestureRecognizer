@@ -1,0 +1,36 @@
+ViewController.swift
+	class ViewController: UIViewController
+AppDelegate.swift
+	class AppDelegate: UIResponder, UIApplicationDelegate
+SKNode.h
+	class SKNode : UIResponder, NSCopying, NSCoding
+TestScene.swift
+	class TestScene: SKScene
+BBUIGestureRecognizer.swift
+	protocol BBUIGestureRecognizerTargetAction
+	struct BBUIGestureRecognizerTargetActionWrapper<T: AnyObject> : BBUIGestureRecognizerTargetAction
+	enum BBUIGestureRecognizerState: Int, Printable
+	struct BBUIGestureRecognizerStateTransition
+	var enabled = true
+	var delegate: BBUIGestureRecognizerDelegate? = nil
+	private var _node: SKNode? = nil
+	internal(set) var node: SKNode?
+	var numberOfTouches: Int
+	private var registeredAction: BBUIGestureRecognizerTargetAction?
+	private var trackingTouches = [UITouch]()
+	func addTarget<T: AnyObject>(target: T, action: (T) -> (BBUIGestureRecognizer?) -> ())
+	func removeTarget()
+	func reset()
+	func touchesBegan(touches: NSSet, withEvent event: UIEvent)
+	func touchesMoved(touches: NSSet, withEvent event: UIEvent)
+	func touchesCancelled(touches: NSSet, withEvent event: UIEvent)
+	func touchesEnded(touches: NSSet, withEvent event: UIEvent)
+	func locationInNode(node: SKNode!) -> CGPoint?
+	func locationOfTouch(touchIndex index: Int, inNode node: SKNode!) -> CGPoint
+	private func beginTrackingTouch(touch: UITouch)
+	internal func beginTrackingTouches(touches: [UITouch])
+	internal func continueTrackingTouchesWithEvent(event: UIEvent)
+	private func endTrackingTouch(touch: UITouch)
+	internal func endTrackingTouches(touches: [UITouch])
+	var description: String
+	func ==(lhs: BBUIGestureRecognizer, rhs: BBUIGestureRecognizer) -> Bool
