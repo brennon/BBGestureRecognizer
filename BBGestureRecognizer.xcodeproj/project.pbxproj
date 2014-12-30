@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A9284B71A51FF2600EACEF5 /* BBUIGestureRecognizerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9284B61A51FF2600EACEF5 /* BBUIGestureRecognizerDelegate.swift */; };
+		3A9284B91A52FA7E00EACEF5 /* BBUITapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9284B81A52FA7E00EACEF5 /* BBUITapGestureRecognizer.swift */; };
 		3ABA68EB1A49E57400E1934C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA68EA1A49E57400E1934C /* AppDelegate.swift */; };
 		3ABA68ED1A49E57400E1934C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA68EC1A49E57400E1934C /* ViewController.swift */; };
 		3ABA68F01A49E57400E1934C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ABA68EE1A49E57400E1934C /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		3A9284B61A51FF2600EACEF5 /* BBUIGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBUIGestureRecognizerDelegate.swift; sourceTree = "<group>"; };
+		3A9284B81A52FA7E00EACEF5 /* BBUITapGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBUITapGestureRecognizer.swift; sourceTree = "<group>"; };
 		3ABA68E51A49E57400E1934C /* BBGestureRecognizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BBGestureRecognizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ABA68E91A49E57400E1934C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3ABA68EA1A49E57400E1934C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				3ABA68F31A49E57400E1934C /* LaunchScreen.xib */,
 				3ABA68E81A49E57400E1934C /* Supporting Files */,
 				3ABA690A1A49E5B200E1934C /* BBUIGestureRecognizer.swift */,
+				3A9284B81A52FA7E00EACEF5 /* BBUITapGestureRecognizer.swift */,
 				3A9284B61A51FF2600EACEF5 /* BBUIGestureRecognizerDelegate.swift */,
 				3AC6BB501A4DBDA900884F76 /* BBSKNode.swift */,
 				3AC6BB541A4DC49B00884F76 /* TestScene.swift */,
@@ -229,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ABA68ED1A49E57400E1934C /* ViewController.swift in Sources */,
+				3A9284B91A52FA7E00EACEF5 /* BBUITapGestureRecognizer.swift in Sources */,
 				3ABA68EB1A49E57400E1934C /* AppDelegate.swift in Sources */,
 				3A9284B71A51FF2600EACEF5 /* BBUIGestureRecognizerDelegate.swift in Sources */,
 				3AC6BB511A4DBDA900884F76 /* BBSKNode.swift in Sources */,

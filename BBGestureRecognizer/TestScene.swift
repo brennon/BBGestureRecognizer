@@ -27,7 +27,7 @@ class TestScene: SKScene {
         nodeB.userInteractionEnabled = true
         
         println("recognizers: \(nodeB.gestureRecognizers)")
-        let recognizer = BBUIGestureRecognizer(target: self, action: TestScene.doSomething)
+        let recognizer = BBUITapGestureRecognizer(target: self, action: TestScene.doSomething)
         nodeB.addGestureRecognizer(recognizer)
         println("recognizers after adding one: \(nodeB.gestureRecognizers)")
         
@@ -72,6 +72,6 @@ class TestScene: SKScene {
     }
     
     func doSomething(gestureRecognizer: BBUIGestureRecognizer?) {
-        println("doing something")
+        println("tapped!")
     }
 }
