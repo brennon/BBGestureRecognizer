@@ -100,7 +100,9 @@ extension SKNode {
     
     // Go through gesture recognizers and allow them to process touches
     func processGestureRecognizers() {
-        
+        for recognizer in gestureRecognizers {
+            recognizer.advanceState()
+        }
     }
     
     func addGestureRecognizer(gestureRecognizer: BBUIGestureRecognizer) {

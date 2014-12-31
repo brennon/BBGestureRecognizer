@@ -298,6 +298,20 @@ class BBUIGestureRecognizer: Equatable, Printable {
 
     // MARK: Getting the Recognizer's State and Node
     
+    /**
+        The state to which this gesture recognizer will next advance. Under the 
+        hood, when a `BBUIGestureRecognizer` sets `state`, it is actually 
+        `nextState` that receives this update. Then, when the coordinating 
+        object processes all gesture recognizers on a node (this object is 
+        typically the node itself), it advances each recognizer from `state` to 
+        the new state in `nextState`. This allows the coordinating object to 
+        enforce dependencies between gesture recognizers. In doing so, the 
+        coordinating object can potentially change `nextState` to a new, 
+        appropriate value, and then advance the `state` on all recognizers by 
+        calling its `advanceState()` method.
+    */
+    private var nextState: BBUIGestureRecognizerState? = nil
+    
     /// Private storage for the `state` property.
     private var _state: BBUIGestureRecognizerState = .Possible
     
@@ -314,16 +328,27 @@ class BBUIGestureRecognizer: Equatable, Printable {
         get {
             return _state
         }
-        set(newState) {
-            
-            var varNewState = newState
-            
+        set {
+            nextState = newValue
+        }
+    }
+    
+    /**
+        Advances the gesture recognizer's state from `state` to `nextState`. 
+        See `nextState` for more information on when and why this is 
+        necessary.
+    */
+    internal func advanceState() {
+        
+        // If there is a state in nextState to which we should advance
+        if var varNewState = nextState {
+        
             // If there is a delegate and it says that this recognizer should
             // not begin, set the new state to .Failed
             var shouldBegin = true
             if let actualDelegate = delegate {
                 if _state == .Possible {
-                    if newState == .Began || newState == .Recognized {
+                    if nextState == .Began || nextState == .Recognized {
                         shouldBegin =
                             actualDelegate.gestureRecognizerShouldBegin(self)
                     }
@@ -337,18 +362,19 @@ class BBUIGestureRecognizer: Equatable, Printable {
             if let allowedTransition = findAllowedTransition(
                 _state,
                 toState: varNewState
-            ) {
-                _state = varNewState
-                
-                // The docs mention that the action messages are sent on the
-                // next run loop, so we'll do that here. Note that this means
-                // that reset can't happen until the next run loop, either
-                // otherwise the state property is going to be wrong when the
-                // action handler looks at it, so as a result we also delay the
-                // reset call (if necessary) in continueTrackingWithEvent:
-                if allowedTransition.shouldNotify {
-                    registeredAction?.performAction(self)
-                }
+                ) {
+                    _state = varNewState
+                    nextState = nil
+                    
+                    // The docs mention that the action messages are sent on the
+                    // next run loop, so we'll do that here. Note that this means
+                    // that reset can't happen until the next run loop, either
+                    // otherwise the state property is going to be wrong when the
+                    // action handler looks at it, so as a result we also delay the
+                    // reset call (if necessary) in continueTrackingWithEvent:
+                    if allowedTransition.shouldNotify {
+                        registeredAction?.performAction(self)
+                    }
             } else {
                 println(
                     "Invalid state transition from \(_state) to \(varNewState)"
