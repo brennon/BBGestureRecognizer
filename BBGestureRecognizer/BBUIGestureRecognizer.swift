@@ -402,6 +402,13 @@ class BBUIGestureRecognizer: Equatable, Printable {
     // MARK: Specifying Dependencies Between Gesture Recognizers
     
     /**
+        An array of weak references to other `BBUIGestureRecognizer` instances 
+        (by way of `WeakWrapper`) that must fail in order for this gesture 
+        recognizer to recognize its gesture.
+    */
+    private var recognizersRequiredToFail = Array<WeakWrapper<BBUIGestureRecognizer>>()
+    
+    /**
         Creates a dependency relationship between the gesture recognizer on 
         which this method was called and another gesture recognizer. This 
         method creates a relationship with another gesture recognizer that 
@@ -418,7 +425,11 @@ class BBUIGestureRecognizer: Equatable, Printable {
             instance of a subclass of `BBUIGestureRecognizer`).
     */
     func requireGestureRecognizerToFail(otherGestureRecognizer: UIGestureRecognizer) {
-        
+        for wrapper in recognizersRequiredToFail {
+            if let wrappedRecognizer = wrapper.get() {
+                
+            }
+        }
     }
     
 //- (void)requireGestureRecognizerToFail:(UIGestureRecognizer *)otherGestureRecognizer
