@@ -7,7 +7,7 @@
 //
 
 struct WeakWrapper<T: AnyObject> {
-    weak var value: T?
+    weak private var value: T?
     
     init(value: T) {
         self.value = value

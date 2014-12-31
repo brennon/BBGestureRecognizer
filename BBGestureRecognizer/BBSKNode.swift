@@ -98,8 +98,36 @@ extension SKNode {
         processGestureRecognizers()
     }
     
-    // Go through gesture recognizers and allow them to process touches
+    /**
+        Process gesture recognizer dependencies and then advance each to their 
+        next state. Each recognizer's `recognizersRequiredToFail` are checked. 
+        If any of those did not fail, the recognizer will transition to a 
+        `.Failed` state. Otherwise, the recognizer will transition to its next 
+        normal state.
+    */
     func processGestureRecognizers() {
+        
+        // For each recognizer, see if it requires any other recognizers to fail
+        for recognizer in gestureRecognizers {
+            
+            // Iterate over recognizer's recognizersRequiredToFail
+            for otherWrappedRecognizer in recognizer.recognizersRequiredToFail {
+                
+                // If there are any existing other recognizers and they either 
+                // began or completed recognition, this recognizer should 
+                // transition to .Failed
+                if let otherRecognizer = otherWrappedRecognizer.get() {
+                    switch otherRecognizer.state {
+                    case .Recognized, .Began:
+                        recognizer.nextState = .Failed
+                    default:
+                        break
+                    }
+                }
+            }
+        }
+        
+        // Advance all recognizers to their next state
         for recognizer in gestureRecognizers {
             recognizer.advanceState()
         }

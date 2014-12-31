@@ -310,7 +310,7 @@ class BBUIGestureRecognizer: Equatable, Printable {
         appropriate value, and then advance the `state` on all recognizers by 
         calling its `advanceState()` method.
     */
-    private var nextState: BBUIGestureRecognizerState? = nil
+    internal var nextState: BBUIGestureRecognizerState? = nil
     
     /// Private storage for the `state` property.
     private var _state: BBUIGestureRecognizerState = .Possible
@@ -432,7 +432,7 @@ class BBUIGestureRecognizer: Equatable, Printable {
         (by way of `WeakWrapper`) that must fail in order for this gesture 
         recognizer to recognize its gesture.
     */
-    private var recognizersRequiredToFail = Array<WeakWrapper<BBUIGestureRecognizer>>()
+    internal var recognizersRequiredToFail = Array<WeakWrapper<BBUIGestureRecognizer>>()
     
     /**
         Creates a dependency relationship between the gesture recognizer on 
@@ -450,12 +450,9 @@ class BBUIGestureRecognizer: Equatable, Printable {
         :param: otherGestureRecognizer Another gesture-recognizer object (an 
             instance of a subclass of `BBUIGestureRecognizer`).
     */
-    func requireGestureRecognizerToFail(otherGestureRecognizer: UIGestureRecognizer) {
-        for wrapper in recognizersRequiredToFail {
-            if let wrappedRecognizer = wrapper.get() {
-                
-            }
-        }
+    func requireGestureRecognizerToFail(otherGestureRecognizer: BBUIGestureRecognizer) {
+        let wrappedRecognizer = WeakWrapper(value: otherGestureRecognizer)
+        recognizersRequiredToFail.append(wrappedRecognizer)
     }
     
 //- (void)requireGestureRecognizerToFail:(UIGestureRecognizer *)otherGestureRecognizer
