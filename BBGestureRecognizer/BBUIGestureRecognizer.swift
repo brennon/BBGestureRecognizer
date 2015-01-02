@@ -420,6 +420,25 @@ class BBUIGestureRecognizer: Equatable, Printable {
         }
     }
     
+    var pendingTerminalState: BBUIGestureRecognizerState?
+    
+    func schedulePendingRecognition(withState: BBUIGestureRecognizerState, andDelay delay: NSTimeInterval) {
+        pendingTerminalState = withState
+        
+        let delayInNanoseconds = delay * NSTimeInterval(NSEC_PER_SEC)
+        
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInNanoseconds))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            self.state = self.pendingTerminalState!
+            self.pendingTerminalState = nil
+            self.advanceState()
+        }
+    }
+    
+    func updatePendingRecognition(withState: BBUIGestureRecognizerState) {
+        pendingTerminalState = withState
+    }
+    
     /// Private storage for the `node` property.
     private var _node: SKNode? = nil
     
@@ -788,7 +807,7 @@ class BBUIGestureRecognizer: Equatable, Printable {
         // clear all the tracked touches, etc. to get ready for a new touch 
         // sequence in the future. This also applies to the special discrete 
         // gesture events because those events are only sent once.
-        if multitouchSequenceIsEnded {
+        if multitouchSequenceIsEnded && pendingTerminalState == nil {
             
             // See note above in state setter about the delay here.
             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0))
