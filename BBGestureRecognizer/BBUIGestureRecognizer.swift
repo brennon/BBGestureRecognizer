@@ -189,7 +189,21 @@ class BBUIGestureRecognizer: Equatable, Printable {
         )
     ]
     
+    /**
+        The `UITouch` objects that the gesture recognizer is currently 
+        tracking. For simplicity, `beginTrackingTouch(_:)` is the only place 
+        where touches are added to this array, and `endTrackingTouch(_:)` is 
+        the only place where touches are removed from this array.
+    */
     private var trackingTouches = [UITouch]()
+    
+    /**
+        The `UITouch` objects that the gesture recognizer is currently 
+        ignoring. For simplicity, `ignoreTouch(_:forEvent:)` is the only place
+        where touches are added to this array, and `endTrackingTouch(_:)` is 
+        the only place where touches are removed from this array.
+    */
+    private var ignoredTouches = [UITouch]()
     
     // MARK: Initializing a Gesture Recognizer
     
@@ -613,14 +627,29 @@ class BBUIGestureRecognizer: Equatable, Printable {
     func reset() {
 //        println("reset (\(name))")
         _state = .Possible
+        
+        // Ignore all remaining touches
+        for touch in trackingTouches {
+            ignoreTouch(touch, forEvent: nil)
+        }
     }
     
+    /**
+        Tells the gesture recognizer to ignore a specific touch of the given 
+        event. If a touch isn't part of this gesture you may pass it to this 
+        method, causing it to be ignored. `BBUIGestureRecognizer` does not 
+        cancel ignored touches on the associated view even if 
+        `cancelsTouchesInView` is `true`. This method is intended to be called, 
+        not overridden.
     
-    // FIXME: Implement ignoreTouch(_:forEvent:)
-    
-//- (void)ignoreTouch:(UITouch *)touch forEvent:(UIEvent*)event
-//{
-//}
+        :param: touch A `UITouch` object that is part of the current 
+            multi-touch sequence and associated with `event`.
+        :param: event A `UIEvent?` object that, if not `nil`, includes a 
+            reference to `touch`.
+    */
+    func ignoreTouch(touch: UITouch, forEvent event: UIEvent?) {
+        ignoredTouches.append(touch)
+    }
     
     // FIXME: Implement canPreventGestureRecognizer(_:)
 //- (BOOL)canPreventGestureRecognizer:(UIGestureRecognizer *)preventedGestureRecognizer
@@ -695,6 +724,17 @@ class BBUIGestureRecognizer: Equatable, Printable {
             recognizer should begin tracking.
     */
     internal func continueTrackingTouchesWithEvent(event: UIEvent) {
+        
+        // Subtract ignoredTouches from trackingTouches.
+        var trackingTouchesExcludingIgnoredTouches = [UITouch]()
+        
+        for touch in trackingTouches {
+            let index = find(ignoredTouches, touch)
+            if index == nil {
+                trackingTouchesExcludingIgnoredTouches.append(touch)
+            }
+        }
+        
         var began = NSMutableSet()
         var moved = NSMutableSet()
         var ended = NSMutableSet()
@@ -702,7 +742,7 @@ class BBUIGestureRecognizer: Equatable, Printable {
         
         var multitouchSequenceIsEnded = true
         
-        for touch in trackingTouches {
+        for touch in trackingTouchesExcludingIgnoredTouches {
             switch touch.phase {
             case .Began:
                 multitouchSequenceIsEnded = false
@@ -742,7 +782,6 @@ class BBUIGestureRecognizer: Equatable, Printable {
         default:
             break
         }
-        
 
         // if all the touches are ended or cancelled, then the multitouch 
         // sequence must be over--so we can reset our state back to normal and 
@@ -766,8 +805,15 @@ class BBUIGestureRecognizer: Equatable, Printable {
             stop tracking.
     */
     private func endTrackingTouch(touch: UITouch) {
+        
+        // Remove touch from trackingTouches.
         if let index = find(trackingTouches, touch) {
             trackingTouches.removeAtIndex(index)
+        }
+        
+        // Remove touch from ignoredTouches.
+        if let index = find(ignoredTouches, touch) {
+            ignoredTouches.removeAtIndex(index)
         }
     }
     
