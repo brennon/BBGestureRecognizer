@@ -10,6 +10,9 @@ import SpriteKit
 
 class TestScene: SKScene {
     
+    var singleTapRecognizer: BBUITapGestureRecognizer!
+    var doubleTapRecognizer: BBUITapGestureRecognizer!
+    
     override func didMoveToView(view: SKView) {
         
         let midX = CGRectGetMidX(self.frame)
@@ -27,8 +30,15 @@ class TestScene: SKScene {
         nodeB.userInteractionEnabled = true
         
         println("recognizers: \(nodeB.gestureRecognizers)")
-        let recognizer = BBUITapGestureRecognizer(target: self, action: TestScene.doSomething)
-        nodeB.addGestureRecognizer(recognizer)
+        singleTapRecognizer = BBUITapGestureRecognizer(target: self, action: TestScene.handleSingleTap)
+        singleTapRecognizer.numberOfTapsRequired = 1
+        singleTapRecognizer.name = "Single Tap Recognizer"
+        doubleTapRecognizer = BBUITapGestureRecognizer(target: self, action: TestScene.handleDoubleTap)
+        doubleTapRecognizer.numberOfTapsRequired = 2
+        doubleTapRecognizer.name = "Double Tap Recognizer"
+//        singleTapRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
+        nodeB.addGestureRecognizer(singleTapRecognizer)
+//        nodeB.addGestureRecognizer(doubleTapRecognizer)
         println("recognizers after adding one: \(nodeB.gestureRecognizers)")
         
 //        let nodeC = SKSpriteNode(color: UIColor.redColor(), size: CGSizeMake(100, 100))
@@ -71,7 +81,15 @@ class TestScene: SKScene {
 //        println("number of descendants: \(descendants.count)")
     }
     
-    func doSomething(gestureRecognizer: BBUIGestureRecognizer?) {
-        println("tapped!")
+    func handleSingleTap(gestureRecognizer: BBUIGestureRecognizer?) {
+//        if gestureRecognizer?.state == BBUIGestureRecognizerState.Ended {
+            println("single tap; single tap recognizer state: \(singleTapRecognizer.state), double tap recognizer state: \(doubleTapRecognizer.state)")
+//        }
+    }
+    
+    func handleDoubleTap(gestureRecognizer: BBUIGestureRecognizer?) {
+//        if gestureRecognizer?.state == BBUIGestureRecognizerState.Ended {
+            println("double tap; single tap recognizer state: \(singleTapRecognizer.state), double tap recognizer state: \(doubleTapRecognizer.state)")
+//        }
     }
 }

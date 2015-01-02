@@ -131,6 +131,8 @@ struct BBUIGestureRecognizerStateTransition {
 */
 class BBUIGestureRecognizer: Equatable, Printable {
     
+    var name = ""
+    
     // MARK: Properties
     
     /**
@@ -330,6 +332,7 @@ class BBUIGestureRecognizer: Equatable, Printable {
         }
         set {
             nextState = newValue
+//            println("nextState: \(nextState)")
         }
     }
     
@@ -363,21 +366,38 @@ class BBUIGestureRecognizer: Equatable, Printable {
                 _state,
                 toState: varNewState
                 ) {
-                    _state = varNewState
-                    nextState = nil
+                    
+                    var shouldResetOnNextRunLoop: Bool
+                    switch varNewState {
+                    case .Recognized, .Cancelled, .Ended, .Failed:
+                        shouldResetOnNextRunLoop = true
+                    default:
+                        shouldResetOnNextRunLoop = false
+                    }
                     
                     // The docs mention that the action messages are sent on the
                     // next run loop, so we'll do that here. Note that this means
-                    // that reset can't happen until the next run loop, either
+                    // that reset can't happen until the next run loop, either,
                     // otherwise the state property is going to be wrong when the
                     // action handler looks at it, so as a result we also delay the
                     // reset call (if necessary) in continueTrackingWithEvent:
-                    if allowedTransition.shouldNotify {
-                        registeredAction?.performAction(self)
+                    
+                    let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0))
+                    dispatch_after(delayTime, dispatch_get_main_queue()) {
+                        self._state = varNewState
+                        self.nextState = nil
+                        
+                        if allowedTransition.shouldNotify {
+                            self.registeredAction?.performAction(self)
+                        }
+                        
+                        if shouldResetOnNextRunLoop {
+                            self.reset()
+                        }
                     }
             } else {
                 println(
-                    "Invalid state transition from \(_state) to \(varNewState)"
+                    "Invalid state transition in \(name) from \(_state) to \(varNewState)"
                 )
             }
         }
@@ -495,9 +515,7 @@ class BBUIGestureRecognizer: Equatable, Printable {
         :param: event A `UIEvent` object representing the event to which the 
             touches belong.
     */
-    func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        println("touches began in recognizer")
-    }
+    func touchesBegan(touches: NSSet, withEvent event: UIEvent) {}
     
     /**
         Sent to the receiver when one or more fingers touch down in the
@@ -523,9 +541,7 @@ class BBUIGestureRecognizer: Equatable, Printable {
         :param: event A `UIEvent` object representing the event to which the
             touches belong.
     */
-    func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
-        println("touches moved in recognizer")
-    }
+    func touchesMoved(touches: NSSet, withEvent event: UIEvent) {}
     
     /**
         Sent to the receiver when one or more fingers touch down in the
@@ -552,9 +568,7 @@ class BBUIGestureRecognizer: Equatable, Printable {
         :param: event A `UIEvent` object representing the event to which the
             touches belong.
     */
-    func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
-        println("touches ended in recognizer")
-    }
+    func touchesEnded(touches: NSSet, withEvent event: UIEvent) {}
     
     /**
         Sent to the receiver when one or more fingers touch down in the
@@ -578,9 +592,7 @@ class BBUIGestureRecognizer: Equatable, Printable {
         :param: event A `UIEvent` object representing the event to which the
             touches belong.
     */
-    func touchesCancelled(touches: NSSet, withEvent event: UIEvent) {
-        println("touches cancelled in recognizer")
-    }
+    func touchesCancelled(touches: NSSet, withEvent event: UIEvent) {}
     
     // FIXME: Make sure reset is called in all of the below listed scenarios
     // FIXME: Make last sentence of below comment is implemented
@@ -596,6 +608,7 @@ class BBUIGestureRecognizer: Equatable, Printable {
         touches that have begun but haven't ended.
     */
     func reset() {
+        println("reset (\(name))")
         _state = .Possible
     }
     

@@ -110,18 +110,37 @@ extension SKNode {
         // For each recognizer, see if it requires any other recognizers to fail
         for recognizer in gestureRecognizers {
             
-            // Iterate over recognizer's recognizersRequiredToFail
-            for otherWrappedRecognizer in recognizer.recognizersRequiredToFail {
-                
-                // If there are any existing other recognizers and they either 
-                // began or completed recognition, this recognizer should 
-                // transition to .Failed
-                if let otherRecognizer = otherWrappedRecognizer.get() {
-                    switch otherRecognizer.state {
-                    case .Recognized, .Began:
-                        recognizer.nextState = .Failed
-                    default:
-                        break
+//            println("checking dependencies for \(recognizer.name)")
+            
+            // If the this recognizer wants to move to a state of .Recognized (a discrete gesture is complete) or .Began (a continuous gesture is being recognized), check dependencies on this recognizer.
+            if recognizer.nextState == .Recognized || recognizer.nextState == .Began {
+            
+                // Iterate over recognizer's recognizersRequiredToFail
+                for otherWrappedRecognizer in recognizer.recognizersRequiredToFail {
+                    
+                    // If there are any existing other recognizers and they either 
+                    // began or completed recognition, this recognizer should 
+                    // transition to .Failed/.Cancelled (for discrete/continuous gestures, respectively).
+                    if let otherRecognizer = otherWrappedRecognizer.get() {
+//                        println("\(recognizer.name) requires \(otherRecognizer.name) to fail; checking")
+                        
+                        switch otherRecognizer.state {
+                        case .Began, .Changed, .Recognized, .Ended:
+                            switch recognizer.state {
+                            case .Began, .Changed:
+//                                println("\(otherRecognizer.name) state: \(otherRecognizer.state); changing \(recognizer.name) state from \(recognizer.state) to .Cancelled")
+                                recognizer.nextState = .Cancelled
+                            case .Recognized:
+//                                println("\(otherRecognizer.name) state: \(otherRecognizer.state); changing \(recognizer.name) state from \(recognizer.state) to .Failed")
+                                recognizer.nextState = .Failed
+                            default:
+//                                println("\(otherRecognizer.name) state: \(otherRecognizer.state); leaving \(recognizer.name) state as \(recognizer.state)")
+                                break
+                            }
+                        default:
+//                            println("\(otherRecognizer.name) state: \(otherRecognizer.state); leaving \(recognizer.name) state as \(recognizer.state)")
+                            break
+                        }
                     }
                 }
             }
