@@ -38,8 +38,8 @@ class TestScene: SKScene {
         doubleTapRecognizer.name = "Double Tap Recognizer"
 //        singleTapRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
         nodeB.addGestureRecognizer(singleTapRecognizer)
-//        nodeB.addGestureRecognizer(doubleTapRecognizer)
-        println("recognizers after adding one: \(nodeB.gestureRecognizers)")
+        nodeB.addGestureRecognizer(doubleTapRecognizer)
+//        println("recognizers after adding one: \(nodeB.gestureRecognizers)")
         
 //        let nodeC = SKSpriteNode(color: UIColor.redColor(), size: CGSizeMake(100, 100))
 //        nodeC.position = CGPointMake(midX, midY - 200)
@@ -90,6 +90,7 @@ class TestScene: SKScene {
     func handleDoubleTap(gestureRecognizer: BBUIGestureRecognizer?) {
 //        if gestureRecognizer?.state == BBUIGestureRecognizerState.Ended {
             println("double tap; single tap recognizer state: \(singleTapRecognizer.state), double tap recognizer state: \(doubleTapRecognizer.state)")
+//        println("double tap handler; state: \(doubleTapRecognizer.state)")
 //        }
     }
 }

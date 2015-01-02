@@ -61,61 +61,83 @@ class BBUITapGestureRecognizer: BBUIGestureRecognizer {
     */
     var numberOfTouchesRequired: Int = 1
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        super.touchesBegan(touches, withEvent: event)
-        
-        // If the number of touches matches the required number and we are in 
-        // the .Possible state
-        if touches.count == numberOfTouchesRequired && state == .Possible {
-            
-            var newState: BBUIGestureRecognizerState
-            
-            // Set the state to .Began
-            let firstTouch = touches.allObjects.first as UITouch
-            if firstTouch.tapCount > numberOfTapsRequired {
-                newState = .Failed
-            } else {
-                newState = .Began
-            }
-            
-            println("changing \(name) from \(state) to .\(newState)")
-            state = newState
-        }
-    }
+//    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+//        super.touchesBegan(touches, withEvent: event)
+//        
+//        // If the number of touches matches the required number and we are in 
+//        // the .Possible state
+//        if touches.count == numberOfTouchesRequired && state == .Possible {
+//            
+//            var newState: BBUIGestureRecognizerState
+//            
+//            // Set the state to .Began
+//            let firstTouch = touches.allObjects.first as UITouch
+//            if firstTouch.tapCount > numberOfTapsRequired {
+//                newState = .Failed
+//            } else {
+//                newState = .Began
+//            }
+//            
+//            println("changing \(name) from \(state) to .\(newState)")
+//            state = newState
+//        }
+//    }
     
     override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
         super.touchesEnded(touches, withEvent: event)
         
-        // If we no longer have the correct number of touches, set the state
-        // to .Cancelled if necessary, reset, and return immediately
-        if touches.count != numberOfTouchesRequired {
+        // If we have the correct number of touches
+        if touches.count == numberOfTouchesRequired {
             
-            // If state is .Began, it needs to become .Cancelled. If state is
-            // .Possible, leave it at .Possible and just reset.
-            if state == .Began {
-                state = .Cancelled
+            // If all touches have tapped the correct number of times
+            var correctTapCountForAllTouches = true
+            var tooManyTaps = false
+            for touch in touches.allObjects as [UITouch] {
+                if touch.tapCount != numberOfTapsRequired {
+                    correctTapCountForAllTouches = false
+                    if touch.tapCount > numberOfTapsRequired {
+                        tooManyTaps = true
+                    }
+                }
             }
-            return
-        }
-        
-        // We know we have the correct number of touches. Now, if we are in the 
-        // .Began or .Changed state
-        var newState: BBUIGestureRecognizerState = .Ended
-        if state == .Began || state == .Changed {
             
-            // If the first touch has not yet tapped the correct number of times
-            let firstTouch = touches.allObjects.first as UITouch
-            if firstTouch.tapCount < numberOfTapsRequired {
-                newState = .Changed
-            } else if firstTouch.tapCount == numberOfTapsRequired {
-                newState = .Ended
-            } else if firstTouch.tapCount > numberOfTapsRequired {
-                newState = .Failed
+            if correctTapCountForAllTouches {
+                state = .Recognized
+            } else if tooManyTaps {
+                state = .Failed
             }
         }
-        
-        println("changing \(name) from \(state) to .\(newState)")
-        state = newState
+//        
+//        // If we no longer have the correct number of touches, set the state
+//        // to .Cancelled if necessary, reset, and return immediately
+//        if touches.count != numberOfTouchesRequired {
+//            
+//            // If state is .Began, it needs to become .Cancelled. If state is
+//            // .Possible, leave it at .Possible and just reset.
+//            if state == .Began {
+//                state = .Cancelled
+//            }
+//            return
+//        }
+//        
+//        // We know we have the correct number of touches. Now, if we are in the 
+//        // .Began or .Changed state
+//        var newState: BBUIGestureRecognizerState = .Ended
+//        if state == .Began || state == .Changed {
+//            
+//            // If the first touch has not yet tapped the correct number of times
+//            let firstTouch = touches.allObjects.first as UITouch
+//            if firstTouch.tapCount < numberOfTapsRequired {
+//                newState = .Changed
+//            } else if firstTouch.tapCount == numberOfTapsRequired {
+//                newState = .Ended
+//            } else if firstTouch.tapCount > numberOfTapsRequired {
+//                newState = .Failed
+//            }
+//        }
+//        
+//        println("changing \(name) from \(state) to .\(newState)")
+//        state = newState
     }
     
     override func touchesCancelled(touches: NSSet, withEvent event: UIEvent) {

@@ -331,8 +331,8 @@ class BBUIGestureRecognizer: Equatable, Printable {
             return _state
         }
         set {
+            println("nextState on \(name) set to: \(newValue)")
             nextState = newValue
-//            println("nextState: \(nextState)")
         }
     }
     
@@ -384,6 +384,9 @@ class BBUIGestureRecognizer: Equatable, Printable {
                     
                     let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0))
                     dispatch_after(delayTime, dispatch_get_main_queue()) {
+                        
+                        println("state on \(self.name) advancing from \(self._state) to \(varNewState)")
+                        
                         self._state = varNewState
                         self.nextState = nil
                         
@@ -608,7 +611,7 @@ class BBUIGestureRecognizer: Equatable, Printable {
         touches that have begun but haven't ended.
     */
     func reset() {
-        println("reset (\(name))")
+//        println("reset (\(name))")
         _state = .Possible
     }
     
