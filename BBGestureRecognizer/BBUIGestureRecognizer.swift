@@ -361,19 +361,28 @@ class BBUIGestureRecognizer: Equatable, Printable {
         if var varNewState = nextState {
         
             // If there is a delegate and it says that this recognizer should
-            // not begin, set the new state to .Failed
-            var shouldBegin = true
+            // not begin, return immediately
             if let actualDelegate = delegate {
                 if _state == .Possible {
                     if nextState == .Began || nextState == .Recognized {
-                        shouldBegin =
-                            actualDelegate.gestureRecognizerShouldBegin(self)
+                        if !actualDelegate.gestureRecognizerShouldBegin(self) {
+                            return
+                        }
                     }
                 }
             }
             
-            if !shouldBegin {
-                varNewState = .Failed
+            // Check gesture recognizers on which this gesture is dependent
+            for otherWrappedRecognizer in recognizersRequiredToFail {
+                if let otherRecognizer = otherWrappedRecognizer.get() {
+
+                    // If the other recognizer is in, is transitioning to, or
+                    // pending a terminal transition to .Began or .Recognized,
+                    // this recognizer should transition to .Failed
+                    if recognizerIsRecognizing(otherRecognizer) {
+                        state = .Failed
+                    }
+                }
             }
             
             if let allowedTransition = findAllowedTransition(
@@ -418,6 +427,37 @@ class BBUIGestureRecognizer: Equatable, Printable {
                 )
             }
         }
+    }
+    
+    func recognizerIsRecognizing(recognizer: BBUIGestureRecognizer) -> Bool {
+        var isRecognizing = false
+
+        switch recognizer.state {
+        case .Began, .Recognized:
+            isRecognizing = true
+        default:
+            break
+        }
+
+        if let unwrappedNextState = recognizer.nextState {
+            switch unwrappedNextState {
+            case .Began, .Recognized:
+                isRecognizing = true
+            default:
+                break
+            }
+        }
+
+        if let unwrappedPendingState = recognizer.pendingTerminalState {
+            switch unwrappedPendingState {
+            case .Began, .Recognized:
+                isRecognizing = true
+            default:
+                break
+            }
+        }
+        
+        return isRecognizing
     }
     
     var pendingTerminalState: BBUIGestureRecognizerState?

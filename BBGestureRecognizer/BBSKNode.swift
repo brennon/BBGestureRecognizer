@@ -118,9 +118,9 @@ extension SKNode {
                 // Iterate over recognizer's recognizersRequiredToFail
                 for otherWrappedRecognizer in recognizer.recognizersRequiredToFail {
                     
-                    // If there are any existing other recognizers and they either 
-                    // began or completed recognition, this recognizer should 
-                    // transition to .Failed/.Cancelled (for discrete/continuous gestures, respectively).
+                    // If there are any existing other recognizers and they either will
+                    // begin or complete recognition, this recognizer should
+                    // transition to the .Failed/.Cancelled (for discrete/continuous gestures, respectively).
                     if let otherRecognizer = otherWrappedRecognizer.get() {
 //                        println("\(recognizer.name) requires \(otherRecognizer.name) to fail; checking")
                         
