@@ -33,7 +33,8 @@ class TestScene: SKScene {
         doubleTapRecognizer = BBUITapGestureRecognizer(target: self, action: TestScene.handleDoubleTap)
         doubleTapRecognizer.numberOfTapsRequired = 2
         doubleTapRecognizer.name = "Double Tap Recognizer"
-//        singleTapRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
+        singleTapRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
+        doubleTapRecognizer.requireGestureRecognizerToFail(singleTapRecognizer)
         nodeB.addGestureRecognizer(singleTapRecognizer)
         nodeB.addGestureRecognizer(doubleTapRecognizer)
 

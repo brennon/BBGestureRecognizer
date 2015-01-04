@@ -129,7 +129,7 @@ struct BBUIGestureRecognizerStateTransition {
     `UIGestureRecognizer`. See the documentation for `UIGestureRecognizer` for 
     further information.
 */
-class BBUIGestureRecognizer: Equatable, Printable {
+class BBUIGestureRecognizer: Hashable, Printable {
     
     var name = ""
     
@@ -345,7 +345,6 @@ class BBUIGestureRecognizer: Equatable, Printable {
             return _state
         }
         set {
-            println("nextState on \(name) set to: \(newValue)")
             nextState = newValue
         }
     }
@@ -373,23 +372,45 @@ class BBUIGestureRecognizer: Equatable, Printable {
             }
             
             // Check gesture recognizers on which this gesture is dependent
-            for otherWrappedRecognizer in recognizersRequiredToFail {
-                if let otherRecognizer = otherWrappedRecognizer.get() {
+            var requestedAnyUpdatesFromPendingRecognizers = false
+            for recognizer in recognizersRequiredToFail {
 
-                    // If the other recognizer is in, is transitioning to, or
-                    // pending a terminal transition to .Began or .Recognized,
-                    // this recognizer should transition to .Failed
-                    if recognizerIsRecognizing(otherRecognizer) {
-                        state = .Failed
+                // If the other recognizer is in or transitioning to .Began
+                // or .Recognized, this recognizer should transition to 
+                // .Failed. If this is the case, we can break out of this 
+                // loop.
+                if recognizerIsRecognizing(recognizer) {
+                    varNewState = .Failed
+                    break
+                }
+                
+                // If the other recognizer has scheduled a transition to a 
+                // terminal state, we need to not change state here, tell 
+                // the other recognizer that we are waiting for an update, 
+                // return immediately, and wait for that update.
+                if recognizer.terminalStateIsPending {
+                    
+                    // If we haven't already requested an update from the other recognizer, request one.
+                    if find(recognizer.failureDependents, self) == nil {
+                        recognizer.addFailureDependent(self)
+                        requestedAnyUpdatesFromPendingRecognizers = true
                     }
                 }
             }
             
+            // If we requested any updates from recognizers wih a pending terminal state, don't update state and return.
+            if requestedAnyUpdatesFromPendingRecognizers {
+                return
+            }
+            
+            // If the transition from _state to nextState is allowed...
             if let allowedTransition = findAllowedTransition(
                 _state,
                 toState: varNewState
                 ) {
                     
+                    // Decide if the recognizer should reset based on the 
+                    // transition.
                     var shouldResetOnNextRunLoop: Bool
                     switch varNewState {
                     case .Recognized, .Cancelled, .Ended, .Failed:
@@ -404,11 +425,8 @@ class BBUIGestureRecognizer: Equatable, Printable {
                     // otherwise the state property is going to be wrong when the
                     // action handler looks at it, so as a result we also delay the
                     // reset call (if necessary) in continueTrackingWithEvent:
-                    
                     let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0))
                     dispatch_after(delayTime, dispatch_get_main_queue()) {
-                        
-                        println("state on \(self.name) advancing from \(self._state) to \(varNewState)")
                         
                         self._state = varNewState
                         self.nextState = nil
@@ -422,6 +440,7 @@ class BBUIGestureRecognizer: Equatable, Printable {
                         }
                     }
             } else {
+                
                 println(
                     "Invalid state transition in \(name) from \(_state) to \(varNewState)"
                 )
@@ -447,20 +466,14 @@ class BBUIGestureRecognizer: Equatable, Printable {
                 break
             }
         }
-
-        if let unwrappedPendingState = recognizer.pendingTerminalState {
-            switch unwrappedPendingState {
-            case .Began, .Recognized:
-                isRecognizing = true
-            default:
-                break
-            }
-        }
         
         return isRecognizing
     }
     
     var pendingTerminalState: BBUIGestureRecognizerState?
+    var terminalStateIsPending: Bool {
+        return pendingTerminalState != nil
+    }
     
     func schedulePendingRecognition(withState: BBUIGestureRecognizerState, andDelay delay: NSTimeInterval) {
         pendingTerminalState = withState
@@ -470,6 +483,12 @@ class BBUIGestureRecognizer: Equatable, Printable {
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInNanoseconds))
         dispatch_after(delayTime, dispatch_get_main_queue()) {
             self.state = self.pendingTerminalState!
+            
+            // Inform failure dependent recognizers of change in state
+            for dependentRecognizer in self.failureDependents {
+                dependentRecognizer.failureDependencyResolved(self, withState: self.pendingTerminalState!)
+            }
+            
             self.pendingTerminalState = nil
             self.advanceState()
         }
@@ -528,7 +547,7 @@ class BBUIGestureRecognizer: Equatable, Printable {
         (by way of `WeakWrapper`) that must fail in order for this gesture 
         recognizer to recognize its gesture.
     */
-    internal var recognizersRequiredToFail = Array<WeakWrapper<BBUIGestureRecognizer>>()
+    internal var recognizersRequiredToFail = [BBUIGestureRecognizer]()
     
     /**
         Creates a dependency relationship between the gesture recognizer on 
@@ -547,8 +566,28 @@ class BBUIGestureRecognizer: Equatable, Printable {
             instance of a subclass of `BBUIGestureRecognizer`).
     */
     func requireGestureRecognizerToFail(otherGestureRecognizer: BBUIGestureRecognizer) {
-        let wrappedRecognizer = WeakWrapper(value: otherGestureRecognizer)
-        recognizersRequiredToFail.append(wrappedRecognizer)
+        if find(recognizersRequiredToFail, otherGestureRecognizer) == nil {
+            recognizersRequiredToFail.append(otherGestureRecognizer)
+        }
+    }
+    
+    private var failureDependents = [BBUIGestureRecognizer]()
+    
+    private func addFailureDependent(dependentRecognizer: BBUIGestureRecognizer) {
+        if find(failureDependents, dependentRecognizer) == nil {
+            failureDependents.append(dependentRecognizer)
+        }
+    }
+    
+    private func removeFailureDependent(recognizer: BBUIGestureRecognizer) {
+        if let index = find(failureDependents, recognizer) {
+            failureDependents.removeAtIndex(index)
+        }
+    }
+    
+    private func failureDependencyResolved(resolvingRecognizer: BBUIGestureRecognizer, withState state: BBUIGestureRecognizerState) {
+        resolvingRecognizer.removeFailureDependent(self)
+        advanceState()
     }
     
 //- (void)requireGestureRecognizerToFail:(UIGestureRecognizer *)otherGestureRecognizer
@@ -684,7 +723,6 @@ class BBUIGestureRecognizer: Equatable, Printable {
         touches that have begun but haven't ended.
     */
     func reset() {
-//        println("reset (\(name))")
         _state = .Possible
         
         // Ignore all remaining touches
@@ -944,6 +982,15 @@ class BBUIGestureRecognizer: Equatable, Printable {
         let thisType = ObjectIdentifier(self)
         return "<BBUIGestureRecognizer; state = \(stateString); node = \(node)>"
     }
+    
+    // MARK: Hashable Protocol
+    
+    /**
+        The hash value of the gesture recognizer.
+    */
+    var hashValue: Int {
+        return ObjectIdentifier(self).hashValue
+    }
 }
 
 // MARK: BBUIGestureRecognizer Equatable Protocol
@@ -958,7 +1005,7 @@ class BBUIGestureRecognizer: Equatable, Printable {
         `BBUIGestureRecognizer`. Otherwise, it returns `false`.
 */
 func ==(lhs: BBUIGestureRecognizer, rhs: BBUIGestureRecognizer) -> Bool {
-    return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
+    return lhs.hashValue == rhs.hashValue
 }
 
 // http://oleb.net/blog/2014/07/swift-instance-methods-curried-functions/

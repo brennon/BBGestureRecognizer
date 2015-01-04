@@ -62,13 +62,10 @@ class BBUITapGestureRecognizer: BBUIGestureRecognizer {
     var numberOfTouchesRequired: Int = 1
     
     /**
-        The maximum time that can elapse between two successive taps. The 
-        gesture recognizer will wait this long after it receives its last tap 
-        before transitioning to the `.Recognized` state. This is to allow for 
-        failure dependency relationships to be established between tap 
-        recognizers. For instance, a single-tap recognizer must wait to 
-        transition to `.Recognized` if there may be a double-tap recognizer 
-        that is expecting it to fail.
+        The maximum time that can elapse between two successive taps. The gesture recognizer will wait this long after it 
+        receives its last tap before transitioning to the `.Recognized` state. This is to allow for failure dependency 
+        relationships to be established between tap recognizers. For instance, a single-tap recognizer must wait to transition 
+        to `.Recognized` if there may be a double-tap recognizer that is expecting it to fail.
     */
     var maximumIntervalBetweenSuccessiveTaps: NSTimeInterval = 0.25
     
