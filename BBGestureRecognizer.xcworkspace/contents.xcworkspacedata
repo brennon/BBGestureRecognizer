@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "container:BBUIGestureRecognizerDemo.xcodeproj">
+      location = "group:BBUIGestureRecognizer.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:BBUIGestureRecognizer.xcodeproj">
+      location = "container:BBUIGestureRecognizerDemo.xcodeproj">
    </FileRef>
 </Workspace>
