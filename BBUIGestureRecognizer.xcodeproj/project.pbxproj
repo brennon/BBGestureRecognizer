@@ -1,0 +1,86 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		3AC919851A59C05C00DE3E8A /* BBUIGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BBUIGestureRecognizer.swift; path = Source/BBUIGestureRecognizer.swift; sourceTree = "<group>"; };
+		3AC919871A59C05C00DE3E8A /* BBUITapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BBUITapGestureRecognizer.swift; path = Source/BBUITapGestureRecognizer.swift; sourceTree = "<group>"; };
+		3AC919881A59C05C00DE3E8A /* BBUIGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BBUIGestureRecognizerDelegate.swift; path = Source/BBUIGestureRecognizerDelegate.swift; sourceTree = "<group>"; };
+		3AC919891A59C05C00DE3E8A /* BBSKNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BBSKNode.swift; path = Source/BBSKNode.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		3AC9197E1A59BFEF00DE3E8A = {
+			isa = PBXGroup;
+			children = (
+				3AC9198B1A59C15F00DE3E8A /* BBUIGestureRecognizer */,
+			);
+			sourceTree = "<group>";
+		};
+		3AC9198B1A59C15F00DE3E8A /* BBUIGestureRecognizer */ = {
+			isa = PBXGroup;
+			children = (
+				3AC919851A59C05C00DE3E8A /* BBUIGestureRecognizer.swift */,
+				3AC919871A59C05C00DE3E8A /* BBUITapGestureRecognizer.swift */,
+				3AC919881A59C05C00DE3E8A /* BBUIGestureRecognizerDelegate.swift */,
+				3AC919891A59C05C00DE3E8A /* BBSKNode.swift */,
+			);
+			name = BBUIGestureRecognizer;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		3AC9197F1A59BFEF00DE3E8A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+			};
+			buildConfigurationList = 3AC919821A59BFEF00DE3E8A /* Build configuration list for PBXProject "BBUIGestureRecognizer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3AC9197E1A59BFEF00DE3E8A;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		3AC919831A59BFEF00DE3E8A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		3AC919841A59BFEF00DE3E8A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3AC919821A59BFEF00DE3E8A /* Build configuration list for PBXProject "BBUIGestureRecognizer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3AC919831A59BFEF00DE3E8A /* Debug */,
+				3AC919841A59BFEF00DE3E8A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3AC9197F1A59BFEF00DE3E8A /* Project object */;
+}

@@ -482,15 +482,18 @@ class BBUIGestureRecognizer: Hashable, Printable {
         
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInNanoseconds))
         dispatch_after(delayTime, dispatch_get_main_queue()) {
-            self.state = self.pendingTerminalState!
+            if self.pendingTerminalState != nil {
             
-            // Inform failure dependent recognizers of change in state
-            for dependentRecognizer in self.failureDependents {
-                dependentRecognizer.failureDependencyResolved(self, withState: self.pendingTerminalState!)
+                self.state = self.pendingTerminalState!
+                
+                // Inform failure dependent recognizers of change in state
+                for dependentRecognizer in self.failureDependents {
+                    dependentRecognizer.failureDependencyResolved(self, withState: self.pendingTerminalState!)
+                }
+                
+                self.pendingTerminalState = nil
+                self.advanceState()
             }
-            
-            self.pendingTerminalState = nil
-            self.advanceState()
         }
     }
     

@@ -9,47 +9,31 @@
 /* Begin PBXBuildFile section */
 		3A9284B71A51FF2600EACEF5 /* BBUIGestureRecognizerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9284B61A51FF2600EACEF5 /* BBUIGestureRecognizerDelegate.swift */; };
 		3A9284B91A52FA7E00EACEF5 /* BBUITapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9284B81A52FA7E00EACEF5 /* BBUITapGestureRecognizer.swift */; };
-		3A9284BB1A5349A500EACEF5 /* WeakWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9284BA1A5349A500EACEF5 /* WeakWrapper.swift */; };
 		3ABA68EB1A49E57400E1934C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA68EA1A49E57400E1934C /* AppDelegate.swift */; };
 		3ABA68ED1A49E57400E1934C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA68EC1A49E57400E1934C /* ViewController.swift */; };
 		3ABA68F01A49E57400E1934C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ABA68EE1A49E57400E1934C /* Main.storyboard */; };
 		3ABA68F21A49E57400E1934C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ABA68F11A49E57400E1934C /* Images.xcassets */; };
 		3ABA68F51A49E57400E1934C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ABA68F31A49E57400E1934C /* LaunchScreen.xib */; };
-		3ABA69011A49E57500E1934C /* BBGestureRecognizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA69001A49E57500E1934C /* BBGestureRecognizerTests.swift */; };
 		3ABA690B1A49E5B200E1934C /* BBUIGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA690A1A49E5B200E1934C /* BBUIGestureRecognizer.swift */; };
 		3AC6BB511A4DBDA900884F76 /* BBSKNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC6BB501A4DBDA900884F76 /* BBSKNode.swift */; };
 		3AC6BB531A4DC41E00884F76 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC6BB521A4DC41E00884F76 /* SpriteKit.framework */; };
 		3AC6BB551A4DC49B00884F76 /* TestScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC6BB541A4DC49B00884F76 /* TestScene.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		3ABA68FB1A49E57500E1934C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3ABA68DD1A49E57400E1934C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3ABA68E41A49E57400E1934C;
-			remoteInfo = BBGestureRecognizer;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		3A9284B61A51FF2600EACEF5 /* BBUIGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBUIGestureRecognizerDelegate.swift; sourceTree = "<group>"; };
-		3A9284B81A52FA7E00EACEF5 /* BBUITapGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBUITapGestureRecognizer.swift; sourceTree = "<group>"; };
-		3A9284BA1A5349A500EACEF5 /* WeakWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeakWrapper.swift; sourceTree = "<group>"; };
-		3ABA68E51A49E57400E1934C /* BBGestureRecognizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BBGestureRecognizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A9284B61A51FF2600EACEF5 /* BBUIGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BBUIGestureRecognizerDelegate.swift; path = Source/BBUIGestureRecognizerDelegate.swift; sourceTree = SOURCE_ROOT; };
+		3A9284B81A52FA7E00EACEF5 /* BBUITapGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BBUITapGestureRecognizer.swift; path = Source/BBUITapGestureRecognizer.swift; sourceTree = SOURCE_ROOT; };
+		3ABA68E51A49E57400E1934C /* BBUIGestureRecognizerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BBUIGestureRecognizerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ABA68E91A49E57400E1934C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3ABA68EA1A49E57400E1934C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3ABA68EC1A49E57400E1934C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3ABA68EA1A49E57400E1934C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = BBGestureRecognizer/AppDelegate.swift; sourceTree = "<group>"; };
+		3ABA68EC1A49E57400E1934C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = BBGestureRecognizer/ViewController.swift; sourceTree = "<group>"; };
 		3ABA68EF1A49E57400E1934C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3ABA68F11A49E57400E1934C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		3ABA68F11A49E57400E1934C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = BBGestureRecognizer/Images.xcassets; sourceTree = "<group>"; };
 		3ABA68F41A49E57400E1934C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		3ABA68FA1A49E57500E1934C /* BBGestureRecognizerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BBGestureRecognizerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3ABA68FF1A49E57500E1934C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3ABA69001A49E57500E1934C /* BBGestureRecognizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBGestureRecognizerTests.swift; sourceTree = "<group>"; };
-		3ABA690A1A49E5B200E1934C /* BBUIGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBUIGestureRecognizer.swift; sourceTree = "<group>"; };
-		3AC6BB501A4DBDA900884F76 /* BBSKNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBSKNode.swift; sourceTree = "<group>"; };
+		3ABA690A1A49E5B200E1934C /* BBUIGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BBUIGestureRecognizer.swift; path = Source/BBUIGestureRecognizer.swift; sourceTree = SOURCE_ROOT; };
+		3AC6BB501A4DBDA900884F76 /* BBSKNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BBSKNode.swift; path = Source/BBSKNode.swift; sourceTree = SOURCE_ROOT; };
 		3AC6BB521A4DC41E00884F76 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
-		3AC6BB541A4DC49B00884F76 /* TestScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestScene.swift; sourceTree = "<group>"; };
+		3AC6BB541A4DC49B00884F76 /* TestScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestScene.swift; path = BBGestureRecognizer/TestScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,21 +45,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3ABA68F71A49E57500E1934C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		3ABA68DC1A49E57400E1934C = {
 			isa = PBXGroup;
 			children = (
+				3AC9198A1A59C0F500DE3E8A /* Demo Application */,
 				3ABA68E71A49E57400E1934C /* BBGestureRecognizer */,
-				3ABA68FD1A49E57500E1934C /* BBGestureRecognizerTests */,
 				3ABA68E61A49E57400E1934C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -83,8 +60,7 @@
 		3ABA68E61A49E57400E1934C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3ABA68E51A49E57400E1934C /* BBGestureRecognizer.app */,
-				3ABA68FA1A49E57500E1934C /* BBGestureRecognizerTests.xctest */,
+				3ABA68E51A49E57400E1934C /* BBUIGestureRecognizerDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -92,18 +68,10 @@
 		3ABA68E71A49E57400E1934C /* BBGestureRecognizer */ = {
 			isa = PBXGroup;
 			children = (
-				3ABA68EA1A49E57400E1934C /* AppDelegate.swift */,
-				3ABA68EC1A49E57400E1934C /* ViewController.swift */,
-				3ABA68EE1A49E57400E1934C /* Main.storyboard */,
-				3ABA68F11A49E57400E1934C /* Images.xcassets */,
-				3ABA68F31A49E57400E1934C /* LaunchScreen.xib */,
-				3ABA68E81A49E57400E1934C /* Supporting Files */,
 				3ABA690A1A49E5B200E1934C /* BBUIGestureRecognizer.swift */,
-				3A9284BA1A5349A500EACEF5 /* WeakWrapper.swift */,
 				3A9284B81A52FA7E00EACEF5 /* BBUITapGestureRecognizer.swift */,
 				3A9284B61A51FF2600EACEF5 /* BBUIGestureRecognizerDelegate.swift */,
 				3AC6BB501A4DBDA900884F76 /* BBSKNode.swift */,
-				3AC6BB541A4DC49B00884F76 /* TestScene.swift */,
 			);
 			path = BBGestureRecognizer;
 			sourceTree = "<group>";
@@ -111,35 +79,41 @@
 		3ABA68E81A49E57400E1934C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3AC6BB521A4DC41E00884F76 /* SpriteKit.framework */,
+				3AC919731A59BEC300DE3E8A /* Frameworks */,
 				3ABA68E91A49E57400E1934C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			path = BBGestureRecognizer;
 			sourceTree = "<group>";
 		};
-		3ABA68FD1A49E57500E1934C /* BBGestureRecognizerTests */ = {
+		3AC919731A59BEC300DE3E8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3ABA69001A49E57500E1934C /* BBGestureRecognizerTests.swift */,
-				3ABA68FE1A49E57500E1934C /* Supporting Files */,
+				3AC6BB521A4DC41E00884F76 /* SpriteKit.framework */,
 			);
-			path = BBGestureRecognizerTests;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3ABA68FE1A49E57500E1934C /* Supporting Files */ = {
+		3AC9198A1A59C0F500DE3E8A /* Demo Application */ = {
 			isa = PBXGroup;
 			children = (
-				3ABA68FF1A49E57500E1934C /* Info.plist */,
+				3ABA68EA1A49E57400E1934C /* AppDelegate.swift */,
+				3ABA68EC1A49E57400E1934C /* ViewController.swift */,
+				3ABA68EE1A49E57400E1934C /* Main.storyboard */,
+				3ABA68F11A49E57400E1934C /* Images.xcassets */,
+				3ABA68F31A49E57400E1934C /* LaunchScreen.xib */,
+				3AC6BB541A4DC49B00884F76 /* TestScene.swift */,
+				3ABA68E81A49E57400E1934C /* Supporting Files */,
 			);
-			name = "Supporting Files";
+			name = "Demo Application";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3ABA68E41A49E57400E1934C /* BBGestureRecognizer */ = {
+		3ABA68E41A49E57400E1934C /* BBUIGestureRecognizerDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3ABA69041A49E57500E1934C /* Build configuration list for PBXNativeTarget "BBGestureRecognizer" */;
+			buildConfigurationList = 3ABA69041A49E57500E1934C /* Build configuration list for PBXNativeTarget "BBUIGestureRecognizerDemo" */;
 			buildPhases = (
 				3ABA68E11A49E57400E1934C /* Sources */,
 				3ABA68E21A49E57400E1934C /* Frameworks */,
@@ -149,28 +123,10 @@
 			);
 			dependencies = (
 			);
-			name = BBGestureRecognizer;
+			name = BBUIGestureRecognizerDemo;
 			productName = BBGestureRecognizer;
-			productReference = 3ABA68E51A49E57400E1934C /* BBGestureRecognizer.app */;
+			productReference = 3ABA68E51A49E57400E1934C /* BBUIGestureRecognizerDemo.app */;
 			productType = "com.apple.product-type.application";
-		};
-		3ABA68F91A49E57500E1934C /* BBGestureRecognizerTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3ABA69071A49E57500E1934C /* Build configuration list for PBXNativeTarget "BBGestureRecognizerTests" */;
-			buildPhases = (
-				3ABA68F61A49E57500E1934C /* Sources */,
-				3ABA68F71A49E57500E1934C /* Frameworks */,
-				3ABA68F81A49E57500E1934C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3ABA68FC1A49E57500E1934C /* PBXTargetDependency */,
-			);
-			name = BBGestureRecognizerTests;
-			productName = BBGestureRecognizerTests;
-			productReference = 3ABA68FA1A49E57500E1934C /* BBGestureRecognizerTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -184,13 +140,9 @@
 					3ABA68E41A49E57400E1934C = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
-					3ABA68F91A49E57500E1934C = {
-						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = 3ABA68E41A49E57400E1934C;
-					};
 				};
 			};
-			buildConfigurationList = 3ABA68E01A49E57400E1934C /* Build configuration list for PBXProject "BBGestureRecognizer" */;
+			buildConfigurationList = 3ABA68E01A49E57400E1934C /* Build configuration list for PBXProject "BBUIGestureRecognizerDemo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -203,8 +155,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3ABA68E41A49E57400E1934C /* BBGestureRecognizer */,
-				3ABA68F91A49E57500E1934C /* BBGestureRecognizerTests */,
+				3ABA68E41A49E57400E1934C /* BBUIGestureRecognizerDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -220,13 +171,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3ABA68F81A49E57500E1934C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -239,29 +183,12 @@
 				3ABA68EB1A49E57400E1934C /* AppDelegate.swift in Sources */,
 				3A9284B71A51FF2600EACEF5 /* BBUIGestureRecognizerDelegate.swift in Sources */,
 				3AC6BB511A4DBDA900884F76 /* BBSKNode.swift in Sources */,
-				3A9284BB1A5349A500EACEF5 /* WeakWrapper.swift in Sources */,
 				3AC6BB551A4DC49B00884F76 /* TestScene.swift in Sources */,
 				3ABA690B1A49E5B200E1934C /* BBUIGestureRecognizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3ABA68F61A49E57500E1934C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3ABA69011A49E57500E1934C /* BBGestureRecognizerTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3ABA68FC1A49E57500E1934C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3ABA68E41A49E57400E1934C /* BBGestureRecognizer */;
-			targetProxy = 3ABA68FB1A49E57500E1934C /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3ABA68EE1A49E57400E1934C /* Main.storyboard */ = {
@@ -270,6 +197,7 @@
 				3ABA68EF1A49E57400E1934C /* Base */,
 			);
 			name = Main.storyboard;
+			path = BBGestureRecognizer;
 			sourceTree = "<group>";
 		};
 		3ABA68F31A49E57400E1934C /* LaunchScreen.xib */ = {
@@ -278,6 +206,7 @@
 				3ABA68F41A49E57400E1934C /* Base */,
 			);
 			name = LaunchScreen.xib;
+			path = BBGestureRecognizer;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -368,7 +297,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BBGestureRecognizer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = BBUIGestureRecognizerDemo;
 			};
 			name = Debug;
 		};
@@ -378,48 +307,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BBGestureRecognizer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		3ABA69081A49E57500E1934C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = BBGestureRecognizerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BBGestureRecognizer.app/BBGestureRecognizer";
-			};
-			name = Debug;
-		};
-		3ABA69091A49E57500E1934C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = BBGestureRecognizerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BBGestureRecognizer.app/BBGestureRecognizer";
+				PRODUCT_NAME = BBUIGestureRecognizerDemo;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3ABA68E01A49E57400E1934C /* Build configuration list for PBXProject "BBGestureRecognizer" */ = {
+		3ABA68E01A49E57400E1934C /* Build configuration list for PBXProject "BBUIGestureRecognizerDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3ABA69021A49E57500E1934C /* Debug */,
@@ -428,20 +323,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3ABA69041A49E57500E1934C /* Build configuration list for PBXNativeTarget "BBGestureRecognizer" */ = {
+		3ABA69041A49E57500E1934C /* Build configuration list for PBXNativeTarget "BBUIGestureRecognizerDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3ABA69051A49E57500E1934C /* Debug */,
 				3ABA69061A49E57500E1934C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3ABA69071A49E57500E1934C /* Build configuration list for PBXNativeTarget "BBGestureRecognizerTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3ABA69081A49E57500E1934C /* Debug */,
-				3ABA69091A49E57500E1934C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
