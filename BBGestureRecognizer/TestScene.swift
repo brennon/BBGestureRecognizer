@@ -25,7 +25,6 @@ class TestScene: SKScene {
         spriteNode.name = "nodeB"
         spriteNode.userInteractionEnabled = true
         
-        println("recognizers: \(spriteNode.gestureRecognizers)")
         singleTapRecognizer = BBUITapGestureRecognizer(target: self, action: TestScene.handleSingleTap)
         singleTapRecognizer.numberOfTapsRequired = 1
         singleTapRecognizer.numberOfTouchesRequired = 2
