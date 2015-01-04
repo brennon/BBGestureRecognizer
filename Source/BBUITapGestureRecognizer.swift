@@ -148,7 +148,5 @@ class BBUITapGestureRecognizer: BBUIGestureRecognizer {
     
     override func reset() {
         super.reset()
-        println("resetting in subclass")
-//        stateAfterDelay = nil
     }
 }
