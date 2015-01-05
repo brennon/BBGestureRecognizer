@@ -72,8 +72,14 @@ class BBPanGestureRecognizer: BBGestureRecognizer {
     
         :returns: A point identifying the new location of a node in the coordinate system of its parent node.
     */
-    func translationInNode() -> CGPoint {
-        return _translation
+    func translationInNode(node: SKNode) -> CGPoint {
+        assertThatNodeAndSceneAreValid()
+        
+        if node == self.node?.scene? {
+            return _translation
+        } else {
+            return self.node!.scene!.convertPoint(_translation, toNode: node)
+        }
     }
     
     /**
@@ -83,9 +89,9 @@ class BBPanGestureRecognizer: BBGestureRecognizer {
         :param: translation A point that identifies the new translation value.
         :param: node A node in whose coordinate system the translation is to occur.
     */
-    func setTranslation(translation: CGPoint) {
+    func setTranslation(translation: CGPoint, inNode node: SKNode!) {
         _velocity = CGPointZero
-        _translation = translation
+        _translation = self.node!.scene!.convertPoint(translation, fromNode: node)
     }
     
     /**
@@ -96,27 +102,42 @@ class BBPanGestureRecognizer: BBGestureRecognizer {
         :returns: The velocity of the pan gesture, which is expressed in points per second. The velocity is broken into 
             horizontal and vertical components.
     */
-    func velocityInNode() -> CGPoint {
-        return _velocity
+    func velocityInNode(node: SKNode) -> CGPoint {
+        assertThatNodeAndSceneAreValid()
+        
+        if node == self.node?.scene? {
+            return _velocity
+        } else {
+            return self.node!.scene!.convertPoint(_velocity, toNode: node)
+        }
     }
     
     // MARK: Touch Handling
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        assertThatNodeAndSceneAreValid()
+        
         super.touchesBegan(touches, withEvent: event)
         
+        let firstTouch = touches.allObjects.first as UITouch
+        
+        let newLocation = firstTouch.locationInNode(node!.scene!)
+        
         if state == .Possible {
-            _lastLocation = locationInNode(node)!
+            _lastLocation = newLocation
             _lastMovementTime = event.timestamp
             state = .Began
         }
     }
     
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+        assertThatNodeAndSceneAreValid()
+        
         super.touchesMoved(touches, withEvent: event)
         
         let firstTouch = touches.allObjects.first as UITouch
-        let newLocation = locationInNode(node)!
+        
+        let newLocation = firstTouch.locationInNode(node!.scene!)
         
         let translation = CGPointMake(newLocation.x - _lastLocation.x, newLocation.y - _lastLocation.y)
         
@@ -128,12 +149,18 @@ class BBPanGestureRecognizer: BBGestureRecognizer {
     }
     
     override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+        assertThatNodeAndSceneAreValid()
+        
         super.touchesEnded(touches, withEvent: event)
         
-        let newLocation = locationInNode(node)!
+        let firstTouch = touches.allObjects.first as UITouch
+        
+        let newLocation = firstTouch.locationInNode(node!.scene!)
+        
+        let translation = CGPointMake(newLocation.x - _lastLocation.x, newLocation.y - _lastLocation.y)
         
         if state == .Began || state == .Changed {
-            translate(newLocation, withEvent: event)
+            translate(translation, withEvent: event)
             state = .Ended
         }
     }
@@ -159,15 +186,31 @@ class BBPanGestureRecognizer: BBGestureRecognizer {
     
     private var _lastMovementTime: NSTimeInterval!
     
+    private var _pastVelocities = [CGPoint]()
+    private var _numberOfPastVelocitiesToTrack = 3
+    
     private func translate(translation: CGPoint, withEvent event: UIEvent) -> Bool {
-//        println("translate called with \(translation)")
         let timeDelta = event.timestamp - _lastMovementTime
         
         if !CGPointEqualToPoint(translation, CGPointZero) && timeDelta > 0 {
             _translation.x += translation.x
             _translation.y += translation.y
-            _velocity.x = translation.x / CGFloat(timeDelta)
-            _velocity.y = translation.y / CGFloat(timeDelta)
+            
+            let newVelocity = CGPointMake(translation.x / CGFloat(timeDelta), translation.y / CGFloat(timeDelta))
+            
+            if _pastVelocities.count > 3 {
+                _pastVelocities.removeAtIndex(0)
+            }
+            
+            _pastVelocities.append(newVelocity)
+            
+            let averageVelocity = _pastVelocities.reduce(CGPointZero) {
+                var initial = $0
+                var next = $1
+                return CGPointMake(initial.x + next.x / CGFloat(self._pastVelocities.count), initial.y + next.y / CGFloat(self._pastVelocities.count))
+            }
+            
+            _velocity = averageVelocity
             _lastMovementTime = event.timestamp
             return true
         } else {
@@ -181,6 +224,12 @@ class BBPanGestureRecognizer: BBGestureRecognizer {
         _lastLocation = CGPointZero
         _translation = CGPointZero
         _velocity = CGPointZero
+        _pastVelocities = [CGPoint]()
+    }
+    
+    private func assertThatNodeAndSceneAreValid() {
+        assert(node != nil, "Gesture recognizer processing touches when it's node is nil")
+        assert(node!.scene != nil, "Gesture recognizer processing touches when it's node's scene is nil")
     }
 }
 

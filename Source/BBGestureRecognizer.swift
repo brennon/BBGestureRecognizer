@@ -714,17 +714,17 @@ class BBGestureRecognizer: Hashable, Printable {
             break
         }
 
-        // If all the touches are ended or cancelled, then the multitouch sequence must be over--so we can reset our state back 
-        // to normal and clear all the tracked touches, etc. to get ready for a new touch sequence in the future. This also 
-        // applies to the special discrete gesture events because those events are only sent once.
-        if multitouchSequenceIsEnded && pendingTerminalState == nil {
-            
-            // See note above in state setter about the delay here.
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0))
-            dispatch_after(delayTime, dispatch_get_main_queue()) {
-                self.reset()
-            }
-        }
+//        // If all the touches are ended or cancelled, then the multitouch sequence must be over--so we can reset our state back 
+//        // to normal and clear all the tracked touches, etc. to get ready for a new touch sequence in the future. This also 
+//        // applies to the special discrete gesture events because those events are only sent once.
+//        if multitouchSequenceIsEnded && pendingTerminalState == nil {
+//            
+//            // See note above in state setter about the delay here.
+//            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0))
+//            dispatch_after(delayTime, dispatch_get_main_queue()) {
+//                self.reset()
+//            }
+//        }
     }
     
     /**
