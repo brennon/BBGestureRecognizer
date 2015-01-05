@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BBGestureRecognizer Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script type="text/javascript">
+    window.jazzy = {'docset': false}
+    if (typeof window.dash != 'undefined') {
+      document.documentElement.className += ' dash'
+      window.jazzy.docset = true
+    }
+    if (navigator.userAgent.match(/xcode/i)) {
+      document.documentElement.className += ' xcode'
+      window.jazzy.docset = true
+    }
+    </script>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+  </head>
+  <body id="reference" class="Swift">
+    <a name="//apple_ref/swift/Class/BBGestureRecognizer" class="dashAnchor"></a>
+    <a title="BBGestureRecognizer Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p class="header-text"><a href="../index.html">BBGestureRecognizer Docs</a> (66% documented)</p>
+        <p id="header-links"><a href="http://github.com/brennon/BBGestureRecognizer"><img id="header-icon" src="../img/gh.png" height="16px" width="16px" />View on GitHub</a></p>
+      </div>
+    </header>
+    <section id="valence">
+      <div class="content-wrapper">
+        <p id="hierarchial_navigation">
+        <a href="../index.html" id="design_resources_link">BBGestureRecognizer Reference</a>
+        <img id="carat" src="../img/carat.png" height="10px" width="6px" />
+        BBGestureRecognizer Class Reference
+        </p>
+      </div>
+    </section>
+    <div class="content-wrapper">
+      <nav class="book-parts">
+        <ul class="nav-parts">
+          <li class="part-name tasks">
+          <a href="../Classes.html">Classes</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Classes/BBGestureRecognizer.html">BBGestureRecognizer</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/BBTapGestureRecognizer.html">BBTapGestureRecognizer</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
+          <a href="../Enums.html">Enums</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Enums.html#/s:O23BBGestureRecognizerDemo24BBGestureRecognizerState">BBGestureRecognizerState</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
+          <a href="../Functions.html">Functions</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Functions.html#/s:F23BBGestureRecognizerDemooi2eeFTCS_19BBGestureRecognizerS0__Sb">==(_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
+          <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Protocols/BBGestureRecognizerDelegate.html">BBGestureRecognizerDelegate</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Protocols/BBGestureRecognizerTargetAction.html">BBGestureRecognizerTargetAction</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
+          <a href="../Structs.html">Structs</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Structs.html#/s:V23BBGestureRecognizerDemo34BBGestureRecognizerStateTransition">BBGestureRecognizerStateTransition</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Structs/BBGestureRecognizerTargetActionWrapper.html">BBGestureRecognizerTargetActionWrapper</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <div class="pixel-line"></div>
+      <div class="rubber-band-gap"></div>
+      <article class="chapter">
+      <a name="/"></a>
+        <h1 class="chapter-name">BBGestureRecognizer</h1>
+        <section>
+          <section class="section">
+            <p class="para"><code>BBGestureRecognizer</code> is a base class for concrete gesture-recognizer classes that can be attached to <code>SKNode</code> instances. A  gesture recognizer object&ndash;or, simply, a gesture recognizer&ndash;decouples the logic for recognizing a gesture and acting on that  recognition. When one of these objects recognizes a common gesture or, in some cases, a change in the gesture, it sends an  action message to each designated target object. <br /><br /> The <code>BBGestureRecognizer</code> class defines a set of common behaviors that can be configured for subclassed gesture  recognizers. It can also communicate with its delegate (an object that conforms to the <code>BBGestureRecognizerDelegate</code>  protocol), thereby enabling finer-grained customization of some behaviors. <br /><br /> A gesture recognizer operates on touches hit-tested to a specific <code>SKNode</code> and all of that node&rsquo;s descendant nodes. It thus  must be associated with that view. To make that association you must call the <code>SKNode</code> method <code>addGestureRecognizer:</code>. <br /><br /> A gesture recognizer has a method associated with it. Recognition of a gesture results in calling this method. The action  method must conform to the signature: <code>(BBGestureRecognizer?) -&gt; ()</code> <br /><br /> Beyond this, a <code>BBGestureRecognizer</code> operates much like a <code>UIGestureRecognizer</code>. See the documentation for  <code>UIGestureRecognizer</code> for further information.</p>
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Properties"></a>
+                <a name="//apple_ref/swift/Section/Properties" class="dashAnchor"></a>
+                <a href="#/Properties">
+                  <h3 class="section-name">Properties</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC23BBGestureRecognizerDemo19BBGestureRecognizerP33_C30F38F1537045887F73DEBE5124350723allowedStateTransitionsGSaVS_34BBGestureRecognizerStateTransition_">
+                    <a name="//apple_ref/swift/Property/allowedStateTransitions" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC23BBGestureRecognizerDemo19BBGestureRecognizerP33_C30F38F1537045887F73DEBE5124350723allowedStateTransitionsGSaVS_34BBGestureRecognizerStateTransition_">allowedStateTransitions</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Only certain transitions from one <code>BBGestureRecognizerState</code> to another are allowed. <code>allowedStateTransitions</code> is an  <code>[BBGestureRecognizerStateTransition]</code> that includes those transitions that are allowed.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">let</span> <span class="nv">allowedStateTransitions</span><span class="p">:</span> <span class="p">[</span><span class="kt">BBGestureRecognizerStateTransition</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC23BBGestureRecognizerDemo19BBGestureRecognizerP33_C30F38F1537045887F73DEBE5124350715trackingTouchesGSaCSo7UITouch_">
+                    <a name="//apple_ref/swift/Property/trackingTouches" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC23BBGestureRecognizerDemo19BBGestureRecognizerP33_C30F38F1537045887F73DEBE5124350715trackingTouchesGSaCSo7UITouch_">trackingTouches</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The <code>UITouch</code> objects that the gesture recognizer is currently tracking. For simplicity, <code>beginTrackingTouch(_:)</code> is the  only place where touches are added to this array, and <code>endTrackingTouch(_:)</code> is the only place where touches are removed  from this array.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">trackingTouches</span> <span class="o">=</span> <span class="p">[</span><span class="kt">UITouch</span><span class="p">]()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC23BBGestureRecognizerDemo19BBGestureRecognizerP33_C30F38F1537045887F73DEBE5124350714ignoredTouchesGSaCSo7UITouch_">
+                    <a name="//apple_ref/swift/Property/ignoredTouches" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC23BBGestureRecognizerDemo19BBGestureRecognizerP33_C30F38F1537045887F73DEBE5124350714ignoredTouchesGSaCSo7UITouch_">ignoredTouches</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The <code>UITouch</code> objects that the gesture recognizer is currently ignoring. For simplicity, <code>ignoreTouch(_:forEvent:)</code> is  the only place where touches are added to this array, and <code>endTrackingTouch(_:)</code> is the only place where touches are  removed from this array.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">ignoredTouches</span> <span class="o">=</span> <span class="p">[</span><span class="kt">UITouch</span><span class="p">]()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Initializing%20a%20Gesture%20Recognizer"></a>
+                <a name="//apple_ref/swift/Section/Initializing a Gesture Recognizer" class="dashAnchor"></a>
+                <a href="#/Initializing%20a%20Gesture%20Recognizer">
+                  <h3 class="section-name">Initializing a Gesture Recognizer</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC23BBGestureRecognizerDemo19BBGestureRecognizercFMS0_USs9AnyObject__FT6targetQ_6actionFQ_FGSqS0__T__S0_">
+                    <a name="//apple_ref/swift/Method/init(target:action:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC23BBGestureRecognizerDemo19BBGestureRecognizercFMS0_USs9AnyObject__FT6targetQ_6actionFQ_FGSqS0__T__S0_">init(target:action:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Initializes an allocated gesture-recognizer object with a target and an action selector. This method is the designated  initializer.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">init</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">target</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="p">(</span><span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">BBGestureRecognizer</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="p">())</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">target</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">An object on which a method will be called when this gesture recognizer recognizes a gesture. <code>nil</code> is not  a valid value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">A method implemented by the target to handle the gesture recognized by the receiver. The method must  conform to the signature described in the class overview. <code>nil</code> is not a valid value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Getting%20the%20Recognizer&#39;s%20Associated%20Action"></a>
+                <a name="//apple_ref/swift/Section/Getting the Recognizer&#39;s Associated Action" class="dashAnchor"></a>
+                <a href="#/Getting%20the%20Recognizer&#39;s%20Associated%20Action">
+                  <h3 class="section-name">Getting the Recognizer&#39;s Associated Action</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC23BBGestureRecognizerDemo19BBGestureRecognizerP33_C30F38F1537045887F73DEBE5124350716registeredActionGSqPS_31BBGestureRecognizerTargetAction__">
+                    <a name="//apple_ref/swift/Property/registeredAction" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC23BBGestureRecognizerDemo19BBGestureRecognizerP33_C30F38F1537045887F73DEBE5124350716registeredActionGSqPS_31BBGestureRecognizerTargetAction__">registeredAction</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The <code>BBGestureRecognizerTargetAction</code> on which <code>performAction:</code> will be called when a gesture is recognized.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">registeredAction</span><span class="p">:</span> <span class="kt">BBGestureRecognizerTargetAction</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Getting%20the%20Touches%20and%20Location%20of%20a%20Gesture"></a>
+                <a name="//apple_ref/swift/Section/Getting the Touches and Location of a Gesture" class="dashAnchor"></a>
+                <a href="#/Getting%20the%20Touches%20and%20Location%20of%20a%20Gesture">
+                  <h3 class="section-name">Getting the Touches and Location of a Gesture</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer14locationInNodeFS0_FGSqCSo6SKNode_GSqVSC7CGPoint_">
+                    <a name="//apple_ref/swift/Method/locationInNode(_:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer14locationInNodeFS0_FGSqCSo6SKNode_GSqVSC7CGPoint_">locationInNode(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Returns the point computed as the location in a given node of the gesture represented by the receiver. The returned value  is a generic single-point location for the gesture computed by the UIKit framework. It is usually the centroid of the  touches involved in the gesture.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">locationInNode</span><span class="p">(</span><span class="nv">node</span><span class="p">:</span> <span class="kt">SKNode</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">CGPoint</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">node</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">An <code>SKNode</code> object on which the gesture took place. Specify <code>nil</code> to indicate the gesture&rsquo;s node&rsquo;s scene.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para">A point in the local coordinate system of <code>node</code> that identifies the location of the gesture. If <code>nil</code> is  specified for <code>node</code>, the method returns the gesture location in the gesture&rsquo;s node&rsquo;s scene&rsquo;s base coordinate system.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer15locationOfTouchFS0_FT10touchIndexSi6inNodeGSqCSo6SKNode__VSC7CGPoint">
+                    <a name="//apple_ref/swift/Method/locationOfTouch(touchIndex:inNode:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer15locationOfTouchFS0_FT10touchIndexSi6inNodeGSqCSo6SKNode__VSC7CGPoint">locationOfTouch(touchIndex:inNode:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Returns the location of one of the gesture&rsquo;s touches in the local coordinate system of a given node.:param inNode An <code>SKNode</code> object on which the gesture took place. Specify <code>nil</code> to indicate the gesture&rsquo;s node&rsquo;s scene.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">locationOfTouch</span><span class="p">(</span><span class="n">touchIndex</span> <span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">inNode</span> <span class="nv">node</span><span class="p">:</span> <span class="kt">SKNode</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">CGPoint</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">touchIndex</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The index of a <code>UITouch</code> object in a private array maintained by the gesture recognizer. This touch  object represents a touch of the current gesture.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para">A point in the local coordinate system of <code>node</code> that identifies the location of the touch. If <code>nil</code> is  specified for <code>node</code>, the method returns the touch location in the gesture&rsquo;s node&rsquo;s scene&rsquo;s base coordinate system.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer15numberOfTouchesFS0_FT_Si">
+                    <a name="//apple_ref/swift/Method/numberOfTouches()" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer15numberOfTouchesFS0_FT_Si">numberOfTouches()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Returns the number of touches involved in the gesture represented by the receiver. Using the value returned by this  method in a loop, you can ask for the location of individual touches using the <code>locationOfTouch(_:inView:)</code> method.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">numberOfTouches</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para">The number of <code>UITouch</code> objects in a private array maintained by the gesture recognizer. Each of these objects  represents a touch in the current gesture.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Getting%20the%20Recognizer&#39;s%20State%20and%20Node"></a>
+                <a name="//apple_ref/swift/Section/Getting the Recognizer&#39;s State and Node" class="dashAnchor"></a>
+                <a href="#/Getting%20the%20Recognizer&#39;s%20State%20and%20Node">
+                  <h3 class="section-name">Getting the Recognizer&#39;s State and Node</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC23BBGestureRecognizerDemo19BBGestureRecognizer9nextStateGSqOS_24BBGestureRecognizerState_">
+                    <a name="//apple_ref/swift/Property/nextState" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC23BBGestureRecognizerDemo19BBGestureRecognizer9nextStateGSqOS_24BBGestureRecognizerState_">nextState</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The state to which this gesture recognizer will next advance. Under the hood, when a <code>BBGestureRecognizer</code> sets  <code>state</code>, it is actually <code>nextState</code> that receives this update. Then, when the coordinating object processes all gesture  recognizers on a node (this object is typically the node itself), it advances each recognizer from <code>state</code> to the new  state in <code>nextState</code>. This allows the coordinating object to enforce dependencies between gesture recognizers. In doing  so, the coordinating object can potentially change <code>nextState</code> to a new, appropriate value, and then advance the <code>state</code>  on all recognizers by calling its <code>advanceState()</code> method.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">internal</span> <span class="k">var</span> <span class="nv">nextState</span><span class="p">:</span> <span class="kt">BBGestureRecognizerState</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC23BBGestureRecognizerDemo19BBGestureRecognizerP33_C30F38F1537045887F73DEBE512435076_stateOS_24BBGestureRecognizerState">
+                    <a name="//apple_ref/swift/Property/_state" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC23BBGestureRecognizerDemo19BBGestureRecognizerP33_C30F38F1537045887F73DEBE512435076_stateOS_24BBGestureRecognizerState">_state</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Private storage for the <code>state</code> property.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_state</span><span class="p">:</span> <span class="kt">BBGestureRecognizerState</span> <span class="o">=</span> <span class="o">.</span><span class="kt">Possible</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC23BBGestureRecognizerDemo19BBGestureRecognizer5stateOS_24BBGestureRecognizerState">
+                    <a name="//apple_ref/swift/Property/state" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC23BBGestureRecognizerDemo19BBGestureRecognizer5stateOS_24BBGestureRecognizerState">state</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The current <code>BBGestureRecognizerState</code> of the gesture recognizer. When <code>state</code> transitions from <code>.Possible</code> to <code>.Began</code>  or <code>.Recognized</code> and the <code>delegate</code> (if set) prevents the gesture recognizer from beginning, <code>state</code> is automatically set  to <code>.Failed</code>. Otherwise, <code>state</code> is only updated if the transition is allowed (see <code>allowedStateTransitions</code>). Lastly, if  the allowed transition (if found) has <code>shouldNotify</code> set to <code>true</code>, the gesture recognizer&rsquo;s associated action method is  called.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">internal(set)</span> <span class="k">var</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">BBGestureRecognizerState</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer12advanceStateFS0_FT_T_">
+                    <a name="//apple_ref/swift/Method/advanceState()" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer12advanceStateFS0_FT_T_">advanceState()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Advances the gesture recognizer&rsquo;s state from <code>state</code> to <code>nextState</code>. See <code>nextState</code> for more information on when and why  this is necessary.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">internal</span> <span class="kd">func</span> <span class="nf">advanceState</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC23BBGestureRecognizerDemo19BBGestureRecognizerP33_C30F38F1537045887F73DEBE512435075_nodeGSqCSo6SKNode_">
+                    <a name="//apple_ref/swift/Property/_node" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC23BBGestureRecognizerDemo19BBGestureRecognizerP33_C30F38F1537045887F73DEBE512435075_nodeGSqCSo6SKNode_">_node</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Private storage for the <code>node</code> property.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_node</span><span class="p">:</span> <span class="kt">SKNode</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC23BBGestureRecognizerDemo19BBGestureRecognizer4nodeGSqCSo6SKNode_">
+                    <a name="//apple_ref/swift/Property/node" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC23BBGestureRecognizerDemo19BBGestureRecognizer4nodeGSqCSo6SKNode_">node</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The <code>SKNode</code> to which this <code>BBGestureRecognizer</code> is attached. You attach (or add) a gesture recognizer to an <code>SKNode</code>  object using its <code>addGestureRecognizer(_:)</code> method. When <code>node</code> is set, <code>reset</code> is called on the recognizer.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">internal(set)</span> <span class="k">var</span> <span class="nv">node</span><span class="p">:</span> <span class="kt">SKNode</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC23BBGestureRecognizerDemo19BBGestureRecognizer7enabledSb">
+                    <a name="//apple_ref/swift/Property/enabled" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC23BBGestureRecognizerDemo19BBGestureRecognizer7enabledSb">enabled</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">A Boolean property that indicates whether the gesture recognizer is  enabled. Disables a gesture recognizers so it does not receive touches.  The default value is <code>true</code>. If you change this property to <code>false</code>  while a gesture recognizer is currently recognizing a gesture, the  gesture recognizer transitions to a cancelled state.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">enabled</span> <span class="o">=</span> <span class="kc">true</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Specifying%20Dependencies%20Between%20Gesture%20Recognizers"></a>
+                <a name="//apple_ref/swift/Section/Specifying Dependencies Between Gesture Recognizers" class="dashAnchor"></a>
+                <a href="#/Specifying%20Dependencies%20Between%20Gesture%20Recognizers">
+                  <h3 class="section-name">Specifying Dependencies Between Gesture Recognizers</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC23BBGestureRecognizerDemo19BBGestureRecognizer25recognizersRequiredToFailGSaS0__">
+                    <a name="//apple_ref/swift/Property/recognizersRequiredToFail" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC23BBGestureRecognizerDemo19BBGestureRecognizer25recognizersRequiredToFailGSaS0__">recognizersRequiredToFail</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">An array of other <code>BBGestureRecognizer</code> instances that must fail in order for this gesture recognizer to recognize its  gesture.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">internal</span> <span class="k">var</span> <span class="nv">recognizersRequiredToFail</span> <span class="o">=</span> <span class="p">[</span><span class="kt">BBGestureRecognizer</span><span class="p">]()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer30requireGestureRecognizerToFailFS0_FS0_T_">
+                    <a name="//apple_ref/swift/Method/requireGestureRecognizerToFail(_:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer30requireGestureRecognizerToFailFS0_FS0_T_">requireGestureRecognizerToFail(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Creates a dependency relationship between the gesture recognizer on which this method was called and another gesture  recognizer. This method creates a relationship with another gesture recognizer that delays the receiver&rsquo;s transition out  of the <code>.Possible</code> state. The state that the receiver transitions to depends on what happens with  <code>otherGestureRecognizer</code>. If <code>otherGestureRecognizer</code> transitions to the <code>.Failed</code> state, the receiver transitions to its  normal next state. If <code>otherGestureRecognizer</code> transitions to the <code>.Recognized</code> or <code>.Began</code> state, the receiver  transitions to <code>.Failed</code>. An example where this method might be called is when you want a single-tap gesture require that  a double-tap gesture fail.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">requireGestureRecognizerToFail</span><span class="p">(</span><span class="nv">otherGestureRecognizer</span><span class="p">:</span> <span class="kt">BBGestureRecognizer</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">otherGestureRecognizer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">Another gesture-recognizer object (an instance of a subclass of <code>BBGestureRecognizer</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Setting%20and%20Getting%20the%20Delegate"></a>
+                <a name="//apple_ref/swift/Section/Setting and Getting the Delegate" class="dashAnchor"></a>
+                <a href="#/Setting%20and%20Getting%20the%20Delegate">
+                  <h3 class="section-name">Setting and Getting the Delegate</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC23BBGestureRecognizerDemo19BBGestureRecognizer8delegateXwGSqPS_27BBGestureRecognizerDelegate__">
+                    <a name="//apple_ref/swift/Property/delegate" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC23BBGestureRecognizerDemo19BBGestureRecognizer8delegateXwGSqPS_27BBGestureRecognizerDelegate__">delegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The delegate of the gesture recognizer. The gesture recognizer maintains a weak reference to its delegate. The delegate  must adopt the <code>BBGestureRecognizerDelegate</code> protocol and implement all of its methods.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">weak</span> <span class="k">var</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kt">BBGestureRecognizerDelegate</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Methods%20For%20Subclasses"></a>
+                <a name="//apple_ref/swift/Section/Methods For Subclasses" class="dashAnchor"></a>
+                <a href="#/Methods%20For%20Subclasses">
+                  <h3 class="section-name">Methods For Subclasses</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer12touchesBeganFS0_FTCSo5NSSet9withEventCSo7UIEvent_T_">
+                    <a name="//apple_ref/swift/Method/touchesBegan(_:withEvent:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer12touchesBeganFS0_FTCSo5NSSet9withEventCSo7UIEvent_T_">touchesBegan(_:withEvent:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Sent to the receiver when one or more fingers touch down in the associated view. This method has the same exact signature  as the corresponding one declared by <code>UIResponder</code>. Through this method a gesture recognizer receives touch objects (in  their <code>.Began</code> phase) before the node attached to the gesture recognizer receives them. <code>BBGestureRecognizer</code> objects  are not in the responder chain, yet observe touches hit-tested to their node and their node&rsquo;s descendants. After  observation, the delivery of touch objects to the attached view, or their disposition otherwise, is affected by the  <code>cancelsTouchesInView</code>, <code>delaysTouchesBegan</code>, and <code>delaysTouchesEnded</code> properties. <br /><br /> If the gesture recognizer is interpreting a continuous gesture, it should set its state to <code>.Began</code> upon receiving this  message. If at any point in its handling of the touch objects the gesture recognizer determines that the multi-touch  event sequence is not its gesture, it should set it state to <code>.Cancelled</code>.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">touchesBegan</span><span class="p">(</span><span class="nv">touches</span><span class="p">:</span> <span class="kt">NSSet</span><span class="p">,</span> <span class="n">withEvent</span> <span class="nv">event</span><span class="p">:</span> <span class="kt">UIEvent</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">touches</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">A set of <code>UITouch</code> instances in the event represented by <code>event</code> that represent the touches in the  <code>.Began</code> phase.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">event</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">A <code>UIEvent</code> object representing the event to which the touches belong.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer12touchesMovedFS0_FTCSo5NSSet9withEventCSo7UIEvent_T_">
+                    <a name="//apple_ref/swift/Method/touchesMoved(_:withEvent:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer12touchesMovedFS0_FTCSo5NSSet9withEventCSo7UIEvent_T_">touchesMoved(_:withEvent:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Sent to the receiver when one or more fingers touch down in the associated view. This method has the same exact signature  as the corresponding one declared by <code>UIResponder</code>. Through this method a gesture recognizer receives touch objects (in  their <code>.Moved</code> phase) before the node attached to the gesture recognizer receives them. <code>BBGestureRecognizer</code> objects  are not in the responder chain, yet observe touches hit-tested to their node and their node&rsquo;s descendants. After  observation, the delivery of touch objects to the attached view, or their disposition otherwise, is affected by the  <code>cancelsTouchesInView</code>, <code>delaysTouchesBegan</code>, and <code>delaysTouchesEnded</code> properties. <br /><br /> If the gesture recognizer is interpreting a continuous gesture, it should set its state to <code>.Changed</code> upon receiving this  message. If at any point in its handling of the touch objects the gesture recognizer determines that the multi-touch  event sequence is not its gesture, it should set it state to <code>.Cancelled</code>.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">touchesMoved</span><span class="p">(</span><span class="nv">touches</span><span class="p">:</span> <span class="kt">NSSet</span><span class="p">,</span> <span class="n">withEvent</span> <span class="nv">event</span><span class="p">:</span> <span class="kt">UIEvent</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">touches</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">A set of <code>UITouch</code> instances in the event represented by <code>event</code> that represent the touches in the  <code>.Began</code> phase.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">event</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">A <code>UIEvent</code> object representing the event to which the touches belong.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer12touchesEndedFS0_FTCSo5NSSet9withEventCSo7UIEvent_T_">
+                    <a name="//apple_ref/swift/Method/touchesEnded(_:withEvent:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer12touchesEndedFS0_FTCSo5NSSet9withEventCSo7UIEvent_T_">touchesEnded(_:withEvent:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Sent to the receiver when one or more fingers touch down in the associated view. This method has the same exact signature  as the corresponding one declared by <code>UIResponder</code>. Through this method a gesture recognizer receives touch objects (in  their <code>.Ended</code> phase) before the node attached to the gesture recognizer receives them. <code>BBGestureRecognizer</code> objects  are not in the responder chain, yet observe touches hit-tested to their node and their node&rsquo;s descendants. After  observation, the delivery of touch objects to the attached view, or their disposition otherwise, is affected by the  <code>cancelsTouchesInView</code>, <code>delaysTouchesBegan</code>, and <code>delaysTouchesEnded</code> properties. <br /><br /> If the gesture recognizer is interpreting a continuous gesture, it should set its state to <code>.Ended</code> upon receiving this  message. If it is interpreting a discrete gesture, it should set its state to <code>.Recognized</code>. If at any point in its  handling of the touch objects the gesture recognizer determines that the multi-touch event sequence is not its gesture,  it should set it state to <code>.Cancelled</code>.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">touchesEnded</span><span class="p">(</span><span class="nv">touches</span><span class="p">:</span> <span class="kt">NSSet</span><span class="p">,</span> <span class="n">withEvent</span> <span class="nv">event</span><span class="p">:</span> <span class="kt">UIEvent</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">touches</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">A set of <code>UITouch</code> instances in the event represented by <code>event</code> that represent the touches in the  <code>.Began</code> phase.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">event</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">A <code>UIEvent</code> object representing the event to which the touches belong.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer16touchesCancelledFS0_FTCSo5NSSet9withEventCSo7UIEvent_T_">
+                    <a name="//apple_ref/swift/Method/touchesCancelled(_:withEvent:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer16touchesCancelledFS0_FTCSo5NSSet9withEventCSo7UIEvent_T_">touchesCancelled(_:withEvent:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Sent to the receiver when one or more fingers touch down in the associated view. This method has the same exact signature  as the corresponding one declared by <code>UIResponder</code>. Through this method a gesture recognizer receives touch objects (in  their <code>.Cancelled</code> phase) before the node attached to the gesture recognizer receives them. <code>BBGestureRecognizer</code>  objects are not in the responder chain, yet observe touches hit-tested to their node and their node&rsquo;s descendants. After  observation, the delivery of touch objects to the attached view, or their disposition otherwise, is affected by the  <code>cancelsTouchesInView</code>, <code>delaysTouchesBegan</code>, and <code>delaysTouchesEnded</code> properties. <br /><br /> Upon receiving this message, the gesture recognizer for a continuous  gesture should set its state to <code>.Cancelled</code>; a  gesture recognizer for a discrete gesture should set its state to <code>.Failed</code>.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">touchesCancelled</span><span class="p">(</span><span class="nv">touches</span><span class="p">:</span> <span class="kt">NSSet</span><span class="p">,</span> <span class="n">withEvent</span> <span class="nv">event</span><span class="p">:</span> <span class="kt">UIEvent</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">touches</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">A set of <code>UITouch</code> instances in the event represented by <code>event</code> that represent the touches in the  <code>.Began</code> phase.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">event</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">A <code>UIEvent</code> object representing the event to which the touches belong.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer5resetFS0_FT_T_">
+                    <a name="//apple_ref/swift/Method/reset()" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer5resetFS0_FT_T_">reset()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Overridden to reset internal state when a gesture recognition attempt completes. The runtime calls this method after the  gesture-recognizer state has been set to <code>.Ended</code>, <code>.Recognized</code>, <code>.Cancelled</code>, or <code>.Failed</code>&ndash;in other words, any of the  terminal states for a gesture recognition attempt. Subclasses should reset any internal state in preparation for a new  attempt at gesture recognition. After this method is called, the gesture recognizer receives no further updates for  touches that have begun but haven&rsquo;t ended.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">reset</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer11ignoreTouchFS0_FTCSo7UITouch8forEventGSqCSo7UIEvent__T_">
+                    <a name="//apple_ref/swift/Method/ignoreTouch(_:forEvent:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer11ignoreTouchFS0_FTCSo7UITouch8forEventGSqCSo7UIEvent__T_">ignoreTouch(_:forEvent:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Tells the gesture recognizer to ignore a specific touch of the given event. If a touch isn&rsquo;t part of this gesture you may  pass it to this method, causing it to be ignored. <code>BBGestureRecognizer</code> does not cancel ignored touches on the  associated view even if <code>cancelsTouchesInView</code> is <code>true</code>. This method is intended to be called, not overridden.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">ignoreTouch</span><span class="p">(</span><span class="nv">touch</span><span class="p">:</span> <span class="kt">UITouch</span><span class="p">,</span> <span class="n">forEvent</span> <span class="nv">event</span><span class="p">:</span> <span class="kt">UIEvent</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">touch</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">A <code>UITouch</code> object that is part of the current multi-touch sequence and associated with <code>event</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">event</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">A <code>UIEvent?</code> object that, if not <code>nil</code>, includes a reference to <code>touch</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Internal/Private%20Methods"></a>
+                <a name="//apple_ref/swift/Section/Internal/Private Methods" class="dashAnchor"></a>
+                <a href="#/Internal/Private%20Methods">
+                  <h3 class="section-name">Internal/Private Methods</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer20beginTrackingTouchesFS0_FGSaCSo7UITouch_T_">
+                    <a name="//apple_ref/swift/Method/beginTrackingTouches(_:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer20beginTrackingTouchesFS0_FGSaCSo7UITouch_T_">beginTrackingTouches(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Begin tracking each touch in the provided array. New touches are sent to the gesture recognizer through this method.  These touches are added to a private internal array that is used as the gesture recognizer continues to track the touches.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">internal</span> <span class="kd">func</span> <span class="nf">beginTrackingTouches</span><span class="p">(</span><span class="nv">touches</span><span class="p">:</span> <span class="p">[</span><span class="kt">UITouch</span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">touches</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">An array of <code>UITouch</code> instances that the gesture recognizer should begin tracking.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC23BBGestureRecognizerDemo19BBGestureRecognizerP33_C30F38F1537045887F73DEBE5124350718beginTrackingTouchFS0_FCSo7UITouchT_">
+                    <a name="//apple_ref/swift/Method/beginTrackingTouch(_:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC23BBGestureRecognizerDemo19BBGestureRecognizerP33_C30F38F1537045887F73DEBE5124350718beginTrackingTouchFS0_FCSo7UITouchT_">beginTrackingTouch(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Begin tracking a single touch.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="kd">func</span> <span class="nf">beginTrackingTouch</span><span class="p">(</span><span class="nv">touch</span><span class="p">:</span> <span class="kt">UITouch</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">touch</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The <code>UITouch</code> instance that the gesture recognizer should begin tracking.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer32continueTrackingTouchesWithEventFS0_FCSo7UIEventT_">
+                    <a name="//apple_ref/swift/Method/continueTrackingTouchesWithEvent(_:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer32continueTrackingTouchesWithEventFS0_FCSo7UIEventT_">continueTrackingTouchesWithEvent(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Continue tracking each of the currently tracked touches. For each <code>UITouch</code> in <code>trackingTouches</code>, this method will check  the phase of the touch, and distribute it to the correct &lsquo;handler&rsquo; method (<code>touchesBegan(_:withEvent:)</code>, etc.) This  method also calls <code>reset()</code> if all touches have either ended or been cancelled.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">internal</span> <span class="kd">func</span> <span class="nf">continueTrackingTouchesWithEvent</span><span class="p">(</span><span class="nv">event</span><span class="p">:</span> <span class="kt">UIEvent</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">touches</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">An array of <code>UITouch</code> instances that the gesture recognizer should begin tracking.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC23BBGestureRecognizerDemo19BBGestureRecognizerP33_C30F38F1537045887F73DEBE5124350716endTrackingTouchFS0_FCSo7UITouchT_">
+                    <a name="//apple_ref/swift/Method/endTrackingTouch(_:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC23BBGestureRecognizerDemo19BBGestureRecognizerP33_C30F38F1537045887F73DEBE5124350716endTrackingTouchFS0_FCSo7UITouchT_">endTrackingTouch(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">End tracking of a single touch.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="kd">func</span> <span class="nf">endTrackingTouch</span><span class="p">(</span><span class="nv">touch</span><span class="p">:</span> <span class="kt">UITouch</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">touch</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The <code>UITouch</code> instance that the gesture recognizer should stop tracking.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer18endTrackingTouchesFS0_FGSaCSo7UITouch_T_">
+                    <a name="//apple_ref/swift/Method/endTrackingTouches(_:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC23BBGestureRecognizerDemo19BBGestureRecognizer18endTrackingTouchesFS0_FGSaCSo7UITouch_T_">endTrackingTouches(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">End tracking of each touch in the provided array.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">internal</span> <span class="kd">func</span> <span class="nf">endTrackingTouches</span><span class="p">(</span><span class="nv">touches</span><span class="p">:</span> <span class="p">[</span><span class="kt">UITouch</span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">touches</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">An array of <code>UITouch</code> instances that the gesture recognizer should stop tracking.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC23BBGestureRecognizerDemo19BBGestureRecognizerP33_C30F38F1537045887F73DEBE5124350721findAllowedTransitionFS0_FTOS_24BBGestureRecognizerState7toStateS1__GSqVS_34BBGestureRecognizerStateTransition_">
+                    <a name="//apple_ref/swift/Method/findAllowedTransition(_:toState:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC23BBGestureRecognizerDemo19BBGestureRecognizerP33_C30F38F1537045887F73DEBE5124350721findAllowedTransitionFS0_FTOS_24BBGestureRecognizerState7toStateS1__GSqVS_34BBGestureRecognizerStateTransition_">findAllowedTransition(_:toState:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Determines if a transition from one <code>BBGestureRecognizerState</code> to another is allowed (is contained in  <code>allowedStateTransitions</code>).</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="kd">func</span> <span class="nf">findAllowedTransition</span><span class="p">(</span>
+        <span class="nv">fromState</span><span class="p">:</span> <span class="kt">BBGestureRecognizerState</span><span class="p">,</span>
+        <span class="nv">toState</span><span class="p">:</span> <span class="kt">BBGestureRecognizerState</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">BBGestureRecognizerStateTransition</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">fromState</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The beginning state of the transition.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">toState</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">The ending state of the transition.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para">Returns the allowed <code>BBGestureRecognizerStateTransition</code> if it is present in <code>allowedStateTransitions</code>,  otherwise it returns <code>nil</code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Printable%20Protocol"></a>
+                <a name="//apple_ref/swift/Section/Printable Protocol" class="dashAnchor"></a>
+                <a href="#/Printable%20Protocol">
+                  <h3 class="section-name">Printable Protocol</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC23BBGestureRecognizerDemo19BBGestureRecognizer11descriptionSS">
+                    <a name="//apple_ref/swift/Property/description" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC23BBGestureRecognizerDemo19BBGestureRecognizer11descriptionSS">description</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Textual representation of the <code>BBGestureRecognizer</code>.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">internal</span> <span class="k">var</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Hashable%20Protocol"></a>
+                <a name="//apple_ref/swift/Section/Hashable Protocol" class="dashAnchor"></a>
+                <a href="#/Hashable%20Protocol">
+                  <h3 class="section-name">Hashable Protocol</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC23BBGestureRecognizerDemo19BBGestureRecognizer9hashValueSi">
+                    <a name="//apple_ref/swift/Property/hashValue" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC23BBGestureRecognizerDemo19BBGestureRecognizer9hashValueSi">hashValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The hash value of the gesture recognizer.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">hashValue</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p class="copyright">&copy; 2015 <a class="link" href="http://www.brennonbortz.com" target="_blank" rel="external">Brennon Bortz</a>. All rights reserved. (Last updated: 2015-01-04)</p>
+          <p class="copyright">Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.0.20</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

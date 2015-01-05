@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BBTapGestureRecognizer Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script type="text/javascript">
+    window.jazzy = {'docset': false}
+    if (typeof window.dash != 'undefined') {
+      document.documentElement.className += ' dash'
+      window.jazzy.docset = true
+    }
+    if (navigator.userAgent.match(/xcode/i)) {
+      document.documentElement.className += ' xcode'
+      window.jazzy.docset = true
+    }
+    </script>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+  </head>
+  <body id="reference" class="Swift">
+    <a name="//apple_ref/swift/Class/BBTapGestureRecognizer" class="dashAnchor"></a>
+    <a title="BBTapGestureRecognizer Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p class="header-text"><a href="../index.html">BBGestureRecognizer Docs</a> (66% documented)</p>
+        <p id="header-links"><a href="http://github.com/brennon/BBGestureRecognizer"><img id="header-icon" src="../img/gh.png" height="16px" width="16px" />View on GitHub</a></p>
+      </div>
+    </header>
+    <section id="valence">
+      <div class="content-wrapper">
+        <p id="hierarchial_navigation">
+        <a href="../index.html" id="design_resources_link">BBGestureRecognizer Reference</a>
+        <img id="carat" src="../img/carat.png" height="10px" width="6px" />
+        BBTapGestureRecognizer Class Reference
+        </p>
+      </div>
+    </section>
+    <div class="content-wrapper">
+      <nav class="book-parts">
+        <ul class="nav-parts">
+          <li class="part-name tasks">
+          <a href="../Classes.html">Classes</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Classes/BBGestureRecognizer.html">BBGestureRecognizer</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/BBTapGestureRecognizer.html">BBTapGestureRecognizer</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
+          <a href="../Enums.html">Enums</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Enums.html#/s:O23BBGestureRecognizerDemo24BBGestureRecognizerState">BBGestureRecognizerState</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
+          <a href="../Functions.html">Functions</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Functions.html#/s:F23BBGestureRecognizerDemooi2eeFTCS_19BBGestureRecognizerS0__Sb">==(_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
+          <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Protocols/BBGestureRecognizerDelegate.html">BBGestureRecognizerDelegate</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Protocols/BBGestureRecognizerTargetAction.html">BBGestureRecognizerTargetAction</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
+          <a href="../Structs.html">Structs</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Structs.html#/s:V23BBGestureRecognizerDemo34BBGestureRecognizerStateTransition">BBGestureRecognizerStateTransition</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Structs/BBGestureRecognizerTargetActionWrapper.html">BBGestureRecognizerTargetActionWrapper</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <div class="pixel-line"></div>
+      <div class="rubber-band-gap"></div>
+      <article class="chapter">
+      <a name="/"></a>
+        <h1 class="chapter-name">BBTapGestureRecognizer</h1>
+        <section>
+          <section class="section">
+            <p class="para"><code>BBTapGestureRecognizer</code> is a subclass of <code>BBGestureRecognizer</code> that  looks for single or multiple taps. For the gesture to be recognized, the  specified number of fingers must tap the view a specified number of times. <br /><br /> Although taps are discrete gestures, they are discrete for each state of  the gesture recognizer; thus the associated action message is sent when the  gesture begins and is sent for each intermediate state until (and  including) the ending state of the gesture. Code that handles tap gestures  should therefore test for the state of the gesture. <br /><br /> Action methods handling this gesture may get the location of the gesture as  a whole by calling the <code>BBGestureRecognizer</code> method <code>locationInNode(_:)</code>;  if there are multiple taps, this location is the first tap; if there are  multiple touches, this location is the centroid of all fingers tapping the  view. Clients may get the location of particular touches in the tap by  calling <code>locationOfTouch(_:inNode:)</code>; if multiple taps are allowed, this  location is that of the first tap.</p>
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Initializing%20a%20Tap%20Gesture%20Recognizer"></a>
+                <a name="//apple_ref/swift/Section/Initializing a Tap Gesture Recognizer" class="dashAnchor"></a>
+                <a href="#/Initializing%20a%20Tap%20Gesture%20Recognizer">
+                  <h3 class="section-name">Initializing a Tap Gesture Recognizer</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FC23BBGestureRecognizerDemo22BBTapGestureRecognizercFMS0_USs9AnyObject__FT6targetQ_6actionFQ_FGSqCS_19BBGestureRecognizer_T__S0_">
+                    <a name="//apple_ref/swift/Method/init(target:action:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FC23BBGestureRecognizerDemo22BBTapGestureRecognizercFMS0_USs9AnyObject__FT6targetQ_6actionFQ_FGSqCS_19BBGestureRecognizer_T__S0_">init(target:action:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Initializes an allocated <code>BBTapGestureRecognizer</code> object with a  target object and method to be called on gesture recognition.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">override</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">AnyObject</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">target</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="p">(</span><span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">BBGestureRecognizer</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="p">())</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">target</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">An object on which a method will be called when this gesture recognizer recognizes a gesture. <code>nil</code> is not a valid value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">A method implemented by the target to handle the gesture recognized by the receiver. The method must conform to the signature described in the <code>BBGestureRecognizer</code> class overview. <code>nil</code> is  not a valid value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Configuring%20the%20Gesture"></a>
+                <a name="//apple_ref/swift/Section/Configuring the Gesture" class="dashAnchor"></a>
+                <a href="#/Configuring%20the%20Gesture">
+                  <h3 class="section-name">Configuring the Gesture</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC23BBGestureRecognizerDemo22BBTapGestureRecognizer20numberOfTapsRequiredSi">
+                    <a name="//apple_ref/swift/Property/numberOfTapsRequired" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC23BBGestureRecognizerDemo22BBTapGestureRecognizer20numberOfTapsRequiredSi">numberOfTapsRequired</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The number of taps for the gesture to be recognized. The default value  is 1.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">numberOfTapsRequired</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC23BBGestureRecognizerDemo22BBTapGestureRecognizer23numberOfTouchesRequiredSi">
+                    <a name="//apple_ref/swift/Property/numberOfTouchesRequired" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC23BBGestureRecognizerDemo22BBTapGestureRecognizer23numberOfTouchesRequiredSi">numberOfTouchesRequired</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The number of fingers required to tap for the gesture to be recognized.  The default value is 1.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">numberOfTouchesRequired</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:vC23BBGestureRecognizerDemo22BBTapGestureRecognizer36maximumIntervalBetweenSuccessiveTapsSd">
+                    <a name="//apple_ref/swift/Property/maximumIntervalBetweenSuccessiveTaps" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:vC23BBGestureRecognizerDemo22BBTapGestureRecognizer36maximumIntervalBetweenSuccessiveTapsSd">maximumIntervalBetweenSuccessiveTaps</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">The maximum time that can elapse between two successive taps. The gesture recognizer will wait this long after it  receives its last tap before transitioning to the <code>.Recognized</code> state. This is to allow for failure dependency  relationships to be established between tap recognizers. For instance, a single-tap recognizer must wait to transition  to <code>.Recognized</code> if there may be a double-tap recognizer that is expecting it to fail.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">maximumIntervalBetweenSuccessiveTaps</span><span class="p">:</span> <span class="kt">NSTimeInterval</span> <span class="o">=</span> <span class="mf">0.25</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p class="copyright">&copy; 2015 <a class="link" href="http://www.brennonbortz.com" target="_blank" rel="external">Brennon Bortz</a>. All rights reserved. (Last updated: 2015-01-04)</p>
+          <p class="copyright">Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.0.20</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

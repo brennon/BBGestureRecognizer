@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BBGestureRecognizerDelegate Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script type="text/javascript">
+    window.jazzy = {'docset': false}
+    if (typeof window.dash != 'undefined') {
+      document.documentElement.className += ' dash'
+      window.jazzy.docset = true
+    }
+    if (navigator.userAgent.match(/xcode/i)) {
+      document.documentElement.className += ' xcode'
+      window.jazzy.docset = true
+    }
+    </script>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+  </head>
+  <body id="reference" class="Swift">
+    <a name="//apple_ref/swift/Protocol/BBGestureRecognizerDelegate" class="dashAnchor"></a>
+    <a title="BBGestureRecognizerDelegate Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p class="header-text"><a href="../index.html">BBGestureRecognizer Docs</a> (66% documented)</p>
+        <p id="header-links"><a href="http://github.com/brennon/BBGestureRecognizer"><img id="header-icon" src="../img/gh.png" height="16px" width="16px" />View on GitHub</a></p>
+      </div>
+    </header>
+    <section id="valence">
+      <div class="content-wrapper">
+        <p id="hierarchial_navigation">
+        <a href="../index.html" id="design_resources_link">BBGestureRecognizer Reference</a>
+        <img id="carat" src="../img/carat.png" height="10px" width="6px" />
+        BBGestureRecognizerDelegate Protocol Reference
+        </p>
+      </div>
+    </section>
+    <div class="content-wrapper">
+      <nav class="book-parts">
+        <ul class="nav-parts">
+          <li class="part-name tasks">
+          <a href="../Classes.html">Classes</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Classes/BBGestureRecognizer.html">BBGestureRecognizer</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Classes/BBTapGestureRecognizer.html">BBTapGestureRecognizer</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
+          <a href="../Enums.html">Enums</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Enums.html#/s:O23BBGestureRecognizerDemo24BBGestureRecognizerState">BBGestureRecognizerState</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
+          <a href="../Functions.html">Functions</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Functions.html#/s:F23BBGestureRecognizerDemooi2eeFTCS_19BBGestureRecognizerS0__Sb">==(_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
+          <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Protocols/BBGestureRecognizerDelegate.html">BBGestureRecognizerDelegate</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Protocols/BBGestureRecognizerTargetAction.html">BBGestureRecognizerTargetAction</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part-name tasks">
+          <a href="../Structs.html">Structs</a>
+            <ul class="nav-chapters">
+              <li class="nav-chapter">
+                <a href="../Structs.html#/s:V23BBGestureRecognizerDemo34BBGestureRecognizerStateTransition">BBGestureRecognizerStateTransition</a>
+              </li>
+              <li class="nav-chapter">
+                <a href="../Structs/BBGestureRecognizerTargetActionWrapper.html">BBGestureRecognizerTargetActionWrapper</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <div class="pixel-line"></div>
+      <div class="rubber-band-gap"></div>
+      <article class="chapter">
+      <a name="/"></a>
+        <h1 class="chapter-name">BBGestureRecognizerDelegate</h1>
+        <section>
+          <section class="section">
+            <p class="para">Delegates of a gesture recognizer&ndash;that is, an instance of a subclass of <code>BBGestureRecognizer</code>&ndash;adopt the UIGestureRecognizerDelegate protocol to fine-tune an app’s gesture-recognition behavior. The delegates receive messages from a gesture recognizer, and their responses to these messages enable them to affect the operation of the gesture recognizer or to specify a relationship between it and another gesture recognizer, such as allowing simultaneous recognition or setting up a failure requirement.</p>
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Regulating%20Gesture%20Recognition"></a>
+                <a name="//apple_ref/swift/Section/Regulating Gesture Recognition" class="dashAnchor"></a>
+                <a href="#/Regulating%20Gesture%20Recognition">
+                  <h3 class="section-name">Regulating Gesture Recognition</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FP23BBGestureRecognizerDemo27BBGestureRecognizerDelegate28gestureRecognizerShouldBeginUS0___FQPS0_FCS_19BBGestureRecognizerSb">
+                    <a name="//apple_ref/swift/Method/gestureRecognizerShouldBegin(_:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FP23BBGestureRecognizerDemo27BBGestureRecognizerDelegate28gestureRecognizerShouldBeginUS0___FQPS0_FCS_19BBGestureRecognizerSb">gestureRecognizerShouldBegin(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Asks the delegate if a gesture recognizer should begin interpreting touches. This method is called when a gesture recognizer attempts to transition out of the state <code>.Possible</code>. Returning <code>false</code> causes the gesture recognizer to transition to the state <code>.Failed</code>.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">gestureRecognizerShouldBegin</span><span class="p">(</span><span class="nv">gestureRecognizer</span><span class="p">:</span> <span class="kt">BBGestureRecognizer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">gestureRecognizer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">An instance of a subclass of the base class <code>BBGestureRecognizer</code>. This gesture recognizer object is about to begin processing touches to determine if its gesture is occurring.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para"><code>true</code> (the default) to tell the gesture recognizer to proceed with interpreting touches, <code>false</code> to prevent it from attempting to recognize its gesture.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FP23BBGestureRecognizerDemo27BBGestureRecognizerDelegate17gestureRecognizerUS0___FQPS0_FTCS_19BBGestureRecognizer18shouldReceiveTouchCSo7UITouch_Sb">
+                    <a name="//apple_ref/swift/Method/gestureRecognizer(_:shouldReceiveTouch:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FP23BBGestureRecognizerDemo27BBGestureRecognizerDelegate17gestureRecognizerUS0___FQPS0_FTCS_19BBGestureRecognizer18shouldReceiveTouchCSo7UITouch_Sb">gestureRecognizer(_:shouldReceiveTouch:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Ask the delegate if a gesture recognizer should receive an object representing a touch. This method is called before <code>touchesBegan(_:withEvent)</code> is called on the gesture recognizer for a new touch.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">gestureRecognizer</span><span class="p">(</span><span class="nv">gestureRecognizer</span><span class="p">:</span> <span class="kt">BBGestureRecognizer</span><span class="p">,</span> <span class="n">shouldReceiveTouch</span> <span class="nv">touch</span><span class="p">:</span> <span class="kt">UITouch</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">gestureRecognizer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">An instance of a subclass of the base class <code>BBGestureRecognizer</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">touch</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">A <code>UITouch</code> object from the current multi-touch sequence.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para"><code>true</code> (the default) to allow the gesture recognizer to examine the touch object, <code>false</code> to prevent the gesture recognizer from seeing this touch object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                
+                <a name="/Controlling%20Simultaneous%20Gesture%20Recognition"></a>
+                <a name="//apple_ref/swift/Section/Controlling Simultaneous Gesture Recognition" class="dashAnchor"></a>
+                <a href="#/Controlling%20Simultaneous%20Gesture%20Recognition">
+                  <h3 class="section-name">Controlling Simultaneous Gesture Recognition</h3>
+                </a>
+                
+              </div>
+              <ul class="task-group-list">
+                <li class="item symbol">
+                  <div class="task-group-term">
+                    <code>
+                    <a name="/s:FP23BBGestureRecognizerDemo27BBGestureRecognizerDelegate17gestureRecognizerUS0___FQPS0_FTCS_19BBGestureRecognizer50shouldRecognizeSimultaneouslyWithGestureRecognizerS2__Sb">
+                    <a name="//apple_ref/swift/Method/gestureRecognizer(_:shouldRecognizeSimultaneouslyWithGestureRecognizer:)" class="dashAnchor"></a>
+                    <a class="x-instance-method Swift" href="#/s:FP23BBGestureRecognizerDemo27BBGestureRecognizerDelegate17gestureRecognizerUS0___FQPS0_FTCS_19BBGestureRecognizer50shouldRecognizeSimultaneouslyWithGestureRecognizerS2__Sb">gestureRecognizer(_:shouldRecognizeSimultaneouslyWithGestureRecognizer:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointy-thing-container"></div>
+                    <section class="section instance-method">
+                      <div class="pointy-thing"></div>
+                      <div class="abstract">
+                        <p class="para">Asks the delegate if two gesture recognizers should be allowed to recognize gestures simultaneously. This method is called when recognition of a gesture by either <code>gestureRecognizer</code> or <code>otherGestureRecognizer</code> would block the other gesture recognizer from recognizing its gesture. Note that returning <code>true</code> is guaranteed to allow simultaneous recognition; returning <code>false</code>, on the other hand, is not guaranteed to prevent simultaneous recognition because the other gesture recognizer&rsquo;s delegate may return <code>true</code>.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+            
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">gestureRecognizer</span><span class="p">(</span><span class="nv">gestureRecognizer</span><span class="p">:</span> <span class="kt">BBGestureRecognizer</span><span class="p">,</span> <span class="n">shouldRecognizeSimultaneouslyWithGestureRecognizer</span> <span class="nv">otherGestureRecognizer</span><span class="p">:</span> <span class="kt">BBGestureRecognizer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="parameters">
+                        <h4>Parameters</h4>
+                        <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+                          <tbody>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">gestureRecognizer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">An instance of a subclass of the base class <code>BBGestureRecognizer</code>. This is the object calling the message on the delegate.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td scope="row">
+                                <code>
+                                <em class="term">otherGestureRecognizer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div class="definition">
+                                  <p class="para">An instance of a subclass of the base class <code>UIGestureRecognizer</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="result-description">
+                        <h4>Return Value</h4>
+                        <p class="para"><code>true</code> to allow both <code>gestureRecognizer</code> and <code>otherGestureRecognizer</code> to recognize their gestures simultaneously. The default implementation returns <code>false</code>&ndash;no two gestures can be recognized simultaneously.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p class="copyright">&copy; 2015 <a class="link" href="http://www.brennonbortz.com" target="_blank" rel="external">Brennon Bortz</a>. All rights reserved. (Last updated: 2015-01-04)</p>
+          <p class="copyright">Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.0.20</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

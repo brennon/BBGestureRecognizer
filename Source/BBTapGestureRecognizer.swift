@@ -1,5 +1,5 @@
 //
-//  BBUITapGestureRecognizer.swift
+//  BBTapGestureRecognizer.swift
 //  BBGestureRecognizer
 //
 //  Created by Brennon Bortz on 12/30/14.
@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /**
-    `BBUITapGestureRecognizer` is a subclass of `BBUIGestureRecognizer` that 
+    `BBTapGestureRecognizer` is a subclass of `BBGestureRecognizer` that 
     looks for single or multiple taps. For the gesture to be recognized, the 
     specified number of fingers must tap the view a specified number of times.
     <br /><br />
@@ -21,29 +21,29 @@ import UIKit
     should therefore test for the state of the gesture.
     <br /><br />
     Action methods handling this gesture may get the location of the gesture as 
-    a whole by calling the `BBUIGestureRecognizer` method `locationInNode(_:)`; 
+    a whole by calling the `BBGestureRecognizer` method `locationInNode(_:)`; 
     if there are multiple taps, this location is the first tap; if there are 
     multiple touches, this location is the centroid of all fingers tapping the 
     view. Clients may get the location of particular touches in the tap by 
     calling `locationOfTouch(_:inNode:)`; if multiple taps are allowed, this 
     location is that of the first tap.
 */
-class BBUITapGestureRecognizer: BBUIGestureRecognizer {
+class BBTapGestureRecognizer: BBGestureRecognizer {
     
     // MARK: Initializing a Tap Gesture Recognizer
     
     /**
-        Initializes an allocated `BBUITapGestureRecognizer` object with a 
+        Initializes an allocated `BBTapGestureRecognizer` object with a 
         target object and method to be called on gesture recognition.
     
         :param: target An object on which a method will be called when this
             gesture recognizer recognizes a gesture. `nil` is not a valid value.
         :param: action A method implemented by the target to handle the gesture
             recognized by the receiver. The method must conform to the signature
-            described in the `BBUIGestureRecognizer` class overview. `nil` is 
+            described in the `BBGestureRecognizer` class overview. `nil` is 
             not a valid value.
     */
-    override init<T : AnyObject>(target: T, action: (T) -> (BBUIGestureRecognizer?) -> ()) {
+    override init<T : AnyObject>(target: T, action: (T) -> (BBGestureRecognizer?) -> ()) {
         super.init(target: target, action: action)
     }
     
