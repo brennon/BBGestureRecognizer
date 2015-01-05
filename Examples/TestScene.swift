@@ -22,10 +22,14 @@ class TestScene: SKScene {
         
         // Create a node
         
-        spriteNode = SKSpriteNode(color: UIColor.redColor(), size: CGSizeMake(500, 500))
+        spriteNode = SKSpriteNode(color: UIColor.redColor(), size: CGSizeMake(100, 100))
         spriteNode.position = CGPointMake(midX, midY)
         spriteNode.name = "nodeB"
         spriteNode.userInteractionEnabled = true
+        spriteNode.physicsBody = SKPhysicsBody(rectangleOfSize: spriteNode.size)
+        spriteNode.physicsBody?.linearDamping = 10
+        
+        physicsWorld.gravity = CGVectorMake(0, 0)
         
         singleTapRecognizer = BBTapGestureRecognizer(target: self, action: TestScene.handleSingleTap)
         singleTapRecognizer.numberOfTapsRequired = 1
@@ -38,12 +42,24 @@ class TestScene: SKScene {
         doubleTapRecognizer.requireGestureRecognizerToFail(singleTapRecognizer)
         
         panRecognizer = BBPanGestureRecognizer(target: self, action: TestScene.handlePan)
+        panRecognizer.requireGestureRecognizerToFail(singleTapRecognizer)
+        panRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
+        panRecognizer.name = "Pan Recognizer"
         
         spriteNode.addGestureRecognizer(singleTapRecognizer)
         spriteNode.addGestureRecognizer(doubleTapRecognizer)
         spriteNode.addGestureRecognizer(panRecognizer)
 
         addChild(spriteNode)
+        
+        println("convert (0,0) to scene from sprite: \(spriteNode.convertPoint(CGPointZero, toNode: self))")
+        println("convert (0,0) from sprite to scene: \(self.convertPoint(CGPointZero, fromNode: spriteNode))")
+        println("convert (100,0) to scene from sprite: \(spriteNode.convertPoint(CGPointMake(100, 0), toNode: self))")
+        println("convert (100,0) from sprite to scene: \(self.convertPoint(CGPointMake(100, 0), fromNode: spriteNode))")
+        println("convert (0,100) to scene from sprite: \(spriteNode.convertPoint(CGPointMake(0, 100), toNode: self))")
+        println("convert (0,100) from sprite to scene: \(self.convertPoint(CGPointMake(0, 100), fromNode: spriteNode))")
+        println("convert (0,-100) to scene from sprite: \(spriteNode.convertPoint(CGPointMake(0, -100), toNode: self))")
+        println("convert (0,-100) from sprite to scene: \(self.convertPoint(CGPointMake(0, -100), fromNode: spriteNode))")
     }
     
     func handleSingleTap(gestureRecognizer: BBGestureRecognizer?) {
@@ -59,14 +75,19 @@ class TestScene: SKScene {
     }
     
     func handlePan(gestureRecognizer: BBGestureRecognizer?) {
-//        println("pan; translation: \(panRecognizer.translationInNode()), velocity: \(panRecognizer.velocityInNode()))")
         if let recognizer = gestureRecognizer {
             let panRecognizer = recognizer as BBPanGestureRecognizer
+            spriteNode.physicsBody?.velocity = CGVectorMake(0, 0)
             if panRecognizer.state == .Changed {
-                let translation = panRecognizer.translationInNode()
+                let velocity = panRecognizer.velocityInNode(self)
+                let translation = panRecognizer.translationInNode(self)
                 let newPosition = CGPointMake(spriteNode.position.x + translation.x, spriteNode.position.y + translation.y)
                 spriteNode.position = newPosition
-                panRecognizer.setTranslation(CGPointZero)
+                panRecognizer.setTranslation(CGPointZero, inNode: self)
+            } else if panRecognizer.state == .Ended {
+                let velocity = panRecognizer.velocityInNode(self)
+                spriteNode.physicsBody?.velocity = CGVectorMake(0, 0)
+                spriteNode.physicsBody?.applyImpulse(CGVectorMake(velocity.x, velocity.y))
             }
         }
     }

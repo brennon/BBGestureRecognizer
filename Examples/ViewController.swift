@@ -22,7 +22,8 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        let testScene = TestScene(size: CGSizeMake(768, 1024))
+        let testScene = TestScene(size: CGSizeMake(1024, 768))
+        testScene.scaleMode = SKSceneScaleMode.AspectFit
         let skView = self.view as SKView
         skView.presentScene(testScene)
     }
