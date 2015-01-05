@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A35F5491A5A34D7000BE3DB /* BBPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A35F5481A5A34D7000BE3DB /* BBPanGestureRecognizer.swift */; };
 		3A9284B71A51FF2600EACEF5 /* BBGestureRecognizerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9284B61A51FF2600EACEF5 /* BBGestureRecognizerDelegate.swift */; };
 		3A9284B91A52FA7E00EACEF5 /* BBTapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9284B81A52FA7E00EACEF5 /* BBTapGestureRecognizer.swift */; };
 		3ABA68EB1A49E57400E1934C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA68EA1A49E57400E1934C /* AppDelegate.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A35F5481A5A34D7000BE3DB /* BBPanGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BBPanGestureRecognizer.swift; path = Source/BBPanGestureRecognizer.swift; sourceTree = SOURCE_ROOT; };
 		3A9284B61A51FF2600EACEF5 /* BBGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BBGestureRecognizerDelegate.swift; path = Source/BBGestureRecognizerDelegate.swift; sourceTree = SOURCE_ROOT; };
 		3A9284B81A52FA7E00EACEF5 /* BBTapGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BBTapGestureRecognizer.swift; path = Source/BBTapGestureRecognizer.swift; sourceTree = SOURCE_ROOT; };
 		3ABA68E51A49E57400E1934C /* BBGestureRecognizerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BBGestureRecognizerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,9 +71,10 @@
 			isa = PBXGroup;
 			children = (
 				3ABA690A1A49E5B200E1934C /* BBGestureRecognizer.swift */,
-				3A9284B81A52FA7E00EACEF5 /* BBTapGestureRecognizer.swift */,
 				3A9284B61A51FF2600EACEF5 /* BBGestureRecognizerDelegate.swift */,
+				3A35F5481A5A34D7000BE3DB /* BBPanGestureRecognizer.swift */,
 				3AC6BB501A4DBDA900884F76 /* BBSKNode.swift */,
+				3A9284B81A52FA7E00EACEF5 /* BBTapGestureRecognizer.swift */,
 			);
 			path = BBGestureRecognizer;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ABA68ED1A49E57400E1934C /* ViewController.swift in Sources */,
+				3A35F5491A5A34D7000BE3DB /* BBPanGestureRecognizer.swift in Sources */,
 				3A9284B91A52FA7E00EACEF5 /* BBTapGestureRecognizer.swift in Sources */,
 				3ABA68EB1A49E57400E1934C /* AppDelegate.swift in Sources */,
 				3A9284B71A51FF2600EACEF5 /* BBGestureRecognizerDelegate.swift in Sources */,
