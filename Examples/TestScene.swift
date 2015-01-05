@@ -46,20 +46,13 @@ class TestScene: SKScene {
         panRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
         panRecognizer.name = "Pan Recognizer"
         
+        doubleTapRecognizer.requireGestureRecognizerToFail(panRecognizer)
+        
         spriteNode.addGestureRecognizer(singleTapRecognizer)
         spriteNode.addGestureRecognizer(doubleTapRecognizer)
         spriteNode.addGestureRecognizer(panRecognizer)
 
         addChild(spriteNode)
-        
-        println("convert (0,0) to scene from sprite: \(spriteNode.convertPoint(CGPointZero, toNode: self))")
-        println("convert (0,0) from sprite to scene: \(self.convertPoint(CGPointZero, fromNode: spriteNode))")
-        println("convert (100,0) to scene from sprite: \(spriteNode.convertPoint(CGPointMake(100, 0), toNode: self))")
-        println("convert (100,0) from sprite to scene: \(self.convertPoint(CGPointMake(100, 0), fromNode: spriteNode))")
-        println("convert (0,100) to scene from sprite: \(spriteNode.convertPoint(CGPointMake(0, 100), toNode: self))")
-        println("convert (0,100) from sprite to scene: \(self.convertPoint(CGPointMake(0, 100), fromNode: spriteNode))")
-        println("convert (0,-100) to scene from sprite: \(spriteNode.convertPoint(CGPointMake(0, -100), toNode: self))")
-        println("convert (0,-100) from sprite to scene: \(self.convertPoint(CGPointMake(0, -100), fromNode: spriteNode))")
     }
     
     func handleSingleTap(gestureRecognizer: BBGestureRecognizer?) {
@@ -70,7 +63,7 @@ class TestScene: SKScene {
     
     func handleDoubleTap(gestureRecognizer: BBGestureRecognizer?) {
         println("double tap")
-        println("\tsingle tap recognizer state: \(singleTapRecognizer.state)")
+//        println("\tsingle tap recognizer state: \(singleTapRecognizer.state)")
         println("\tdouble tap recognizer state: \(doubleTapRecognizer.state)")
     }
     

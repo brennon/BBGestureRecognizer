@@ -278,11 +278,14 @@ class BBGestureRecognizer: Hashable, Printable {
             var requestedAnyUpdatesFromPendingRecognizers = false
             for recognizer in recognizersRequiredToFail {
 
-                // If the other recognizer is in or transitioning to .Began or .Recognized, this recognizer should transition to 
-                // .Failed. If this is the case, we can break out of this loop.
-                if recognizerIsRecognizing(recognizer) {
-                    varNewState = .Failed
-                    break
+                // If this recognizer is in the .Possible state and the other recognizer is in or transitioning to .Began or 
+                // .Recognized, this recognizer should transition to .Failed. If this is the case, we can break out of this loop.
+                if _state == .Possible || _state == .Recognized {
+                    if recognizerIsRecognizing(recognizer) {
+                        println("Failing \(name) because \(recognizer.name) is recognizing")
+                        varNewState = .Failed
+                        break
+                    }
                 }
                 
                 // If the other recognizer has scheduled a transition to a terminal state, we need to not change state here, tell 
@@ -307,33 +310,33 @@ class BBGestureRecognizer: Hashable, Printable {
             
             if allowedTransition {
                     
-                    // Decide if the recognizer should reset based on the transition.
-                    var shouldResetOnNextRunLoop: Bool
-                    switch varNewState {
-                    case .Recognized, .Cancelled, .Ended, .Failed:
-                        shouldResetOnNextRunLoop = true
-                    default:
-                        shouldResetOnNextRunLoop = false
+                // Decide if the recognizer should reset based on the transition.
+                var shouldResetOnNextRunLoop: Bool
+                switch varNewState {
+                case .Recognized, .Cancelled, .Ended, .Failed:
+                    shouldResetOnNextRunLoop = true
+                default:
+                    shouldResetOnNextRunLoop = false
+                }
+                
+                // The docs mention that the action messages are sent on the next run loop, so we'll do that here. Note that 
+                // this means that reset can't happen until the next run loop, either, otherwise the state property is going 
+                // to be wrong when the action handler looks at it, so as a result we also delay the reset call (if 
+                // necessary) in continueTrackingWithEvent:.
+                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0))
+                dispatch_after(delayTime, dispatch_get_main_queue()) {
+                    
+                    self._state = varNewState
+                    self.nextState = nil
+                    
+                    if shouldNotify {
+                        self.registeredAction?.performAction(self)
                     }
                     
-                    // The docs mention that the action messages are sent on the next run loop, so we'll do that here. Note that 
-                    // this means that reset can't happen until the next run loop, either, otherwise the state property is going 
-                    // to be wrong when the action handler looks at it, so as a result we also delay the reset call (if 
-                    // necessary) in continueTrackingWithEvent:.
-                    let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0))
-                    dispatch_after(delayTime, dispatch_get_main_queue()) {
-                        
-                        self._state = varNewState
-                        self.nextState = nil
-                        
-                        if shouldNotify {
-                            self.registeredAction?.performAction(self)
-                        }
-                        
-                        if shouldResetOnNextRunLoop {
-                            self.reset()
-                        }
+                    if shouldResetOnNextRunLoop {
+                        self.reset()
                     }
+                }
             } else {
                 
                 println(
@@ -656,14 +659,14 @@ class BBGestureRecognizer: Hashable, Printable {
     internal func continueTrackingTouchesWithEvent(event: UIEvent) {
         
         // Subtract ignoredTouches from trackingTouches.
-//        var trackingTouchesExcludingIgnoredTouches = [UITouch]()
-//        
-//        for touch in trackingTouches {
-//            let index = find(ignoredTouches, touch)
-//            if index == nil {
-//                trackingTouchesExcludingIgnoredTouches.append(touch)
-//            }
-//        }
+        var trackingTouchesExcludingIgnoredTouches = [UITouch]()
+        
+        for touch in trackingTouches {
+            let index = find(ignoredTouches, touch)
+            if index == nil {
+                trackingTouchesExcludingIgnoredTouches.append(touch)
+            }
+        }
         
         var began = NSMutableSet()
         var moved = NSMutableSet()
@@ -672,8 +675,7 @@ class BBGestureRecognizer: Hashable, Printable {
         
         var multitouchSequenceIsEnded = true
 
-        for touch in trackingTouches {
-//        for touch in trackingTouchesExcludingIgnoredTouches {
+        for touch in trackingTouchesExcludingIgnoredTouches {
             switch touch.phase {
             case .Began:
                 multitouchSequenceIsEnded = false

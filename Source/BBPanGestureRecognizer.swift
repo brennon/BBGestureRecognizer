@@ -123,11 +123,8 @@ class BBPanGestureRecognizer: BBGestureRecognizer {
         
         let newLocation = firstTouch.locationInNode(node!.scene!)
         
-        if state == .Possible {
-            _lastLocation = newLocation
-            _lastMovementTime = event.timestamp
-            state = .Began
-        }
+        _firstLocation = newLocation
+        _lastLocation = newLocation
     }
     
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
@@ -139,12 +136,26 @@ class BBPanGestureRecognizer: BBGestureRecognizer {
         
         let newLocation = firstTouch.locationInNode(node!.scene!)
         
-        let translation = CGPointMake(newLocation.x - _lastLocation.x, newLocation.y - _lastLocation.y)
-        
-        _lastLocation = newLocation
-        
-        if translate(translation, withEvent: event) {
-            state = .Changed
+        if state == .Possible {
+            
+            // Get distance from first location to this one
+            let deltaX = newLocation.x - _firstLocation.x
+            let deltaY = newLocation.y - _firstLocation.y
+            let distanceSquared = pow(deltaX, 2) + pow(deltaY, 2)
+            
+            if distanceSquared >= 25 {
+                    _lastLocation = _firstLocation
+                    _lastMovementTime = event.timestamp
+                    state = .Began
+            }
+        } else if state == .Began || state == .Changed {
+            let translation = CGPointMake(newLocation.x - _lastLocation.x, newLocation.y - _lastLocation.y)
+            
+            _lastLocation = newLocation
+            
+            if translate(translation, withEvent: event) {
+                state = .Changed
+            }
         }
     }
     
@@ -177,6 +188,8 @@ class BBPanGestureRecognizer: BBGestureRecognizer {
     }
     
     // MARK: Private Properties/Methods
+    
+    private var _firstLocation = CGPointZero
     
     private var _lastLocation = CGPointZero
     
@@ -221,6 +234,7 @@ class BBPanGestureRecognizer: BBGestureRecognizer {
     override func reset() {
         super.reset()
         
+        _firstLocation = CGPointZero
         _lastLocation = CGPointZero
         _translation = CGPointZero
         _velocity = CGPointZero
