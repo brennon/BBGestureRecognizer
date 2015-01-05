@@ -119,58 +119,6 @@ class BBGestureRecognizer: Hashable, Printable {
     // MARK: Properties
     
     /**
-        Only certain transitions from one `BBGestureRecognizerState` to another are allowed. `allowedStateTransitions` is an 
-        `[BBGestureRecognizerStateTransition]` that includes those transitions that are allowed.
-    */
-    private let allowedStateTransitions: [BBGestureRecognizerStateTransition] = [
-        BBGestureRecognizerStateTransition(
-            fromState: .Possible,
-            toState: .Recognized,
-            shouldNotify: true
-        ),
-        BBGestureRecognizerStateTransition(
-            fromState: .Possible,
-            toState: .Failed,
-            shouldNotify: false
-        ),
-        BBGestureRecognizerStateTransition(
-            fromState: .Possible,
-            toState: .Began,
-            shouldNotify: true
-        ),
-        BBGestureRecognizerStateTransition(
-            fromState: .Began,
-            toState: .Changed,
-            shouldNotify: true
-        ),
-        BBGestureRecognizerStateTransition(
-            fromState: .Began,
-            toState: .Cancelled,
-            shouldNotify: true
-        ),
-        BBGestureRecognizerStateTransition(
-            fromState: .Began,
-            toState: .Ended,
-            shouldNotify: true
-        ),
-        BBGestureRecognizerStateTransition(
-            fromState: .Changed,
-            toState: .Changed,
-            shouldNotify: true
-        ),
-        BBGestureRecognizerStateTransition(
-            fromState: .Changed,
-            toState: .Cancelled,
-            shouldNotify: true
-        ),
-        BBGestureRecognizerStateTransition(
-            fromState: .Changed,
-            toState: .Ended,
-            shouldNotify: true
-        )
-    ]
-    
-    /**
         The `UITouch` objects that the gesture recognizer is currently tracking. For simplicity, `beginTrackingTouch(_:)` is the 
         only place where touches are added to this array, and `endTrackingTouch(_:)` is the only place where touches are removed 
         from this array.
@@ -355,10 +303,9 @@ class BBGestureRecognizer: Hashable, Printable {
             }
             
             // If the transition from _state to nextState is allowed...
-            if let allowedTransition = findAllowedTransition(
-                _state,
-                toState: varNewState
-                ) {
+            let (allowedTransition, shouldNotify) = findAllowedTransition(_state, toState: varNewState)
+            
+            if allowedTransition {
                     
                     // Decide if the recognizer should reset based on the transition.
                     var shouldResetOnNextRunLoop: Bool
@@ -379,7 +326,7 @@ class BBGestureRecognizer: Hashable, Printable {
                         self._state = varNewState
                         self.nextState = nil
                         
-                        if allowedTransition.shouldNotify {
+                        if shouldNotify {
                             self.registeredAction?.performAction(self)
                         }
                         
@@ -709,14 +656,14 @@ class BBGestureRecognizer: Hashable, Printable {
     internal func continueTrackingTouchesWithEvent(event: UIEvent) {
         
         // Subtract ignoredTouches from trackingTouches.
-        var trackingTouchesExcludingIgnoredTouches = [UITouch]()
-        
-        for touch in trackingTouches {
-            let index = find(ignoredTouches, touch)
-            if index == nil {
-                trackingTouchesExcludingIgnoredTouches.append(touch)
-            }
-        }
+//        var trackingTouchesExcludingIgnoredTouches = [UITouch]()
+//        
+//        for touch in trackingTouches {
+//            let index = find(ignoredTouches, touch)
+//            if index == nil {
+//                trackingTouchesExcludingIgnoredTouches.append(touch)
+//            }
+//        }
         
         var began = NSMutableSet()
         var moved = NSMutableSet()
@@ -724,8 +671,9 @@ class BBGestureRecognizer: Hashable, Printable {
         var cancelled = NSMutableSet()
         
         var multitouchSequenceIsEnded = true
-        
-        for touch in trackingTouchesExcludingIgnoredTouches {
+
+        for touch in trackingTouches {
+//        for touch in trackingTouchesExcludingIgnoredTouches {
             switch touch.phase {
             case .Began:
                 multitouchSequenceIsEnded = false
@@ -809,30 +757,39 @@ class BBGestureRecognizer: Hashable, Printable {
     }
     
     /**
-        Determines if a transition from one `BBGestureRecognizerState` to another is allowed (is contained in 
-        `allowedStateTransitions`).
+        Determines if a transition from one `BBGestureRecognizerState` to another is allowed.
         
         :param: fromState The beginning state of the transition.
         :param: toState The ending state of the transition.
         
-        :returns: Returns the allowed `BBGestureRecognizerStateTransition` if it is present in `allowedStateTransitions`, 
-            otherwise it returns `nil`.
+        :returns: Returns `(allowed: Bool, shouldNotify: Bool)` where `allowed` indicates if the transition is allowed and 
+            `shouldNotify` indicates if the recognizer's action method should be called.
     */
-    private func findAllowedTransition(
-        fromState: BBGestureRecognizerState,
-        toState: BBGestureRecognizerState
-    ) -> BBGestureRecognizerStateTransition? {
+    private func findAllowedTransition(fromState: BBGestureRecognizerState, toState: BBGestureRecognizerState) ->
+        (alowed: Bool, shouldNotify: Bool) {
         
-        for transition in allowedStateTransitions {
-            
-            if transition.fromState == fromState
-                && transition.toState == toState {
-                    
-                return transition
+        switch fromState {
+        case .Possible:
+            switch toState {
+            case .Recognized, .Began:
+                return (true, true)
+            case .Failed:
+                return (true, false)
+            default:
+                break
             }
+        case .Began, .Changed:
+            switch toState {
+            case .Changed, .Cancelled, .Ended:
+                return (true, true)
+            default:
+                break
+            }
+        default:
+            break
         }
         
-        return nil
+        return (false, false)
     }
     
     // MARK: Printable Protocol
