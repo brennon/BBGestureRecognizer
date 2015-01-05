@@ -53,6 +53,8 @@ class TestScene: SKScene {
         spriteNode.addGestureRecognizer(panRecognizer)
 
         addChild(spriteNode)
+        
+        physicsBody = SKPhysicsBody(edgeLoopFromRect: frame)
     }
     
     func handleSingleTap(gestureRecognizer: BBGestureRecognizer?) {

@@ -19,6 +19,7 @@ class ViewController: UIViewController {
         skView.showsDrawCount = true
         skView.showsNodeCount = true
         skView.showsFPS = true
+        skView.showsPhysics = true
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -32,7 +33,5 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 
