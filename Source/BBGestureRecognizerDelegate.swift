@@ -1,5 +1,5 @@
 //
-//  BBUIGestureRecognizerDelegate.swift
+//  BBGestureRecognizerDelegate.swift
 //  BBGestureRecognizer
 //
 //  Created by Brennon Bortz on 12/29/14.
@@ -10,14 +10,14 @@ import UIKit
 
 /**
     Delegates of a gesture recognizer--that is, an instance of a subclass of
-    `BBUIGestureRecognizer`--adopt the UIGestureRecognizerDelegate protocol to
+    `BBGestureRecognizer`--adopt the UIGestureRecognizerDelegate protocol to
     fine-tune an app’s gesture-recognition behavior. The delegates receive
     messages from a gesture recognizer, and their responses to these messages
     enable them to affect the operation of the gesture recognizer or to specify
     a relationship between it and another gesture recognizer, such as allowing
     simultaneous recognition or setting up a failure requirement.
 */
-protocol BBUIGestureRecognizerDelegate: class {
+protocol BBGestureRecognizerDelegate: class {
     
     // MARK: Regulating Gesture Recognition
     
@@ -28,14 +28,14 @@ protocol BBUIGestureRecognizerDelegate: class {
         gesture recognizer to transition to the state `.Failed`.
         
         :param: gestureRecognizer An instance of a subclass of the base class
-            `BBUIGestureRecognizer`. This gesture recognizer object is about to
+            `BBGestureRecognizer`. This gesture recognizer object is about to
             begin processing touches to determine if its gesture is occurring.
         
         :returns: `true` (the default) to tell the gesture recognizer to proceed
             with interpreting touches, `false` to prevent it from attempting to
             recognize its gesture.
     */
-    func gestureRecognizerShouldBegin(gestureRecognizer: BBUIGestureRecognizer) -> Bool
+    func gestureRecognizerShouldBegin(gestureRecognizer: BBGestureRecognizer) -> Bool
     
     /**
         Ask the delegate if a gesture recognizer should receive an object
@@ -44,14 +44,14 @@ protocol BBUIGestureRecognizerDelegate: class {
         new touch.
         
         :param: gestureRecognizer An instance of a subclass of the base class
-            `BBUIGestureRecognizer`.
+            `BBGestureRecognizer`.
         :param: touch A `UITouch` object from the current multi-touch sequence.
         
         :returns: `true` (the default) to allow the gesture recognizer to
             examine the touch object, `false` to prevent the gesture recognizer
             from seeing this touch object.
     */
-    func gestureRecognizer(gestureRecognizer: BBUIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool
+    func gestureRecognizer(gestureRecognizer: BBGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool
     
     
     // MARK: Controlling Simultaneous Gesture Recognition
@@ -67,7 +67,7 @@ protocol BBUIGestureRecognizerDelegate: class {
         gesture recognizer's delegate may return `true`.
         
         :param: gestureRecognizer An instance of a subclass of the base class
-            `BBUIGestureRecognizer`. This is the object calling the message on
+            `BBGestureRecognizer`. This is the object calling the message on
             the delegate.
         :param: otherGestureRecognizer An instance of a subclass of the base
             class `UIGestureRecognizer`.
@@ -77,5 +77,5 @@ protocol BBUIGestureRecognizerDelegate: class {
             The default implementation returns `false`--no two gestures can be
             recognized simultaneously.
     */
-    func gestureRecognizer(gestureRecognizer: BBUIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: BBUIGestureRecognizer) -> Bool
+    func gestureRecognizer(gestureRecognizer: BBGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: BBGestureRecognizer) -> Bool
 }

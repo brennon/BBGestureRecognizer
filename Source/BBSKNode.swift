@@ -38,15 +38,15 @@ extension SKNode {
         return descendantsList
     }
     
-    var gestureRecognizers: [BBUIGestureRecognizer] {
+    var gestureRecognizers: [BBGestureRecognizer] {
         get {
             var associatedObject: AnyObject? = objc_getAssociatedObject(self, gestureRecognizersAssociationKey)
             if associatedObject == nil {
-                var recognizers = [BBUIGestureRecognizer]()
+                var recognizers = [BBGestureRecognizer]()
                 objc_setAssociatedObject(self, gestureRecognizersAssociationKey, recognizers, UInt(OBJC_ASSOCIATION_COPY_NONATOMIC))
                 associatedObject = objc_getAssociatedObject(self, gestureRecognizersAssociationKey)
             }
-            return associatedObject as [BBUIGestureRecognizer]
+            return associatedObject as [BBGestureRecognizer]
         }
         set {
             objc_setAssociatedObject(self, gestureRecognizersAssociationKey, newValue, UInt(OBJC_ASSOCIATION_COPY_NONATOMIC))
@@ -113,7 +113,7 @@ extension SKNode {
         }
     }
     
-    func addGestureRecognizer(gestureRecognizer: BBUIGestureRecognizer) {
+    func addGestureRecognizer(gestureRecognizer: BBGestureRecognizer) {
         if find(gestureRecognizers, gestureRecognizer) == nil {
             gestureRecognizer.node?.removeGestureRecognizer(gestureRecognizer)
             gestureRecognizers.append(gestureRecognizer)
@@ -121,7 +121,7 @@ extension SKNode {
         }
     }
     
-    func removeGestureRecognizer(gestureRecognizer: BBUIGestureRecognizer) {
+    func removeGestureRecognizer(gestureRecognizer: BBGestureRecognizer) {
         if let index = find(gestureRecognizers, gestureRecognizer) {
             gestureRecognizer.node = nil
             gestureRecognizers.removeAtIndex(index)

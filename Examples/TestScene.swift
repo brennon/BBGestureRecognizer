@@ -10,8 +10,8 @@ import SpriteKit
 
 class TestScene: SKScene {
     
-    var singleTapRecognizer: BBUITapGestureRecognizer!
-    var doubleTapRecognizer: BBUITapGestureRecognizer!
+    var singleTapRecognizer: BBTapGestureRecognizer!
+    var doubleTapRecognizer: BBTapGestureRecognizer!
     
     override func didMoveToView(view: SKView) {
         
@@ -25,11 +25,11 @@ class TestScene: SKScene {
         spriteNode.name = "nodeB"
         spriteNode.userInteractionEnabled = true
         
-        singleTapRecognizer = BBUITapGestureRecognizer(target: self, action: TestScene.handleSingleTap)
+        singleTapRecognizer = BBTapGestureRecognizer(target: self, action: TestScene.handleSingleTap)
         singleTapRecognizer.numberOfTapsRequired = 1
         singleTapRecognizer.numberOfTouchesRequired = 2
         singleTapRecognizer.name = "Single Tap Recognizer"
-        doubleTapRecognizer = BBUITapGestureRecognizer(target: self, action: TestScene.handleDoubleTap)
+        doubleTapRecognizer = BBTapGestureRecognizer(target: self, action: TestScene.handleDoubleTap)
         doubleTapRecognizer.numberOfTapsRequired = 2
         doubleTapRecognizer.name = "Double Tap Recognizer"
         singleTapRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
@@ -40,13 +40,13 @@ class TestScene: SKScene {
         addChild(spriteNode)
     }
     
-    func handleSingleTap(gestureRecognizer: BBUIGestureRecognizer?) {
+    func handleSingleTap(gestureRecognizer: BBGestureRecognizer?) {
         println("single tap")
         println("\tsingle tap recognizer state: \(singleTapRecognizer.state)")
         println("\tdouble tap recognizer state: \(doubleTapRecognizer.state)")
     }
     
-    func handleDoubleTap(gestureRecognizer: BBUIGestureRecognizer?) {
+    func handleDoubleTap(gestureRecognizer: BBGestureRecognizer?) {
         println("double tap")
         println("\tsingle tap recognizer state: \(singleTapRecognizer.state)")
         println("\tdouble tap recognizer state: \(doubleTapRecognizer.state)")
