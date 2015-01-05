@@ -6,42 +6,33 @@
 //  Copyright (c) 2014 Brennon Bortz. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 /**
-    `BBTapGestureRecognizer` is a subclass of `BBGestureRecognizer` that 
-    looks for single or multiple taps. For the gesture to be recognized, the 
-    specified number of fingers must tap the view a specified number of times.
+    `BBTapGestureRecognizer` is a subclass of `BBGestureRecognizer` that looks for single or multiple taps. For the gesture to be 
+    recognized, the specified number of fingers must tap the view a specified number of times.
     <br /><br />
-    Although taps are discrete gestures, they are discrete for each state of 
-    the gesture recognizer; thus the associated action message is sent when the 
-    gesture begins and is sent for each intermediate state until (and 
-    including) the ending state of the gesture. Code that handles tap gestures 
-    should therefore test for the state of the gesture.
+    Although taps are discrete gestures, they are discrete for each state of the gesture recognizer; thus the associated action 
+    message is sent when the gesture begins and is sent for each intermediate state until (and including) the ending state of the 
+    gesture. Code that handles tap gestures should therefore test for the state of the gesture.
     <br /><br />
-    Action methods handling this gesture may get the location of the gesture as 
-    a whole by calling the `BBGestureRecognizer` method `locationInNode(_:)`; 
-    if there are multiple taps, this location is the first tap; if there are 
-    multiple touches, this location is the centroid of all fingers tapping the 
-    view. Clients may get the location of particular touches in the tap by 
-    calling `locationOfTouch(_:inNode:)`; if multiple taps are allowed, this 
-    location is that of the first tap.
+    Action methods handling this gesture may get the location of the gesture as a whole by calling the `BBGestureRecognizer` 
+    method `locationInNode(_:)`; if there are multiple taps, this location is the first tap; if there are multiple touches, this 
+    location is the centroid of all fingers tapping the view. Clients may get the location of particular touches in the tap by 
+    calling `locationOfTouch(_:inNode:)`; if multiple taps are allowed, this location is that of the first tap.
 */
 class BBTapGestureRecognizer: BBGestureRecognizer {
     
     // MARK: Initializing a Tap Gesture Recognizer
     
     /**
-        Initializes an allocated `BBTapGestureRecognizer` object with a 
-        target object and method to be called on gesture recognition.
+        Initializes an allocated `BBTapGestureRecognizer` object with a target object and method to be called on gesture 
+        recognition.
     
-        :param: target An object on which a method will be called when this
-            gesture recognizer recognizes a gesture. `nil` is not a valid value.
-        :param: action A method implemented by the target to handle the gesture
-            recognized by the receiver. The method must conform to the signature
-            described in the `BBGestureRecognizer` class overview. `nil` is 
-            not a valid value.
+        :param: target An object on which a method will be called when this gesture recognizer recognizes a gesture. `nil` is not 
+            a valid value.
+        :param: action A method implemented by the target to handle the gesturerecognized by the receiver. The method must 
+            conform to the signature described in the `BBGestureRecognizer` class overview. `nil` is not a valid value.
     */
     override init<T : AnyObject>(target: T, action: (T) -> (BBGestureRecognizer?) -> ()) {
         super.init(target: target, action: action)
