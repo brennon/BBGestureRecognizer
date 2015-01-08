@@ -8,6 +8,7 @@
 
 /* Begin PBXFileReference section */
 		3A35F5471A5A3099000BE3DB /* BBPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BBPanGestureRecognizer.swift; path = Source/BBPanGestureRecognizer.swift; sourceTree = "<group>"; };
+		3A4DAB301A5EFF000032FE71 /* BBTapAndAHalfGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BBTapAndAHalfGestureRecognizer.swift; path = Source/BBTapAndAHalfGestureRecognizer.swift; sourceTree = "<group>"; };
 		3AC919851A59C05C00DE3E8A /* BBGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = BBGestureRecognizer.swift; path = Source/BBGestureRecognizer.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3AC919871A59C05C00DE3E8A /* BBTapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BBTapGestureRecognizer.swift; path = Source/BBTapGestureRecognizer.swift; sourceTree = "<group>"; };
 		3AC919881A59C05C00DE3E8A /* BBGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BBGestureRecognizerDelegate.swift; path = Source/BBGestureRecognizerDelegate.swift; sourceTree = "<group>"; };
@@ -29,6 +30,7 @@
 				3AC919881A59C05C00DE3E8A /* BBGestureRecognizerDelegate.swift */,
 				3A35F5471A5A3099000BE3DB /* BBPanGestureRecognizer.swift */,
 				3AC919891A59C05C00DE3E8A /* BBSKNode.swift */,
+				3A4DAB301A5EFF000032FE71 /* BBTapAndAHalfGestureRecognizer.swift */,
 				3AC919871A59C05C00DE3E8A /* BBTapGestureRecognizer.swift */,
 			);
 			name = BBUIGestureRecognizer;

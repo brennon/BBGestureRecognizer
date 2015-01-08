@@ -12,6 +12,7 @@ class TestScene: SKScene {
     
     var singleTapRecognizer: BBTapGestureRecognizer!
     var doubleTapRecognizer: BBTapGestureRecognizer!
+    var tapAndAHalfRecognizer: BBTapAndAHalfGestureRecognizer!
     var panRecognizer: BBPanGestureRecognizer!
     var spriteNode: SKSpriteNode!
     
@@ -46,11 +47,18 @@ class TestScene: SKScene {
         panRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
         panRecognizer.name = "Pan Recognizer"
         
+        tapAndAHalfRecognizer = BBTapAndAHalfGestureRecognizer(target: self, action: TestScene.handleTapAndAHalf)
+        tapAndAHalfRecognizer.name = "Tap and a Half Recognizer"
+//        tapAndAHalfRecognizer.requireGestureRecognizerToFail(singleTapRecognizer)
+//        tapAndAHalfRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
+//        tapAndAHalfRecognizer.requireGestureRecognizerToFail(panRecognizer)
+        
         doubleTapRecognizer.requireGestureRecognizerToFail(panRecognizer)
         
         spriteNode.addGestureRecognizer(singleTapRecognizer)
         spriteNode.addGestureRecognizer(doubleTapRecognizer)
         spriteNode.addGestureRecognizer(panRecognizer)
+        spriteNode.addGestureRecognizer(tapAndAHalfRecognizer)
 
         addChild(spriteNode)
         
@@ -67,6 +75,10 @@ class TestScene: SKScene {
         println("double tap")
 //        println("\tsingle tap recognizer state: \(singleTapRecognizer.state)")
         println("\tdouble tap recognizer state: \(doubleTapRecognizer.state)")
+    }
+    
+    func handleTapAndAHalf(gestureRecognizer: BBGestureRecognizer?) {
+        println("tap and a half")
     }
     
     func handlePan(gestureRecognizer: BBGestureRecognizer?) {
