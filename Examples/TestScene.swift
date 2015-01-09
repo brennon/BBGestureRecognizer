@@ -11,6 +11,7 @@ import SpriteKit
 class TestScene: SKScene {
     
     var singleTapRecognizer: BBTapGestureRecognizer!
+    var singleTapDoubleTouchRecognizer: BBTapGestureRecognizer!
     var doubleTapRecognizer: BBTapGestureRecognizer!
     var tapAndAHalfRecognizer: BBTapAndAHalfGestureRecognizer!
     var tapTapDragRecognizer: BBTapTapDragGestureRecognizer!
@@ -19,75 +20,91 @@ class TestScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         
-        let midX = CGRectGetMidX(self.frame)
-        let midY = CGRectGetMidY(self.frame)
+        // Setup scene
+        physicsWorld.gravity = CGVectorMake(0, 0)
+        physicsBody = SKPhysicsBody(edgeLoopFromRect: frame)
         
         // Create a node
-        
-        spriteNode = SKSpriteNode(color: UIColor.redColor(), size: CGSizeMake(100, 100))
+        let midX = CGRectGetMidX(self.frame)
+        let midY = CGRectGetMidY(self.frame)
+        spriteNode = SKSpriteNode(color: UIColor.redColor(), size: CGSizeMake(200, 200))
         spriteNode.position = CGPointMake(midX, midY)
         spriteNode.name = "nodeB"
         spriteNode.userInteractionEnabled = true
         spriteNode.physicsBody = SKPhysicsBody(rectangleOfSize: spriteNode.size)
-        spriteNode.physicsBody?.linearDamping = 10
+        spriteNode.physicsBody?.linearDamping = 5
         
-        physicsWorld.gravity = CGVectorMake(0, 0)
+        // Setup recognizers
+        singleTapRecognizer = BBTapGestureRecognizer(target: self, action: TestScene.handleSingleTap)
+        singleTapRecognizer.name = "Single Tap Recognizer"
         
-//        singleTapRecognizer = BBTapGestureRecognizer(target: self, action: TestScene.handleSingleTap)
-//        singleTapRecognizer.numberOfTapsRequired = 1
-//        singleTapRecognizer.numberOfTouchesRequired = 2
-//        singleTapRecognizer.name = "Single Tap Recognizer"
-//        doubleTapRecognizer = BBTapGestureRecognizer(target: self, action: TestScene.handleDoubleTap)
-//        doubleTapRecognizer.numberOfTapsRequired = 2
-//        doubleTapRecognizer.name = "Double Tap Recognizer"
-//        singleTapRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
-//        doubleTapRecognizer.requireGestureRecognizerToFail(singleTapRecognizer)
+        singleTapDoubleTouchRecognizer = BBTapGestureRecognizer(target: self, action: TestScene.handleSingleTapDoubleTouch)
+        singleTapDoubleTouchRecognizer.numberOfTouchesRequired = 2
+        singleTapDoubleTouchRecognizer.name = "Two Finger Single Tap Recognizer"
+        
+        doubleTapRecognizer = BBTapGestureRecognizer(target: self, action: TestScene.handleDoubleTap)
+        doubleTapRecognizer.numberOfTapsRequired = 2
+        doubleTapRecognizer.name = "Double Tap Recognizer"
         
         panRecognizer = BBPanGestureRecognizer(target: self, action: TestScene.handlePan)
-//        panRecognizer.requireGestureRecognizerToFail(singleTapRecognizer)
-//        panRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
         panRecognizer.name = "Pan Recognizer"
         
         tapTapDragRecognizer = BBTapTapDragGestureRecognizer(target: self, action: TestScene.handleTapTapDrag)
         tapTapDragRecognizer.name = "Tap Tap Drag Recognizer"
         
-//        tapAndAHalfRecognizer = BBTapAndAHalfGestureRecognizer(target: self, action: TestScene.handleTapAndAHalf)
-//        tapAndAHalfRecognizer.name = "Tap and a Half Recognizer"
-//        tapAndAHalfRecognizer.requireGestureRecognizerToFail(singleTapRecognizer)
-//        tapAndAHalfRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
-//        tapAndAHalfRecognizer.requireGestureRecognizerToFail(panRecognizer)
+        tapAndAHalfRecognizer = BBTapAndAHalfGestureRecognizer(target: self, action: TestScene.handleTapAndAHalf)
+        tapAndAHalfRecognizer.name = "Tap and a Half Recognizer"
         
-//        doubleTapRecognizer.requireGestureRecognizerToFail(panRecognizer)
-        
-//        spriteNode.addGestureRecognizer(singleTapRecognizer)
-//        spriteNode.addGestureRecognizer(doubleTapRecognizer)
-//        spriteNode.addGestureRecognizer(panRecognizer)
-//        spriteNode.addGestureRecognizer(tapAndAHalfRecognizer)
-        
-        panRecognizer.requireGestureRecognizerToFail(tapTapDragRecognizer)
-        
-        spriteNode.addGestureRecognizer(panRecognizer)
+        // Add recognizers to node
+        spriteNode.addGestureRecognizer(singleTapRecognizer)
+        spriteNode.addGestureRecognizer(doubleTapRecognizer)
+        spriteNode.addGestureRecognizer(singleTapDoubleTouchRecognizer)
+        spriteNode.addGestureRecognizer(tapAndAHalfRecognizer)
         spriteNode.addGestureRecognizer(tapTapDragRecognizer)
+        spriteNode.addGestureRecognizer(panRecognizer)
+        
+        // Setup dependencies
+        tapTapDragRecognizer.requireGestureRecognizerToFail(panRecognizer)
+        tapTapDragRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
+        panRecognizer.requireGestureRecognizerToFail(tapTapDragRecognizer)
 
         addChild(spriteNode)
-        
-        physicsBody = SKPhysicsBody(edgeLoopFromRect: frame)
     }
     
     func handleSingleTap(gestureRecognizer: BBGestureRecognizer?) {
-        println("single tap")
-        println("\tsingle tap recognizer state: \(singleTapRecognizer.state)")
-        println("\tdouble tap recognizer state: \(doubleTapRecognizer.state)")
+        if let recognizer = gestureRecognizer {
+            let tapRecognizer = recognizer as BBTapGestureRecognizer
+            if tapRecognizer.state == .Recognized {
+                flashLabel("Single Tap")
+            }
+        }
+    }
+    
+    func handleSingleTapDoubleTouch(gestureRecognizer: BBGestureRecognizer?) {
+        if let recognizer = gestureRecognizer {
+            let tapRecognizer = recognizer as BBTapGestureRecognizer
+            if tapRecognizer.state == .Recognized {
+                flashLabel("Two Finger Single Tap")
+            }
+        }
     }
     
     func handleDoubleTap(gestureRecognizer: BBGestureRecognizer?) {
-        println("double tap")
-//        println("\tsingle tap recognizer state: \(singleTapRecognizer.state)")
-        println("\tdouble tap recognizer state: \(doubleTapRecognizer.state)")
+        if let recognizer = gestureRecognizer {
+            let tapRecognizer = recognizer as BBTapGestureRecognizer
+            if tapRecognizer.state == .Recognized {
+                flashLabel("Double Tap")
+            }
+        }
     }
     
     func handleTapAndAHalf(gestureRecognizer: BBGestureRecognizer?) {
-        println("tap and a half")
+        if let recognizer = gestureRecognizer {
+            let tapTapDragRecognizer = recognizer as BBTapAndAHalfGestureRecognizer
+            if tapTapDragRecognizer.state == .Recognized {
+                flashLabel("Tap and a Half")
+            }
+        }
     }
     
     func handleTapTapDrag(gestureRecognizer: BBGestureRecognizer?) {
@@ -101,6 +118,7 @@ class TestScene: SKScene {
                 spriteNode.position = newPosition
                 tapTapDragRecognizer.setTranslation(CGPointZero, inNode: self)
             } else if tapTapDragRecognizer.state == .Ended {
+                flashLabel("Tap and a Half + Drag")
                 let velocity = tapTapDragRecognizer.velocityInNode(self)
                 spriteNode.physicsBody?.velocity = CGVectorMake(0, 0)
                 spriteNode.physicsBody?.applyImpulse(CGVectorMake(velocity.x, velocity.y))
@@ -112,7 +130,9 @@ class TestScene: SKScene {
         if let recognizer = gestureRecognizer {
             let panRecognizer = recognizer as BBPanGestureRecognizer
             spriteNode.physicsBody?.velocity = CGVectorMake(0, 0)
-            if panRecognizer.state == .Changed {
+            if panRecognizer.state == .Began {
+                flashLabel("Pan")
+            } else if panRecognizer.state == .Changed {
                 let velocity = panRecognizer.velocityInNode(self)
                 let translation = panRecognizer.translationInNode(self)
                 let newPosition = CGPointMake(spriteNode.position.x + translation.x, spriteNode.position.y + translation.y)
@@ -124,5 +144,24 @@ class TestScene: SKScene {
                 spriteNode.physicsBody?.applyImpulse(CGVectorMake(velocity.x, velocity.y))
             }
         }
+    }
+    
+    func flashLabel(text: String) {
+        let labelNode = SKLabelNode(text: text)
+        labelNode.fontSize = 72
+        labelNode.fontColor = UIColor.whiteColor()
+        labelNode.position = CGPointMake(size.width / 2, size.height + labelNode.fontSize)
+        labelNode.alpha = 0
+        addChild(labelNode)
+        
+        let fadeIn = SKAction.fadeInWithDuration(0.2)
+        let slideUp = SKAction.moveTo(CGPointMake(size.width / 2, size.height - labelNode.fontSize - 12), duration: 0.2)
+        let fadeInAndSlideUp = SKAction.group([fadeIn, slideUp])
+        
+        let wait = SKAction.waitForDuration(0.3)
+        let fadeOut = SKAction.fadeOutWithDuration(0.1)
+        let remove = SKAction.removeFromParent()
+        let sequence = SKAction.sequence([fadeInAndSlideUp, wait, fadeOut, remove])
+        labelNode.runAction(sequence)
     }
 }

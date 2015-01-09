@@ -15,11 +15,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
-        let skView = self.view as SKView
-        skView.showsDrawCount = true
-        skView.showsNodeCount = true
-        skView.showsFPS = true
-        skView.showsPhysics = true
+//        let skView = self.view as SKView
+//        skView.showsDrawCount = true
+//        skView.showsNodeCount = true
+//        skView.showsFPS = true
+//        skView.showsPhysics = true
     }
     
     override func viewWillAppear(animated: Bool) {
