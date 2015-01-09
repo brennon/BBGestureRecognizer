@@ -309,7 +309,7 @@ class BBGestureRecognizer: Hashable, Printable {
             let (allowedTransition, shouldNotify) = findAllowedTransition(_state, toState: varNewState)
             
             if allowedTransition {
-                    
+                
                 // Decide if the recognizer should reset based on the transition.
                 var shouldResetOnNextRunLoop: Bool
                 switch varNewState {
@@ -350,7 +350,7 @@ class BBGestureRecognizer: Hashable, Printable {
         var isRecognizing = false
 
         switch recognizer.state {
-        case .Began, .Recognized:
+        case .Began, .Recognized, .Changed:
             isRecognizing = true
         default:
             break
@@ -358,7 +358,7 @@ class BBGestureRecognizer: Hashable, Printable {
 
         if let unwrappedNextState = recognizer.nextState {
             switch unwrappedNextState {
-            case .Began, .Recognized:
+            case .Began, .Recognized, .Changed:
                 isRecognizing = true
             default:
                 break
