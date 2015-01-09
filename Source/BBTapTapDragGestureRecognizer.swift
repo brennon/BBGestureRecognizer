@@ -112,30 +112,14 @@ class BBTapTapDragGestureRecognizer: BBGestureRecognizer {
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         super.touchesBegan(touches, withEvent: event)
         
-        if state == .Possible {
+        let firstTouch = touches.allObjects.first as UITouch
         
-            // Has the touch tapped once already and is now down again?
-            let firstTouch = touches.allObjects.first as UITouch
-            
-            if firstTouch.tapCount == 2 {
-                
-                secondTapHasReleased = false
-                secondTapStartTime = NSDate()
-                
-                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(maximumIntervalBetweenSuccessiveTaps * NSTimeInterval(NSEC_PER_SEC)))
-                
-                dispatch_after(delayTime, dispatch_get_main_queue()) {
-                    if !self.secondTapHasReleased {
-                        self.state = .Began
-                        
-                        let newLocation = firstTouch.locationInNode(self.node!.scene!)
-                        self._lastLocation = newLocation
-                        self._lastMovementTime = event.timestamp
-                    } else {
-                        self.state = .Failed
-                    }
-                    self.advanceState()
-                }
+        if state == .Possible {
+            if firstTouch.tapCount == 1 {
+                schedulePendingRecognition(.Began, andDelay: maximumIntervalBetweenSuccessiveTaps)
+                let newLocation = firstTouch.locationInNode(self.node!.scene!)
+                _lastLocation = newLocation
+                _lastMovementTime = event.timestamp
             }
         }
     }
@@ -143,22 +127,29 @@ class BBTapTapDragGestureRecognizer: BBGestureRecognizer {
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
         super.touchesMoved(touches, withEvent: event)
         
-        if state == .Began {
-            state = .Changed
-        }
+        let firstTouch = touches.allObjects.first as UITouch
         
-        if state == .Began || state == .Changed {
-            
-            let firstTouch = touches.allObjects.first as UITouch
-            
-            let newLocation = firstTouch.locationInNode(node!.scene!)
-            
-            let translation = CGPointMake(newLocation.x - _lastLocation.x, newLocation.y - _lastLocation.y)
-            
-            _lastLocation = newLocation
-            
-            if translate(translation, withEvent: event) {
+        // If touch is moving before receiving two taps...
+        if firstTouch.tapCount < 2 {
+            updatePendingRecognition(.Failed)
+        } else {
+            if state == .Began {
                 state = .Changed
+            }
+            
+            if state == .Began || state == .Changed {
+                
+                let firstTouch = touches.allObjects.first as UITouch
+                
+                let newLocation = firstTouch.locationInNode(node!.scene!)
+                
+                let translation = CGPointMake(newLocation.x - _lastLocation.x, newLocation.y - _lastLocation.y)
+                
+                _lastLocation = newLocation
+                
+                if translate(translation, withEvent: event) {
+                    state = .Changed
+                }
             }
         }
     }
@@ -172,10 +163,7 @@ class BBTapTapDragGestureRecognizer: BBGestureRecognizer {
         if firstTouch.tapCount == 2 {
             
             // Has the maximum interval between successive taps not yet passed?
-            let elapsedTime = NSDate().timeIntervalSinceDate(secondTapStartTime)
-            if elapsedTime < maximumIntervalBetweenSuccessiveTaps {
-                secondTapHasReleased = true
-            }
+            updatePendingRecognition(.Failed)
         } else if state == .Changed {
             
             let newLocation = firstTouch.locationInNode(node!.scene!)
@@ -251,9 +239,6 @@ class BBTapTapDragGestureRecognizer: BBGestureRecognizer {
         _translation = CGPointZero
         _velocity = CGPointZero
         _pastVelocities = [CGPoint]()
-        
-        secondTapHasReleased = false
-        secondTapStartTime = nil
     }
     
     private func assertThatNodeAndSceneAreValid() {

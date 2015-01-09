@@ -33,19 +33,19 @@ class TestScene: SKScene {
         
         physicsWorld.gravity = CGVectorMake(0, 0)
         
-        singleTapRecognizer = BBTapGestureRecognizer(target: self, action: TestScene.handleSingleTap)
-        singleTapRecognizer.numberOfTapsRequired = 1
-        singleTapRecognizer.numberOfTouchesRequired = 2
-        singleTapRecognizer.name = "Single Tap Recognizer"
-        doubleTapRecognizer = BBTapGestureRecognizer(target: self, action: TestScene.handleDoubleTap)
-        doubleTapRecognizer.numberOfTapsRequired = 2
-        doubleTapRecognizer.name = "Double Tap Recognizer"
-        singleTapRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
-        doubleTapRecognizer.requireGestureRecognizerToFail(singleTapRecognizer)
+//        singleTapRecognizer = BBTapGestureRecognizer(target: self, action: TestScene.handleSingleTap)
+//        singleTapRecognizer.numberOfTapsRequired = 1
+//        singleTapRecognizer.numberOfTouchesRequired = 2
+//        singleTapRecognizer.name = "Single Tap Recognizer"
+//        doubleTapRecognizer = BBTapGestureRecognizer(target: self, action: TestScene.handleDoubleTap)
+//        doubleTapRecognizer.numberOfTapsRequired = 2
+//        doubleTapRecognizer.name = "Double Tap Recognizer"
+//        singleTapRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
+//        doubleTapRecognizer.requireGestureRecognizerToFail(singleTapRecognizer)
         
         panRecognizer = BBPanGestureRecognizer(target: self, action: TestScene.handlePan)
-        panRecognizer.requireGestureRecognizerToFail(singleTapRecognizer)
-        panRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
+//        panRecognizer.requireGestureRecognizerToFail(singleTapRecognizer)
+//        panRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
         panRecognizer.name = "Pan Recognizer"
         
         tapTapDragRecognizer = BBTapTapDragGestureRecognizer(target: self, action: TestScene.handleTapTapDrag)
@@ -57,12 +57,16 @@ class TestScene: SKScene {
 //        tapAndAHalfRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
 //        tapAndAHalfRecognizer.requireGestureRecognizerToFail(panRecognizer)
         
-        doubleTapRecognizer.requireGestureRecognizerToFail(panRecognizer)
+//        doubleTapRecognizer.requireGestureRecognizerToFail(panRecognizer)
         
-        spriteNode.addGestureRecognizer(singleTapRecognizer)
-        spriteNode.addGestureRecognizer(doubleTapRecognizer)
+//        spriteNode.addGestureRecognizer(singleTapRecognizer)
+//        spriteNode.addGestureRecognizer(doubleTapRecognizer)
 //        spriteNode.addGestureRecognizer(panRecognizer)
 //        spriteNode.addGestureRecognizer(tapAndAHalfRecognizer)
+        
+        panRecognizer.requireGestureRecognizerToFail(tapTapDragRecognizer)
+        
+        spriteNode.addGestureRecognizer(panRecognizer)
         spriteNode.addGestureRecognizer(tapTapDragRecognizer)
 
         addChild(spriteNode)

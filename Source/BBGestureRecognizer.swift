@@ -481,6 +481,14 @@ class BBGestureRecognizer: Hashable, Printable {
     
     private func failureDependencyResolved(resolvingRecognizer: BBGestureRecognizer, withState state: BBGestureRecognizerState) {
         resolvingRecognizer.removeFailureDependent(self)
+        
+        switch state {
+        case .Began, .Changed, .Recognized, .Ended:
+            self.state = .Failed
+        default:
+            break
+        }
+        
         advanceState()
     }
     
@@ -633,8 +641,8 @@ class BBGestureRecognizer: Hashable, Printable {
         // If this recognizer is enabled
         if enabled {
             
-            // If there is no delgate or the delegate says this recognizer
-            // should receive this touch, add this touch to trackingTouches
+            // If there is no delegate or the delegate says this recognizer should receive this touch, add this touch to 
+            // trackingTouches.
             var shouldReceiveTouch = true
             if let actualDelegate = delegate {
                 shouldReceiveTouch = actualDelegate.gestureRecognizer(
