@@ -13,6 +13,7 @@ class TestScene: SKScene {
     var singleTapRecognizer: BBTapGestureRecognizer!
     var doubleTapRecognizer: BBTapGestureRecognizer!
     var tapAndAHalfRecognizer: BBTapAndAHalfGestureRecognizer!
+    var tapTapDragRecognizer: BBTapTapDragGestureRecognizer!
     var panRecognizer: BBPanGestureRecognizer!
     var spriteNode: SKSpriteNode!
     
@@ -47,8 +48,11 @@ class TestScene: SKScene {
         panRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
         panRecognizer.name = "Pan Recognizer"
         
-        tapAndAHalfRecognizer = BBTapAndAHalfGestureRecognizer(target: self, action: TestScene.handleTapAndAHalf)
-        tapAndAHalfRecognizer.name = "Tap and a Half Recognizer"
+        tapTapDragRecognizer = BBTapTapDragGestureRecognizer(target: self, action: TestScene.handleTapTapDrag)
+        tapTapDragRecognizer.name = "Tap Tap Drag Recognizer"
+        
+//        tapAndAHalfRecognizer = BBTapAndAHalfGestureRecognizer(target: self, action: TestScene.handleTapAndAHalf)
+//        tapAndAHalfRecognizer.name = "Tap and a Half Recognizer"
 //        tapAndAHalfRecognizer.requireGestureRecognizerToFail(singleTapRecognizer)
 //        tapAndAHalfRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
 //        tapAndAHalfRecognizer.requireGestureRecognizerToFail(panRecognizer)
@@ -57,8 +61,9 @@ class TestScene: SKScene {
         
         spriteNode.addGestureRecognizer(singleTapRecognizer)
         spriteNode.addGestureRecognizer(doubleTapRecognizer)
-        spriteNode.addGestureRecognizer(panRecognizer)
-        spriteNode.addGestureRecognizer(tapAndAHalfRecognizer)
+//        spriteNode.addGestureRecognizer(panRecognizer)
+//        spriteNode.addGestureRecognizer(tapAndAHalfRecognizer)
+        spriteNode.addGestureRecognizer(tapTapDragRecognizer)
 
         addChild(spriteNode)
         
@@ -79,6 +84,24 @@ class TestScene: SKScene {
     
     func handleTapAndAHalf(gestureRecognizer: BBGestureRecognizer?) {
         println("tap and a half")
+    }
+    
+    func handleTapTapDrag(gestureRecognizer: BBGestureRecognizer?) {
+        if let recognizer = gestureRecognizer {
+            let tapTapDragRecognizer = recognizer as BBTapTapDragGestureRecognizer
+            spriteNode.physicsBody?.velocity = CGVectorMake(0, 0)
+            if tapTapDragRecognizer.state == .Changed {
+                let velocity = tapTapDragRecognizer.velocityInNode(self)
+                let translation = tapTapDragRecognizer.translationInNode(self)
+                let newPosition = CGPointMake(spriteNode.position.x + translation.x, spriteNode.position.y + translation.y)
+                spriteNode.position = newPosition
+                tapTapDragRecognizer.setTranslation(CGPointZero, inNode: self)
+            } else if tapTapDragRecognizer.state == .Ended {
+                let velocity = tapTapDragRecognizer.velocityInNode(self)
+                spriteNode.physicsBody?.velocity = CGVectorMake(0, 0)
+                spriteNode.physicsBody?.applyImpulse(CGVectorMake(velocity.x, velocity.y))
+            }
+        }
     }
     
     func handlePan(gestureRecognizer: BBGestureRecognizer?) {

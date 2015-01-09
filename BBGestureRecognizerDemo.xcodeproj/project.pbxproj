@@ -11,6 +11,7 @@
 		3A4DAB341A5F00A90032FE71 /* BBTapAndAHalfGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DAB331A5F00A90032FE71 /* BBTapAndAHalfGestureRecognizer.swift */; };
 		3A9284B71A51FF2600EACEF5 /* BBGestureRecognizerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9284B61A51FF2600EACEF5 /* BBGestureRecognizerDelegate.swift */; };
 		3A9284B91A52FA7E00EACEF5 /* BBTapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9284B81A52FA7E00EACEF5 /* BBTapGestureRecognizer.swift */; };
+		3AAB9E111A601DA2003C35C4 /* BBTapTapDragGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAB9E101A601DA2003C35C4 /* BBTapTapDragGestureRecognizer.swift */; };
 		3ABA68EB1A49E57400E1934C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA68EA1A49E57400E1934C /* AppDelegate.swift */; };
 		3ABA68ED1A49E57400E1934C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA68EC1A49E57400E1934C /* ViewController.swift */; };
 		3ABA68F01A49E57400E1934C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ABA68EE1A49E57400E1934C /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 		3A4DAB331A5F00A90032FE71 /* BBTapAndAHalfGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BBTapAndAHalfGestureRecognizer.swift; path = Source/BBTapAndAHalfGestureRecognizer.swift; sourceTree = SOURCE_ROOT; };
 		3A9284B61A51FF2600EACEF5 /* BBGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BBGestureRecognizerDelegate.swift; path = Source/BBGestureRecognizerDelegate.swift; sourceTree = SOURCE_ROOT; };
 		3A9284B81A52FA7E00EACEF5 /* BBTapGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BBTapGestureRecognizer.swift; path = Source/BBTapGestureRecognizer.swift; sourceTree = SOURCE_ROOT; };
+		3AAB9E101A601DA2003C35C4 /* BBTapTapDragGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BBTapTapDragGestureRecognizer.swift; path = Source/BBTapTapDragGestureRecognizer.swift; sourceTree = SOURCE_ROOT; };
 		3ABA68E51A49E57400E1934C /* BBGestureRecognizerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BBGestureRecognizerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ABA68E91A49E57400E1934C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Examples/Info.plist; sourceTree = SOURCE_ROOT; };
 		3ABA68EA1A49E57400E1934C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Examples/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
@@ -78,6 +80,7 @@
 				3AC6BB501A4DBDA900884F76 /* BBSKNode.swift */,
 				3A4DAB331A5F00A90032FE71 /* BBTapAndAHalfGestureRecognizer.swift */,
 				3A9284B81A52FA7E00EACEF5 /* BBTapGestureRecognizer.swift */,
+				3AAB9E101A601DA2003C35C4 /* BBTapTapDragGestureRecognizer.swift */,
 			);
 			path = BBGestureRecognizer;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				3A35F5491A5A34D7000BE3DB /* BBPanGestureRecognizer.swift in Sources */,
 				3A9284B91A52FA7E00EACEF5 /* BBTapGestureRecognizer.swift in Sources */,
 				3ABA68EB1A49E57400E1934C /* AppDelegate.swift in Sources */,
+				3AAB9E111A601DA2003C35C4 /* BBTapTapDragGestureRecognizer.swift in Sources */,
 				3A9284B71A51FF2600EACEF5 /* BBGestureRecognizerDelegate.swift in Sources */,
 				3AC6BB511A4DBDA900884F76 /* BBSKNode.swift in Sources */,
 				3AC6BB551A4DC49B00884F76 /* TestScene.swift in Sources */,
