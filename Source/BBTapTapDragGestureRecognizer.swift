@@ -115,8 +115,8 @@ class BBTapTapDragGestureRecognizer: BBGestureRecognizer {
         let firstTouch = touches.allObjects.first as UITouch
         
         if state == .Possible {
-            if firstTouch.tapCount == 1 {
-                schedulePendingRecognition(.Began, andDelay: maximumIntervalBetweenSuccessiveTaps)
+            if firstTouch.tapCount == 2 {
+                state = .Began
                 let newLocation = firstTouch.locationInNode(self.node!.scene!)
                 _lastLocation = newLocation
                 _lastMovementTime = event.timestamp
@@ -128,28 +128,21 @@ class BBTapTapDragGestureRecognizer: BBGestureRecognizer {
         super.touchesMoved(touches, withEvent: event)
         
         let firstTouch = touches.allObjects.first as UITouch
-        
-        // If touch is moving before receiving two taps...
-        if firstTouch.tapCount < 2 {
-            updatePendingRecognition(.Failed)
-        } else {
-            if state == .Began {
-                state = .Changed
-            }
             
-            if state == .Began || state == .Changed {
-                
-                let firstTouch = touches.allObjects.first as UITouch
-                
-                let newLocation = firstTouch.locationInNode(node!.scene!)
-                
-                let translation = CGPointMake(newLocation.x - _lastLocation.x, newLocation.y - _lastLocation.y)
-                
-                _lastLocation = newLocation
-                
-                if translate(translation, withEvent: event) {
-                    state = .Changed
-                }
+        if state == .Began || state == .Changed {
+            
+            state = .Changed
+            
+            let firstTouch = touches.allObjects.first as UITouch
+            
+            let newLocation = firstTouch.locationInNode(node!.scene!)
+            
+            let translation = CGPointMake(newLocation.x - _lastLocation.x, newLocation.y - _lastLocation.y)
+            
+            _lastLocation = newLocation
+            
+            if translate(translation, withEvent: event) {
+                state = .Changed
             }
         }
     }
@@ -161,11 +154,8 @@ class BBTapTapDragGestureRecognizer: BBGestureRecognizer {
         let firstTouch = touches.allObjects.first as UITouch
         
         if firstTouch.tapCount == 2 {
-            
-            // Has the maximum interval between successive taps not yet passed?
-            updatePendingRecognition(.Failed)
+            state == .Failed
         } else if state == .Changed {
-            
             let newLocation = firstTouch.locationInNode(node!.scene!)
             
             let translation = CGPointMake(newLocation.x - _lastLocation.x, newLocation.y - _lastLocation.y)
